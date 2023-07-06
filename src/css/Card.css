@@ -1,0 +1,14 @@
+.outer-box{
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inner-box{
+    width: 50%;
+    height: 50%;
+    border : 2px black solid;
+}

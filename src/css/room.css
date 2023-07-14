@@ -1,0 +1,16 @@
+.timeTable{
+    display: grid;
+    grid-template-columns: repeat(17, 1fr);
+    border: 1px solid gray;
+}
+
+
+
+.hour{
+    border: 1px solid black;
+    text-align: center;
+}
+
+.highlight{
+    background-color: lightblue;
+}

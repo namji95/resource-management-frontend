@@ -11,6 +11,7 @@ function Input(){
     const [name,setName] = useState("");
 
     const handleChange = ({target : {value}}) => setStation(value);
+    
     const handleSubmit = function(event){
         event.preventDefault()
         axios.post('/input',null,{

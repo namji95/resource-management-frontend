@@ -9,8 +9,6 @@ import {Container, Row, Col, Card, Form, Button,Navbar } from "react-bootstrap";
 
 import ReserveModal from './compontents/ReserveModal'
 import Sidebar from './compontents/Sidebar';
-import { Height } from '@mui/icons-material';
-import { height, width } from '@mui/system';
 
 function App() {
   

@@ -1,0 +1,88 @@
+/* full calendar css */
+/* ================= */
+.fc-day-sun a {
+    color: red;
+}
+
+.fc-day-sat a {
+    color: blue;
+}
+
+.fc-day a {
+    text-decoration:  none;
+}
+
+
+
+:root {
+    --fc-today-bg-color: rgb(235, 255, 255);
+}
+/* .fc .fc-button {
+    background-color: rgb(0, 170, 255);
+} */
+
+.fc .fc-col-header-cell-cushion {
+    display: inline-block;
+    padding: 2px 4px;
+    color: #000;
+    text-decoration:none;
+    font-family: "Helvetica Neue", "Arial", sans-serif;
+    font-weight:400;
+    font-size: .8em;
+}
+
+.fc table {
+    font-size: 0.6em;
+}
+
+.fc .fc-toolbar-title {
+    padding-top: 13px;
+    text-decoration:none;
+    font-family: "Helvetica Neue", "Arial", sans-serif;
+    font-size: 1.3em;
+}
+
+.fc title {
+    font-size: 0.9em;
+}
+
+.fc .fc-button {
+    background-color: rgb(0, 170, 255);
+    outline:none;
+    border:none;
+    border-radius: 12px;
+    color: white;
+}
+.fc .fc-button:hover {
+    background-color: rgb(0, 170, 230);;
+    color: white;
+}
+
+.fc .fc-button:disabled {
+    background-color: lightgrey;
+    color: white;
+}
+.fc .fc-button:active:hover {
+    background-color: rgb(0, 0, 0);
+}
+.fc .fc-prevMonth-button,
+.fc .fc-nextMonth-button {
+    font-size: 18px;
+}
+
+
+
+/* .fc-button:active {
+    border-color:none;
+    color: red;
+} */
+
+
+
+
+/* ========================= */
+/* bootstrap modal title css */
+.modal-title { 
+    text-align: center;
+    width: 100%;
+}

@@ -1,0 +1,12 @@
+.MyPageform-container {
+    width: 2200px; /* 폼 컨테이너의 너비 */
+    margin: 0 auto; /* 가운데 정렬을 위한 외부 여백(auto는 가로 중앙 정렬을 의미) */
+  }
+  
+.MyPagefieldset-container {
+    padding: 2px; /* 내부 여백 */
+    margin-bottom: 0px; /* 하단 여백 */
+    border: 1px solid #ccc; /* 테두리 스타일 */
+    border-radius: 5px; /* 테두리 굴곡 */
+  }
+  

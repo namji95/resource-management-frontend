@@ -1,0 +1,30 @@
+
+.main{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+text{
+  font-size: xx-large;
+  font-style: italic;
+  font-weight: bolder;
+}
+
+.fieldset-container {
+    width: 1000px;
+    padding: 20px;
+    padding-bottom: 30px;
+    padding-right: 30px;
+    border: 3px solid skyblue;
+    
+}
+.button{
+  float: right;
+  top: -20px; /* 선의 위에 위치시킬 버튼의 상단 여백을 조정합니다. */
+  right: 140px;
+}
+
+
+

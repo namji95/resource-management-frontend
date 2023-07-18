@@ -1,0 +1,20 @@
+
+  button[type="submit"] {
+    margin-left: auto; /* 버튼을 오른쪽으로 이동시킴 */
+  }
+
+.textbox1{
+  margin-left: 60px;
+}
+.textbox2{
+  margin-left: 30px;
+}
+.textbox3{
+  margin-left: 60px;
+}
+.textbox4{
+  margin-left: 60px;
+}
+.textbox5{
+  margin-left: 60px;
+}

@@ -40,10 +40,10 @@ function Sidebar(){
 
   return (
     <>
-      <nav className ={styles.navMenu}>         
+      <nav className ={`${styles.navMenu} ${styles.navbarMargin}`}>         
         <ul className ={styles.navMenuItems} >
           <Link to = "/room" >
-            <button className = "reserveButton" >+예약하기</button>
+            <button className = {styles.reserveButton} >+예약하기</button>
           </Link>
           {barData.map((item,index)=>{
             return (

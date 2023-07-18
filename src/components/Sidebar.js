@@ -5,8 +5,7 @@ import * as IoIcons from "react-icons/io";
 
 import { FaUserAlt } from "react-icons/fa";
 import {Link} from 'react-router-dom';
-import styles from "../css/Sidebar.module.css"
-
+import styles from "../css/Sidebar.module.css";
 
 const barData = [
   {
@@ -17,19 +16,19 @@ const barData = [
   },
   {
     title : '회의실',
-    path : '/',
+    path : '/meeting',
     icon : <AiIcons.AiFillHome/>,
     cName : 'navText'
   },
   {
     title : '모바일 기기',
-    path : '/',
+    path : '/device',
     icon : <AiIcons.AiFillHome/>,
     cName : 'navText'
   },
   {
     title : '차량',
-    path : '/',
+    path : '/car',
     icon : <AiIcons.AiFillHome/>,
     cName : 'navText'
   },

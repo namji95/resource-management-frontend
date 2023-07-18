@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import LoginFail from './LoginFail';
+// import LoginFail from './LoginFail';
 import styles from '../../css/Login.module.css';
 
 
@@ -79,7 +79,7 @@ function Login() {
             <br />
 
             {
-                checkFail ? test : <LoginFail />
+                // checkFail ? test : <LoginFail />
             }
 
             </div>

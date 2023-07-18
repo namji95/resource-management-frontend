@@ -1,36 +1,31 @@
 import './App.css';
-import { useEffect, useState } from 'react';
-import Board from './compontents/Board.js';
-import Input from './compontents/Input.js';
-import { BrowserRouter as Router, Switch,Route} from 'react-router-dom';
-import Header from './compontents/Header.js';
-import Room from './compontents/Room.js';
-import {Container, Row, Col, Card, Form, Button,Navbar } from "react-bootstrap";
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import Header from './components/Header';
+import Sidebar from './components/Sidebar';
 
-import ReserveModal from './compontents/ReserveModal'
-import Sidebar from './compontents/Sidebar';
-import { Height } from '@mui/icons-material';
-import { height, width } from '@mui/system';
+import Calendar from './components/calendar/Calendar';
+import Signup from './components/member/Signup';
+import Login from './components/member/Login';
+import Company from './components/company/Compamy'
 
 function App() {
   
   return (
     <div className = "App">
-
-      
-{/* 
+      {/* 하늘이 라우터 */}
       <Routes>
-        <Route path="/input" element ={<Input></Input>}></Route>
-        <Route path='/board' element = {<Board></Board>}></Route>
-        <Route path='/room' element = {<Room></Room>}></Route>
-      </Routes> */}
-
+        <Route path='/signup' element = {<Signup></Signup>}></Route>
+        <Route path='/login' element = {<Login></Login>}></Route>
+        <Route path='/company' element = {<Company></Company>}></Route> 
+      </Routes>
+      
       <Header/>
-      <div className = "body">
-        <Sidebar/>
-        <div className= "main">
-          <div style={{border : '1px solid black', height : '100vw',width : '100vw',backgroundColor :'red'}}>
-            메인 컨텐트입니다. test
+      <div className = "body" >
+        <Sidebar />
+        <div className= "main" >
+          <div style={{border : '1px solid black', backgroundColor :'white', width: '79vw', height: '90vh' , position: 'fixed', left: '300px', top: '77px', right: '0', bottom: '0' }}>
+            <Calendar />
             {/* <ReserveModal/> */}
           </div>
         </div>

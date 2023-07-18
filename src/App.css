@@ -1,14 +1,19 @@
 @import url(//fonts.googleapis.com/earlyaccess/hanna.css);
 
-.main{
-  border : '1px solid black';
-  height : '100vw';
-  width : '100vw';
-  background-color :'red';
+#root{
+  height: 100vh;
 }
 
-.body {
+.main{
+  border : '1px solid black';
+  height : 100%;
+  width : 100%;
+  background-color :'white';
+}
+
+.body{
   display: flex;
+  height: 100%;
 }
 
 .sidebar{
@@ -24,6 +29,7 @@
 .App {
   text-align: center;
   font-family: ' Hanna ', 산세리프;
+  height: 100%;
 }
 
 .App-logo {

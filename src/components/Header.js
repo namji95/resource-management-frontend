@@ -9,7 +9,7 @@ import logo from '../images/wehago.png';
 function Header() {
   return (
     <>
-      <Navbar  bg="light" data-bs-theme="light">
+      <Navbar  bg="light" data-bs-theme="light" className={styles.fixedHeader}>
         <Container className = {styles.header}>
           <img className = {styles.logo} alt = "logo" src = {logo}></img>
           <Navbar.Brand href="#home">Navbar</Navbar.Brand>

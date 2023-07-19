@@ -13,8 +13,6 @@ import Device from './components/Device/Device';
 import Meeting from './components/Metting/InputDeviceForm';
 import Car from './components/Car/Car';
 
-import Facility from './components/Car/Facility_modal';
-
 function App() {
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -57,6 +55,7 @@ function App() {
           <div className = "body" >
             <Sidebar />
             <div className= "main" >
+
               <div style={{border : '1px solid rgba(0,0,0,.08)', backgroundColor :'white', width: windowWidth - 260, height: windowHeight - 50 , position: 'fixed', left: '260px', top: '50px', right: '0', bottom: '0' }}>
 
                 <Routes>
@@ -65,7 +64,6 @@ function App() {
                   <Route path='/device' element = {<Device/>}></Route> 
                   <Route path='/meeting' element = {<Meeting/>}></Route> 
                   <Route path='/car' element = {<Car/>}></Route> 
-
 
                 </Routes>
               

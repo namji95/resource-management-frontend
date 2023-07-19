@@ -1,6 +1,6 @@
 import './App.css';
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link} from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, useNavigate} from 'react-router-dom';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 
@@ -15,40 +15,67 @@ import Car from './components/Car/Car';
 
 
 function App() {
-  
+
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+
+  const [token, setToken] = useState(1);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+      setWindowHeight(window.innerHeight);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
+
     <div className = "App">
-      {/* 하늘이 라우터 */}
-      
-      
-      <Header/>
-      <div className = "body" >
-        <Sidebar />
-        <div className= "main" >
-          <div style={{border : '1px solid black', backgroundColor :'white', width: '79vw', height: '90vh' , position: 'fixed', left: '300px', top: '77px', right: '0', bottom: '0' }}>
-            {/* <ReserveModal/> */}
+      {token === 0 ? 
+        <div className = "body" style={{backgroundColor: '#F7F7F7'}}>
+          <div className= "main" >
 
             <Routes>
-        
-              <Route path='/main' element = {<Calendar></Calendar>}></Route>
-              <Route path='/signup' element = {<Signup></Signup>}></Route>
-              <Route path='/login' element = {<Login></Login>}></Route>
-              <Route path='/company' element = {<Company></Company>}></Route> 
-              {/* <Route path='/mypage' element = {<Mypage></Mypage>}></Route>  */}
-              <Route path='/device' element = {<Device></Device>}></Route> 
-              <Route path='/meeting' element = {<Meeting></Meeting>}></Route> 
-              <Route path='/car' element = {<Car></Car>}></Route> 
-
-            
+              <Route path='/' element = {<Login/>}></Route>
+              <Route path='/signup' element = {<Signup/>}></Route>
             </Routes>
+
           </div>
         </div>
-        
-      <div>
+      :
+        <React.Fragment>
+        <Header/>
+          <div className = "body" >
+            <Sidebar />
+            <div className= "main" >
+              <div style={{border : '1px solid black', backgroundColor :'white', width: windowWidth - 300, height: windowHeight - 77 , position: 'fixed', left: '300px', top: '77px', right: '0', bottom: '0' }}>
 
-      </div>
-      
-      </div>
+                <Routes>
+                  <Route path='/main' element = {<Calendar/>}></Route>
+                  <Route path='/company' element = {<Company/>}></Route> 
+                  <Route path='/device' element = {<Device/>}></Route> 
+                  <Route path='/meeting' element = {<Meeting/>}></Route> 
+                  <Route path='/car' element = {<Car/>}></Route> 
+                </Routes>
+              
+              </div>
+            </div>
+            
+            <div>
+
+            </div>
+          
+          </div>
+          </React.Fragment>
+      }
     </div>
   );
 }

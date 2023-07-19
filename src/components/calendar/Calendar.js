@@ -108,8 +108,9 @@ export default function Calendar() {
         
     return (
         <Fragment>
+            &nbsp;
             <FullCalendar
-                contentHeight={500}
+                contentHeight={570}
                 plugins={[momentTimezone, dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
                 initialView={'dayGridMonth'}
                 headerToolbar={HeaderToolbar}

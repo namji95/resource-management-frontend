@@ -18,41 +18,40 @@ function Login() {
         <React.Fragment>
             <>
             <div className={styles.page}>
-            <div className={styles.imgContainer}>
-                    <img src='https://kimsky.s3.ap-northeast-2.amazonaws.com//wehago_logo.png' />
-            </div>
-            <div className={styles.title}>로그인</div>
+                <div className={styles.imgContainer}>
+                        <img src='https://kimsky.s3.ap-northeast-2.amazonaws.com//wehago_logo.png' />
+                </div>
+                <div className={styles.title}>로그인</div>
 
-            <div className={styles.contentWrap}>
-                <div className={styles.inputTitle}>아이디</div>
-                    <div className={styles.inputWrap}>
-                        <input 
-                            type='text'
-                            className={styles.input}
-                            value={id}
-                            onChange={(e) => {
-                                setId(e.target.value);
-                            }}
-                        />
-                    </div>
-                    <div className={styles.inputTitle}>비밀번호</div>
-                    <div className={styles.inputWrap}>
-                        <input 
-                            type='password'
-                            className={styles.input}
-                            value={password}
-                            onChange={(e) => {
-                                setPassword(e.target.value)
-                            }}
-                        />
-                    </div>
+                <div className={styles.contentWrap} style={{width: '450px'}}>
+                    <div className={styles.inputTitle}>아이디</div>
+                        <div className={styles.inputWrap}>
+                            <input 
+                                type='text'
+                                className={styles.input}
+                                value={id}
+                                onChange={(e) => {
+                                    setId(e.target.value);
+                                }}
+                            />
+                        </div>
+                        <div className={styles.inputTitle}>비밀번호</div>
+                        <div className={styles.inputWrap}>
+                            <input 
+                                type='password'
+                                className={styles.input}
+                                value={password}
+                                onChange={(e) => {
+                                    setPassword(e.target.value)
+                                }}
+                            />
+                        </div>
 
-            </div>
+                </div>
 
             <button className={styles.bottomButton} onClick={() => {
                 // axios.post('https://deeb-112-221-198-150.ngrok-free.app/member', {
                 axios.post('http://localhost:9000/member', {
-
                     userId: id,
                     password: password
                 })

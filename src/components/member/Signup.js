@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import styles from '../../css/Signup.module.css';
 
@@ -15,7 +15,6 @@ function Signup() {
     const [notAllow, setNotAllow] = useState(true);
 
     // let data = {};
-
 
     const handleEmail = (e) => {
         setEmail(e.target.value);

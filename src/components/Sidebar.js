@@ -10,7 +10,7 @@ import styles from "../css/Sidebar.module.css";
 const barData = [
   {
     title : '나의 예약정보',
-    path : '/',
+    path : '/main',
     icon : <FaUserAlt/>,
     cName : 'navText'
   },

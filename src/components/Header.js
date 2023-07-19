@@ -19,16 +19,16 @@ function Header() {
               <Nav.Link href="#pricing">Pricing</Nav.Link>
             </Nav>
           <div>
-            <Form className="d-flex">
+            <Form className="d-flex" >
               <Form.Control
                 type="search"
                 placeholder="Search"
                 className="me-2"
                 aria-label="Search"
               />
-              <Button variant="outline-primary">Search</Button>
+              <Button variant="outline-primary" className={styles.formControlButton}>Search</Button>
             </Form>
-            </div>
+          </div>
 
             <div>
               

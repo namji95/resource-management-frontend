@@ -1,6 +1,6 @@
 import Form from 'react-bootstrap/Form';
 
-import styles from '../css/Company.module.css';
+import styles from './Company.module.css';
 
 
 function company() {

@@ -13,18 +13,15 @@ import Device from './components/Device/Device';
 import Meeting from './components/Metting/InputDeviceForm';
 import Car from './components/Car/Car';
 
-<<<<<<< HEAD
-import ReserveModal from './compontents/ReserveModal'
-import Sidebar from './compontents/Sidebar';
-=======
->>>>>>> c138353d50f772288f53d554e74da168954dea3f
+import CpForm from './components/company/Cp_Form';
+
 
 function App() {
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
 
-  const [token, setToken] = useState(0);
+  const [token, setToken] = useState(1);
 
   const navigate = useNavigate();
 
@@ -62,7 +59,7 @@ function App() {
             <Sidebar />
             <div className= "main" >
               <div style={{border : '1px solid black', backgroundColor :'white', width: windowWidth - 300, height: windowHeight - 77 , position: 'fixed', left: '300px', top: '77px', right: '0', bottom: '0' }}>
-
+                <CpForm></CpForm>
                 <Routes>
                   <Route path='/main' element = {<Calendar/>}></Route>
                   <Route path='/company' element = {<Company/>}></Route> 

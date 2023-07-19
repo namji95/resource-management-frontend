@@ -19,7 +19,7 @@ function App() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
 
-  const [token, setToken] = useState(1);
+  const [token, setToken] = useState(0);
 
   const navigate = useNavigate();
 

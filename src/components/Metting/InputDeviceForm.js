@@ -29,8 +29,8 @@ const handleOptionChange = (event) => {
      
         <TagTypesExample></TagTypesExample>
         <hr/>
-      <PlaintextExample></PlaintextExample> 
-      <MultipleInputsExample></MultipleInputsExample>
+        <PlaintextExample></PlaintextExample> 
+        <MultipleInputsExample></MultipleInputsExample>
       
       <Check></Check>
       <hr/>

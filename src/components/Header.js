@@ -9,7 +9,7 @@ import logo from '../images/wehago.png';
 function Header() {
   return (
     <>
-      <Navbar  bg="light" data-bs-theme="light">
+      <Navbar  bg="light" data-bs-theme="light" className={styles.fixedHeader}>
         <Container className = {styles.header}>
           <img className = {styles.logo} alt = "logo" src = {logo}></img>
           <Navbar.Brand href="#home">Navbar</Navbar.Brand>
@@ -19,16 +19,16 @@ function Header() {
               <Nav.Link href="#pricing">Pricing</Nav.Link>
             </Nav>
           <div>
-            <Form className="d-flex">
+            <Form className="d-flex" >
               <Form.Control
                 type="search"
                 placeholder="Search"
                 className="me-2"
                 aria-label="Search"
               />
-              <Button variant="outline-primary">Search</Button>
+              <Button variant="outline-primary" className={styles.formControlButton}>Search</Button>
             </Form>
-            </div>
+          </div>
 
             <div>
               

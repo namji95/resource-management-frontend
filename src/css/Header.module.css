@@ -1,14 +1,25 @@
-.header{
+.header {
     display: flex;
     margin-left: 0px;
     padding: 10px;
     justify-content: space-between;
 }
 
-.logo{
+.logo {
     margin-left: 50px;
     margin-right : 50px;
     padding: 0px;
     width: 200px;
+}
 
+.fixedHeader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+}
+
+.formControlButton {
+    margin: 0px;
 }

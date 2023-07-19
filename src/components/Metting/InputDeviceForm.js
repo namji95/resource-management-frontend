@@ -68,7 +68,6 @@ const handleOptionChange = (event) => {
      <Row>
        <Col sm="3">
         <Form.Control type = "text" value="설비 예약">
-
         </Form.Control>
        </Col>
      </Row>

@@ -6,6 +6,8 @@ import * as IoIcons from "react-icons/io";
 import { FaUserAlt } from "react-icons/fa";
 import {Link} from 'react-router-dom';
 import styles from "../css/Sidebar.module.css";
+import itemStyles from '../css/SidebarItem.module.css';
+import { green, red } from '@mui/material/colors';
 
 const barData = [
   {
@@ -23,13 +25,13 @@ const barData = [
   {
     title : '모바일 기기',
     path : '/device',
-    icon : <AiIcons.AiFillHome/>,
+    icon : <AiIcons.AiFillMobile/>,
     cName : 'navText'
   },
   {
     title : '차량',
     path : '/car',
-    icon : <AiIcons.AiFillHome/>,
+    icon : <AiIcons.AiFillCar/>,
     cName : 'navText'
   },
 
@@ -42,18 +44,20 @@ function Sidebar(){
       <nav className ={`${styles.navMenu} ${styles.navbarMargin}`}>         
         <ul className ={styles.navMenuItems} >
           <Link to = "/room" >
-            <button className = {styles.reserveButton} >+예약하기</button>
+            <button className = {`${styles.reserveButton}`} style={{margin : '30px', marginRight : '60px', marginTop : '10px'}}>+ 예약하기</button>
           </Link>
+          <div className={itemStyles.sideItem}>
           {barData.map((item,index)=>{
             return (
               <li key = {index} className={`${styles.item} ${styles[item.cName]}`}>
                 <Link to = {item.path}>
-                  {item.icon}
-                  <span>{item.title}</span>
+                  {item.icon} &nbsp;&nbsp;
+                  <span style={{color : '#306AA3'}}>{item.title}</span>
                 </Link>
               </li>
             )
           })}
+          </div>
         </ul>
       </nav>
     </>

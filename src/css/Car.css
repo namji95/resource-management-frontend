@@ -1,22 +1,19 @@
 @import
 
-/* view2.js CSS */
+/* FacilityModal.js CSS */
 
 .header {
-    text-align: left;
-    font-size: 20px;
-    margin-top: 10px;
-    margin-left: 20px;
+
 }
 
 .update_page{
     position: absolute;
-    top: 50px;
+    top: 20px;
     
     background-color:#EAEAEA;
 
     height: 100%;
-    max-height: 580px;
+    max-height: 500px;
     width: 100%;
     max-width: 400px;
 
@@ -25,73 +22,118 @@
 }
 
 .essential{
-    text-align: left;
+    display: flex;
     font-size: 13px;
-    margin-left: 20px;
-    margin-top: 25px;
+    margin-top: 10px;
     color: blue;
 }
 
 .categorys{
-    margin-top: 20px;
-    margin-left: 35px;
+    display: flex;
+    margin-top: 15px;
     font-size: 12px;
 }
 
 .category{
     width: 100px;
     height: 20px;
-    margin-left: 50px;
+    margin-left: 40px;
 }
 
 .carNames{
+    display: flex;
     color: blue;
-    margin-top: 30px;
-    margin-left: 20px;
-    font-size: 12px;
+    margin-top: 15px;
+    font-size: 10px;
 }
 
 .carName{
-    height: 30px;
-    width: 200px;
-    margin-left: 67px;
+    height: 20px;
+    width: 100%;
+    max-width: 150px;
+    margin-left: 45px;
 }
 
-.carBoardings{
-    margin-top: 30px;
+.carNumbers{
+    display: flex;
+    color: blue;
+    margin-top: 15px;
+    font-size: 10px;
+}
+
+.carNumber{
+    height: 20px;
+    width: 100%;
+    max-width: 150px;
     margin-left: 35px;
-    font-size: 12px;
 }
 
-.carBoarding{
-    height: 30px;
-    width: 50px;
-    margin-left: 48px;
-    margin-right: 5px;
+.carDistances{
+    display: flex;
+    color: blue;
+    margin-top: 15px;
+    font-size: 10px;
+}
+
+.carDistance{
+    height: 20px;
+    width: 100%;
+    max-width: 150px;
+    margin-left: 35px;
+}
+
+.carYears{
+    display: flex;
+    color: blue;
+    margin-top: 15px;
+    font-size: 10px;
+}
+
+.carYear{
+    height: 20px;
+    width: 100%;
+    max-width: 150px;
+    margin-left: 35px;
+}
+
+
+.carImages{
+    display: flex;
+    margin-top: 15px;
+    font-size: 10px;
+}
+
+.carImage{
+    height: 20px;
+    width: 200px;
+    margin-left: 60px;
 }
 
 .explanations{
-    margin-top: 30px;
-    margin-left: 35px;
+    display: flex;
+    margin-top: 15px;
     font-size: 12px;
 }
 
 .explanation{
-    height: 150px;
-    width: 200px;
-    margin-left: 75px;
+    height: 100px;
+    width: 100%;
+    max-width: 200px;
+    margin-left: 65px;
     margin-right: 5px;
 }
 
 .firstLine{
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 15px;
+    margin-left: 15px;
     border: none;
     width: 370px;
     border: 1px solid gray;
 }
 
 .companys{
+    display: flex;
+    margin-top: 20px;
     margin-left: 35px;
     font-size: 12px;
 }
@@ -105,8 +147,7 @@
 }
 
 .secondLine{
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 9px;
     border: none;
     border: 1px solid gray;
 }
@@ -117,61 +158,40 @@
 }
 
 .cancel{
-    height: 30px;
-    width: 70px;
+    height: 25px;
+    width: 65px;
 }
 
 .save{
     margin-left: 10px;
-    height: 30px;
-    width: 70px;
+    height: 25px;
+    width: 65px;
 }
 
 /*-------------------------------------------------------------*/
 
-/* view3.js CSS*/
+/* ResourceList.js CSS*/
 
-.table_right{
-    border: 1px solid;
+.top_category{
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
-.table_left{
-    border: 1px solid;
+.manage{
+    float: left;
+    border: 0%;
 }
 
-.category_input{
-    font-size: 15px;
-    
-    margin-top: 10px;
-    margin-left: 11px;
-
-    display: flex;
-    line-height: 100%;
-    text-align: center;
+.facility_input{
+    float: right;
 }
 
-.resources{
-    margin-top: 10px;
-    margin-left: 8px;
-    display: flex;
-    
+.firstLine{
+    width: 100%;
+    size: 50px;
 }
 
-.line{
-    border: 1px solid !important;
-    margin-top: 10px !important;
-}
-
-.category_button{
-    height: 40px;
-    display: flex;
-    line-height: 100%;
-    text-align: center;
-}
-
-table th{
-    border: none;
-}
+/* --------------------------------------------- */
 
 /* .mainButton{
     margin-top: 25px;

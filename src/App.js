@@ -7,19 +7,21 @@ import Sidebar from './components/Sidebar';
 import Calendar from './components/calendar/Calendar';
 import Signup from './components/member/Signup';
 import Login from './components/member/Login';
-import Company from './components/company/Compamy';
+import Company from './components/company/Company';
 import Device from './components/Device/Device';
 // import Mypage from './components/MyPage/PageForm';
 import Meeting from './components/Metting/InputDeviceForm';
-import Car from './components/Car/Car';
-
+import Car from './components/car/Car';
+import FacilityModal from './components/car/FacilityModal';
+import ResourceList from './components/car/ResourceList';
+ 
 
 function App() {
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
 
-  const [token, setToken] = useState(0);
+  const [token, setToken] = useState(1);
 
   const navigate = useNavigate();
 
@@ -63,7 +65,9 @@ function App() {
                   <Route path='/company' element = {<Company/>}></Route> 
                   <Route path='/device' element = {<Device/>}></Route> 
                   <Route path='/meeting' element = {<Meeting/>}></Route> 
-                  <Route path='/car' element = {<Car/>}></Route> 
+                  <Route path='/car' element = {<Car />}></Route>
+                  <Route path='/facilityModal' element = {<FacilityModal />}></Route>
+                  <Route path='/resourceList' element = {<ResourceList />}></Route>
                 </Routes>
               
               </div>

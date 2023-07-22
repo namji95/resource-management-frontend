@@ -7,7 +7,7 @@ import Sidebar from './components/Sidebar';
 import Calendar from './components/calendar/Calendar';
 import Signup from './components/member/Signup';
 import Login from './components/member/Login';
-import Company from './components/company/Compamy';
+import Company from './components/company/Company';
 import Device from './components/Device/Device';
 // import Mypage from './components/MyPage/PageForm';
 import Meeting from './components/Metting/InputDeviceForm';

@@ -1,6 +1,6 @@
 .page {
     position: absolute;
-    top: 130px;
+    top: 10%;
     bottom: 10px;
     width: 100%;
     height: 800px;
@@ -30,11 +30,14 @@
     height: 48px;
     border: none;
     font-weight: 700;
-    background-color: #558ef2;
+    background-color: #007bff;
     border-radius: 64px;
     color: white;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     cursor: pointer;
+    margin: 1px;
+    margin-top: 50px;
+
 }
 
 

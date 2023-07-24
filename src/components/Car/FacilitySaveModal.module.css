@@ -1,0 +1,201 @@
+.background_block{
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    z-index: 998;
+}
+
+.black
+{
+    z-index: 999;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0.5;
+    background-color: black;
+}
+
+.update_page{
+    position: absolute;
+    height: 50%;
+    width: 30%;
+    min-width: 400px;
+    min-height: 530px;
+    padding: 20px;
+
+    top: 20px;
+    left: 50%;
+    transform: translate(-50%, 0);
+
+    opacity: 1;
+    border-radius: 8px;
+
+    z-index: 1000;
+    background-color:#EAEAEA;
+    
+
+}
+
+.essential{
+    display: flex;
+    font-size: 13px;
+    margin-top: 10px;
+    color: blue;
+    height: 20px;
+}
+
+.cancelButton{
+    width: 22px;
+    height: 22px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0%;
+    padding: 5px;
+    background-color: #EAEAEA;
+    color: black;
+    text-align: center;
+    margin-left: px;
+}
+
+.categorys{
+    display: flex;
+    margin-top: 15px;
+    font-size: 12px;
+}
+
+.category{
+    width: 100px;
+    height: 20px;
+    margin-left: 40px;
+}
+
+.carNames{
+    display: flex;
+    color: blue;
+    margin-top: 15px;
+    font-size: 10px;
+}
+
+.carName{
+    height: 20px;
+    width: 100%;
+    max-width: 150px;
+    margin-left: 45px;
+}
+
+.carNumbers{
+    display: flex;
+    color: blue;
+    margin-top: 15px;
+    font-size: 10px;
+}
+
+.carNumber{
+    height: 20px;
+    width: 100%;
+    max-width: 150px;
+    margin-left: 35px;
+}
+
+.carDistances{
+    display: flex;
+    color: blue;
+    margin-top: 15px;
+    font-size: 10px;
+}
+
+.carDistance{
+    height: 20px;
+    width: 100%;
+    max-width: 150px;
+    margin-left: 35px;
+}
+
+.carYears{
+    display: flex;
+    color: blue;
+    margin-top: 15px;
+    font-size: 10px;
+}
+
+.carYear{
+    height: 20px;
+    width: 100%;
+    max-width: 150px;
+    margin-left: 35px;
+}
+
+
+.carImages{
+    display: flex;
+    margin-top: 15px;
+    font-size: 10px;
+}
+
+.carImage{
+    height: 20px;
+    width: 200px;
+    margin-left: 60px;
+}
+
+.explanations{
+    display: flex;
+    margin-top: 15px;
+    font-size: 12px;
+}
+
+.explanation{
+    height: 100px;
+    width: 100%;
+    max-width: 200px;
+    margin-left: 65px;
+    margin-right: 5px;
+}
+
+.firstLine{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    width: 370px;
+    border: 1px solid gray;
+}
+
+.companys{
+    display: flex;
+    margin-top: 20px;
+    margin-left: 35px;
+    font-size: 12px;
+}
+
+.company{
+    text-align: center;
+    height: 20x;
+    width: 80px;
+    margin-left: 50px;
+    margin-right: 5px;
+}
+
+.secondLine{
+    margin-bottom: 9px;
+    border: none;
+    border: 1px solid gray;
+}
+
+.sNcBtn{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center; 
+}
+
+.cancel{
+    height: 25px;
+    width: 65px;
+}
+
+.save{
+    margin-left: 10px;
+    height: 25px;
+    width: 65px;
+}

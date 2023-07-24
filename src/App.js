@@ -7,12 +7,13 @@ import Sidebar from './components/Sidebar';
 import Calendar from './components/calendar/Calendar';
 import Signup from './components/member/Signup';
 import Login from './components/member/Login';
-import Company from './components/company/Compamy';
+import Company from './components/company/Company';
 import Device from './components/Device/Device';
 // import Mypage from './components/MyPage/PageForm';
 import Meeting from './components/Metting/InputDeviceForm';
-import Car from './components/Car/Car';
-
+import Car from './components/car/Car';
+import ResourceList from './components/car/ResourceList';
+ 
 function App() {
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -60,11 +61,11 @@ function App() {
 
                 <Routes>
                   <Route path='/main' element = {<Calendar/>}></Route>
-                  <Route path='/company' element = {<Company/>}></Route> 
+                  {/* <Route path='/company' element = {<Company/>}></Route>  */}
                   <Route path='/device' element = {<Device/>}></Route> 
                   <Route path='/meeting' element = {<Meeting/>}></Route> 
-                  <Route path='/car' element = {<Car/>}></Route> 
-
+                  <Route path='/car' element = {<Car />}></Route>
+                  <Route path='/resourceList' element = {<ResourceList />}></Route>
                 </Routes>
               
               </div>

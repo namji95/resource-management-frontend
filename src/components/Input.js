@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Container } from "react-bootstrap";
 import '../css/Card.css'
 
-import Board from '../compontents/Board';
+import Board from '../components/Board';
 
 function Input(){
     const [station,setStation] = useState("");

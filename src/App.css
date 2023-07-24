@@ -29,7 +29,6 @@
 .App {
   text-align: center;
   font-family: ' Hanna ', 산세리프;
-  height: 100%;
 }
 
 .App-logo {
@@ -65,4 +64,7 @@
   to {
     transform: rotate(360deg);
   }
+}
+.left{
+  margin-right: 80%;
 }

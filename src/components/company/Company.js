@@ -16,9 +16,9 @@ function Company() {
     return (
         <>
             <div className={styles.page}>
-            <h1>신청하기</h1>
+            <h1>회사 등록</h1>
             <br/>
-        <h6>서비스 세팅을 위해 회사 정보를 입력해주세요.
+        <h6>회사 정보를 입력해주세요.
             <br/>
             입력한 내용으로 최초 관리자 정보가 설정됩니다.
         </h6>

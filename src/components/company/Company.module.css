@@ -17,6 +17,20 @@
     flex-direction: column;
 }
 
+.content_head {
+    margin-top: 5%;
+    
+}
+
+.title {
+    text-align: left;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
 .inputTitle {
     font-size: 12px;
     font-weight: 600;

@@ -34,10 +34,9 @@ const barData = [
     icon : <AiIcons.AiFillCar/>,
     cName : 'navText'
   },
-
 ]
 
-function Sidebar(){
+function Sidebar() {
 
   return (
     <>

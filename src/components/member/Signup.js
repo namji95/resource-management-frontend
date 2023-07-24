@@ -1,50 +1,129 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import styles from '../../css/Signup.module.css';
+import { style } from '@mui/system';
+import { useNavigate } from 'react-router-dom';
 
 
 
 function Signup() {
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
+    const [passwordConfirm, setPasswordConfirm] = useState('');
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
 
+    const [idValid, setIdValid] = useState(false);
     const [passValid, setPassValid] = useState(false);
+    const [passConfirmValid, setPassConfirmValid] = useState(false);
     const [emailValid, setEmailValid] = useState(false);
     const [notAllow, setNotAllow] = useState(true);
 
+    const [idCheck, setIdCheck] = useState('');
+
     // let data = {};
 
-    const handleEmail = (e) => {
-        setEmail(e.target.value);
-        const regex = /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
-        if(regex.test(email)) {
-            setEmailValid(true);
-        } else {
-            setEmailValid(false);
-        }
+    const navigate = useNavigate();
+
+    const handleIdCheck = (e) => {
+        setId(e.target.value);
     }
 
     const handlePassword = (e) => {
         setPassword(e.target.value);
-        const regex = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])(?!.*[^a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]).{8,20}$/;
-        if(regex.test(password)) {
+    }
+
+    const handlePasswordConfirm = (e) => {
+        setPasswordConfirm(e.target.value);
+    }
+
+    const handleEmail = (e) => {
+        setEmail(e.target.value);
+    }
+
+    const signUpHandler = () => {
+        axios.post('http://localhost:9000/api/user/signup', {
+            userId : id,
+            userPwd : password,
+            userName : name,
+            userEmail : email,
+        }).then((response) => {
+            console.log(response)
+            navigate("/")
+        }).catch((error) => {
+            console.log(error)
+        })
+    }
+    
+    useEffect(() => {
+
+        if(emailValid && passConfirmValid && idValid) {
+            setNotAllow(false);
+        } else {
+            setNotAllow(true);
+        }
+    }, [emailValid, passConfirmValid, idValid])
+
+    useEffect(() => {
+    }, [passwordConfirm, password])
+
+    useEffect(() => {
+
+        if (id.length > 6) {
+
+            axios.post('http://localhost:9000/api/user/duplicate', {}, {
+                params : {
+                    userId : id,
+                }
+            }).then((response) => {
+                if(response.data == 0) {
+                    setIdCheck('OK');
+                } else {
+                    setIdCheck('NO');
+                }
+            }).catch((error) => {
+                console.log(error);
+            })
+        } else {
+            setIdCheck('NO');
+        }
+
+        if (idCheck === 'OK') {
+            setIdValid(true);
+        } else {
+            setIdValid(false);
+        }
+
+    }, [id, idCheck])
+
+    useEffect(() => {
+
+        const passwordRegex = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])(?!.*[^a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]).{8,20}$/;
+        if(passwordRegex.test(password)) {
             setPassValid(true);
         } else {
             setPassValid(false);
         }
-    }
-    
 
-
-    useEffect(() => {
-        if(emailValid && passValid) {
-            setNotAllow(false);
-            return;
+        if (password.length > 7 && passwordConfirm.length > 7) {
+            if (password === passwordConfirm) {
+                setPassConfirmValid(true)
+            } else {
+                setPassConfirmValid(false)
+            }
+        } else {
+            setPassConfirmValid(false);
         }
-        setNotAllow(true);
-    }, [emailValid, passValid])
+
+        const emailRegex = /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+
+        if(emailRegex.test(email)) {
+            setEmailValid(true);
+        } else {
+            setEmailValid(false);
+        }
+
+    }, [password, passwordConfirm , email])
 
     return (
         <React.Fragment>
@@ -61,13 +140,16 @@ function Signup() {
                     <div className={styles.inputWrap}>
                         <input 
                             type='text'
+                            placeholder='영어로 7자 이상'
                             className={styles.input}
                             value={id}
-                            onChange={(e) => {
-                                setId(e.target.value);
-                            }}
+                            onChange={handleIdCheck}
                         />
                     </div>
+                    { idCheck === 'OK' && id.length > 0 ? <p className={styles.successMessageWrap}>사용 가능한 아이디입니다.</p> 
+                    : idCheck === 'NO' && id.length > 0 ? <p className={styles.errorMessageWrap}>사용 불가능한 아이디입니다.</p> 
+                    : id.length === 0 ? <p> </p> : <p> </p>  }
+
                     <div className={styles.inputTitle}>비밀번호</div>
                     <div className={styles.inputWrap}>
                         <input 
@@ -78,20 +160,34 @@ function Signup() {
                             onChange={handlePassword}    
                         />
                     </div>
-                    <div className={styles.errorMessageWrap}>
+                    <div>
                         {
-                            !passValid && password.length > 0 && password.length < 8 && (
-                                <div>영문, 숫자, 특수문자 포함 8자 이상 입력해주세요.</div>
-                            )
+                            // !passValid && password.length > 0 && password.length < 8 && (
+                            //     <div>영문, 숫자, 특수문자 포함 8자 이상 입력해주세요.</div>
+                            // )
+                            password.length === 0 ? <p></p> :
+                            password.length > 1 && password.length < 25 && passValid ?
+                            (<p className={styles.successMessageWrap}>조건에 맞는 비밀번호입니다.</p>) : 
+                            (<p className={styles.errorMessageWrap}>영문, 숫자, 특수문자 포함 8~25자 이상 입력해주세요.</p>)
                         }
                     </div>
+
                     <div className={styles.inputTitle}>비밀번호 확인</div>
                     <div className={styles.inputWrap}>
                         <input 
                             type='password'
-                            className={styles.input} 
+                            className={styles.input}
+                            onChange={handlePasswordConfirm} 
                         />
                     </div>
+                    <div>
+                        {
+                            passConfirmValid ? (<p className={styles.successMessageWrap}>비밀번호와 일치합니다.</p>) : 
+                            !passConfirmValid && passwordConfirm.length > 0 ? <p className={styles.errorMessageWrap}>비밀번호와 일치하지 않습니다.</p> : 
+                            <p></p>
+                        }
+                    </div>
+
                     <div className={styles.inputTitle}>이름</div>
                     <div className={styles.inputWrap}>
                         <input 
@@ -124,7 +220,7 @@ function Signup() {
 
 
                <div>
-                <button disabled={notAllow} className={styles.bottomButton}>
+                <button disabled={notAllow} className={styles.bottomButton} onClick={signUpHandler}>
                     회원가입하기
                 </button>
                </div>

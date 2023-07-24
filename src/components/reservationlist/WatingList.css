@@ -1,0 +1,14 @@
+.wating_list_container {
+    height: 50%;
+}
+
+.wating_list {
+    font-family: sans-serif;
+    font-size: 1.2em;
+    font-weight: bold;
+    height: 5%;
+}
+
+.table {
+    height: 45%;
+}

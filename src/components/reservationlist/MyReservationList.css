@@ -1,0 +1,12 @@
+.main_reservation_list {
+    margin : 15px 0px 0px 15px;
+    width: 150vh;
+    height: 100vh;
+}
+
+.my_reservation_list {
+    font-family: sans-serif;
+    font-size: 1.5em;
+    font-weight: bold;
+    height: 5%;
+}

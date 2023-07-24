@@ -12,12 +12,16 @@
 }
 
 .navMenu{
-    background-color: #060b26;
-    width: 300px;
+    background-color: #f4f6fc;
+    width: 260px;
     height: 100vh;
     display: flex;
     justify-content: center;
     position: fixed;
+    top: 0;
+    left: 0;
+    position: fixed;
+    padding: 20px;
 }
 
 .navText{
@@ -32,7 +36,7 @@
 
 .navText a {
     text-decoration: none;
-    color : white;
+    color : #1a83ff;
     font-size: 18px;
     width: 95%;
     display: flex;
@@ -42,7 +46,9 @@
 }
 
 .navText a:hover{
-    background-color: #1a83ff;
+    /* background-color: #1a83ff; */
+    transform: scale(1.05);
+    transition-duration: 0.5s;
 }
 
 .navbarMenuItems{
@@ -58,13 +64,19 @@
     align-items: center;
 }
 
-span {
-    
+.reserveButton{
+    /* margin-top: 30px; */
+    margin-left: 10px;
+    margin-right: 60px;
+    padding: 10px;
+    width: 230px;
+    background-color: #1C90FB;
 }
 
-.reserveButton{
-    margin: 10px;
-    padding: 10px;
-    width: 150px;
+.reserveButton:hover {
+    background-color: #1a83ff;
   }
-  
+
+.navbarMargin {
+    margin-top: 50px;
+}

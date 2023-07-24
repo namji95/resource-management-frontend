@@ -1,10 +1,7 @@
 import { React} from "react";
 import { useEffect, useState } from 'react';
-import { Container } from "react-bootstrap";
-import { propTypes } from "react-bootstrap/esm/Image";
 import { Link, json } from "react-router-dom";
 import axios from "axios";
-import moment from "moment/moment";
  
 // fetch("https://deeb-112-221-198-150.ngrok-free.app/cars")
 // .then((response) => response.json())

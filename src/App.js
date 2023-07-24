@@ -12,10 +12,8 @@ import Device from './components/Device/Device';
 // import Mypage from './components/MyPage/PageForm';
 import Meeting from './components/Metting/InputDeviceForm';
 import Car from './components/car/Car';
-import FacilityModal from './components/car/FacilityModal';
 import ResourceList from './components/car/ResourceList';
  
-
 function App() {
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -58,15 +56,15 @@ function App() {
           <div className = "body" >
             <Sidebar />
             <div className= "main" >
-              <div style={{border : '1px solid black', backgroundColor :'white', width: windowWidth - 300, height: windowHeight - 77 , position: 'fixed', left: '300px', top: '77px', right: '0', bottom: '0' }}>
+
+              <div style={{border : '1px solid rgba(0,0,0,.08)', backgroundColor :'white', width: windowWidth - 260, height: windowHeight - 50 , position: 'fixed', left: '260px', top: '50px', right: '0', bottom: '0' }}>
 
                 <Routes>
                   <Route path='/main' element = {<Calendar/>}></Route>
-                  <Route path='/company' element = {<Company/>}></Route> 
+                  {/* <Route path='/company' element = {<Company/>}></Route>  */}
                   <Route path='/device' element = {<Device/>}></Route> 
                   <Route path='/meeting' element = {<Meeting/>}></Route> 
                   <Route path='/car' element = {<Car />}></Route>
-                  <Route path='/facilityModal' element = {<FacilityModal />}></Route>
                   <Route path='/resourceList' element = {<ResourceList />}></Route>
                 </Routes>
               

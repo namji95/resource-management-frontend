@@ -1,6 +1,7 @@
 .form-container {
     width: 1180px; /* 폼 컨테이너의 너비 */
     margin: 0 auto; /* 가운데 정렬을 위한 외부 여백(auto는 가로 중앙 정렬을 의미) */
+    height: 100%;
   }
   
   .fieldset-container {

@@ -12,9 +12,12 @@ import Device from './components/Device/Device';
 // import Mypage from './components/MyPage/PageForm';
 import Meeting from './components/Metting/InputDeviceForm';
 import Car from './components/Car/Car';
+import ResourceList from './components/Car/ResourceList';
 import CompanyList from './components/company/CompanyList';
 import EmployeeList from './components/employee/EmployeeList';
 
+
+ 
 function App() {
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -65,9 +68,10 @@ function App() {
                   <Route path='/device' element = {<Device/>}></Route> 
                   <Route path='/meeting' element = {<Meeting/>}></Route> 
                   <Route path='/car' element = {<Car/>}></Route> 
+                  <Route path='/resourceList' element = {<ResourceList />}></Route>
                   <Route path='/companylist' element = {<CompanyList></CompanyList>}></Route>
                   <Route path='./employee' element = {<EmployeeList></EmployeeList>}></Route>
-                  
+              
                 </Routes>
               
               </div>

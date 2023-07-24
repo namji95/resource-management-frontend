@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import facilityModifyStyle from "../car/FacilitySaveModal.module.css";
+import facilityModifyStyle from "./FacilitySaveModal.module.css";
 
 function FacilityModifyModal(props) {
 

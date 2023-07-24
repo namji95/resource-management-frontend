@@ -50,18 +50,7 @@ const testSubmit =(e) =>{
       <div className="metting-container">
       <fieldset className="fieldset-container-meet">
      
-<<<<<<< HEAD
-=======
-        <TagTypesExample></TagTypesExample>
-        <hr/>
-        <PlaintextExample></PlaintextExample> 
-        <MultipleInputsExample></MultipleInputsExample>
-      
-      <Check></Check>
-      <hr/>
-      <SelectSizesExample></SelectSizesExample>
-      <Form>
->>>>>>> 9c358cd6fb0b6ff5590518f723bdc66c9829fbae
+
       <Form.Group as={Row} className="mb-3">
         <Form.Label column sm="2">제목 
         </Form.Label>
@@ -149,20 +138,12 @@ const testSubmit =(e) =>{
    </Form.Label>
    <Col sm="6">
      <Row>
-<<<<<<< HEAD
-     <Col sm="10"> 
-        <Form.Select aria-label="Default select example">
-      <option>회의실</option>
-      <option value="교육장">교육장</option>
-    </Form.Select>
-      </Col>
-       
-=======
+
+
        <Col sm="3">
         <Form.Control type = "text" value="설비 예약">
         </Form.Control>
        </Col>
->>>>>>> 9c358cd6fb0b6ff5590518f723bdc66c9829fbae
      </Row>
    </Col>
  </Form.Group>

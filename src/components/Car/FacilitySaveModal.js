@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import facilitySaveStyle from "../car/FacilitySaveModal.module.css";
+import facilitySaveStyle from "./FacilitySaveModal.module.css";
 
 function FacilitySaveModal(props) {
 

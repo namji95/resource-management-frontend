@@ -17,11 +17,19 @@
 
 }
 
+.buttonCon {
+    display: flex;
+    align-items: end;
+    width: 260px;
+}
+
 .button {
     background-color:#1a83ff;
     /* float: right; */
-    right: 50%;
+    /* right: 100%; */
     margin: 0px;
+    margin-right: 3%;
+    /* padding: 0; */
 
 }
 
@@ -36,7 +44,7 @@
     justify-content:center;
     align-items: center;
     margin-top: 3%;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     
 }
 

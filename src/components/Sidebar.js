@@ -30,7 +30,7 @@ const barData = [
   },
   {
     title : '차량',
-    path : '/resourceList',
+    path : '/car',
     icon : <AiIcons.AiFillCar/>,
     cName : 'navText'
   },
@@ -53,6 +53,12 @@ const adminData = [
     title : '자원 관리',
     path : '/resourceList',
     icon : <AiIcons.AiFillHdd/>,
+    cName : 'navText'
+  },
+  {
+    title : '예약 관리',
+    path : '/Reservation',
+    icon : <AiIcons.AiFillCarryOut/>,
     cName : 'navText'
   },
 ]

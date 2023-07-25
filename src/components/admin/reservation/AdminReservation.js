@@ -6,10 +6,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import CloseButton from 'react-bootstrap/CloseButton';
 import React, { useState } from "react";
 import Modal from 'react-bootstrap/Modal';
-import './PageForm.css'; 
+import styles from './AdminReservation.module.css'; 
 import Container from 'react-bootstrap/Container';
 
-function PageForm() {
+function AdminReservation() {
     const [selectedOption, setSelectedOption] = useState('');
     const [title, setTitle] = useState('');
     const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
@@ -33,29 +33,29 @@ function PageForm() {
       };
 
   return (
-    
-   <div>
-    
-        <fieldset className='pg_fieldset'>
+    <container>
+       <div>
+        {/* <fieldset className={styles.pgFieldset}> */}
         <Container>
         
         <div className="d-flex align-items-center">
             <h2 className='left ml-auto'>예약관리</h2>
-            <CloseButton className="d-flex align-items-end" />
+            {/* <h2 className={styles.left}>예약관리</h2> */}
+            {/* <CloseButton className="d-flex align-items-end" /> */}
           </div>
-       
+<br/>       
+    <div>
+    {/* <span className={styles.left}>sky0202 교육장</span> */}
+<br/>
+    </div>
 
-    <div className='enter'></div>
-    <text className='left'>sky0202 교육장</text>
-    <div className='enter'></div>
     <Form.Group as={Row} className="mb-3">
             <Form.Label column sm="2">
             </Form.Label>
             <Col sm="6" className="d-flex align-items-center">
               <Form.Control type="date" value={date} onChange={(e) => setDate(e.target.value)} className="field2" />
-              <button className='datehandle'onClick={handleNextDate}>&lsaquo;</button>
-        
-                <button className='datehandle' onClick={handledownDate}>&rsaquo;</button>
+              <button className={styles.datehandle} onClick={handleNextDate}>&lsaquo;</button>
+              <button className={styles.datehandle} onClick={handledownDate}>&rsaquo;</button>
             </Col>
           </Form.Group>
     <hr></hr>
@@ -69,7 +69,7 @@ function PageForm() {
             <Col>예약자</Col>
         </Row>
       </Container>
-      <div className='enter'></div>
+      <div className={styles.enter}></div>
       <Container>
         <Row>
         <Col>2023.07.10</Col>
@@ -81,10 +81,14 @@ function PageForm() {
       
       </Row>
       </Container>  
-      </fieldset>
+      {/* </fieldset> */}
     </div>
+
+    </container>
+    
+  
 
   );
 }
 
-export default PageForm;
+export default AdminReservation;

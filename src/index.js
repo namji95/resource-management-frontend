@@ -4,7 +4,6 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
-import PageForm from './components/Page9/PageForm';
 import InputDeviceForm from './components/Metting/InputDeviceForm';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

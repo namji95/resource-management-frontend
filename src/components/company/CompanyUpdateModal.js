@@ -4,19 +4,43 @@ import axios from 'axios';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-import './Cp_Form.css';
+import styles from './CompanyUpdate.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Button from 'react-bootstrap/Button';
 
 
-function CpForm() {
-
-  const [copRegNum, setCopRegNum] = useState();
-  const [copName, setCopName] = useState();
-  const [copAdmin, setCopAdmin] = useState();
-
+function CompanyUpdateModal(props) {
   let data = {};
   const copSeq = 1;
+
+  const defaultCompanyObj = {
+    copRegNum : "",
+    copName :"",
+    copAdmin : "",
+  }
+
+  const [companyObj, setCompanyObj] = useState(defaultCompanyObj);
+
+  const onChangeCompany = (e) => {
+      let newName = e.target.name;
+      let newValue = e.target.value;
+      const newObj = {
+          ...companyObj,
+          [newName] : newValue
+      }
+      setCompanyObj(newObj);
+  }
+
+const onReset = () => {
+  setCompanyObj(defaultCompanyObj);
+}
+
+const closeModal = () => {
+    props.setShowModal(!props.showModal);
+}
+
+const FacilitySaveModal = (event) => {
+    event.preventDefault();
+
 
   
 
@@ -25,11 +49,11 @@ function CpForm() {
 
 <br/>
 
-      <div className="Cp_form-container">
-        <fieldset className="Cp_fieldset-container">
+      <div className={styles.cpFormContainer}>
+        <fieldset className={styles.cpFieldsetContainer}>
           <h2>회사 정보</h2>
 
-          <div className='labe1'>
+          <div className={styles.myLabel}>
             <Form>
               <Form.Group as={Row} className="mb-3">
                 <Form.Label column sm="2">
@@ -39,10 +63,8 @@ function CpForm() {
                   <Form.Control
                     type="text" 
                     placeholder=''
-                    value={copRegNum}
-                    onChange={(e) => {
-                      setCopRegNum(e.target.value);
-                    }}
+                    value={companyObj.copRegNum}
+                    onChange={onChangeCompany}
                   />
                 </Col>
               </Form.Group>
@@ -57,10 +79,8 @@ function CpForm() {
                   <Form.Control 
                     type="text" 
                     placeholder=''  
-                    value={copName}
-                    onChange={(e) => {
-                      setCopName(e.target.value);
-                    }}
+                    value={companyObj.copName}
+                    onChange={onChangeCompany}
                   />
                 </Col>
               </Form.Group>
@@ -75,10 +95,8 @@ function CpForm() {
                   <Form.Control 
                     type="text" 
                     placeholder='' 
-                    value={copAdmin}
-                    onChange={(e) => {
-                      setCopAdmin(e.target.value);
-                    }}
+                    value={companyObj.copAdmin}
+                    onChange={onChangeCompany}
                   />
                 </Col>
               </Form.Group>
@@ -90,16 +108,18 @@ function CpForm() {
         </fieldset>
 
               {/* <div className='Buttoncss'> */}
-      <div className='button-contain'>
-        <input type="reset" class="btn btn-outline-secondary" value="취소" />
+      <div className={styles.buttonContainer}>
+        {/* <input type="reset" class="btn btn-outline-secondary" value="취소" /> */}
+        <input type="reset" class={styles.buttoncancle} value="취소" />
         <button 
-          class="btn btn-primary" 
+          // class="btn btn-primary" 
+          class={styles.buttonSave} 
           type="submit"
           onClick={() => {
             axios.put(`http://localhost:9000/api/company/${copSeq}`, {
-                copRegNum: copRegNum,
-                copName: copName,
-                copAdmin: copAdmin
+                copRegNum: companyObj.copRegNum,
+                copName: companyObj.copName,
+                copAdmin: companyObj.copAdmin
             })
             .then((result) => {
                 data = result.data;
@@ -119,5 +139,6 @@ function CpForm() {
     </div>
   );
 }
+}
 
-export default CpForm;
+export default CompanyUpdateModal;

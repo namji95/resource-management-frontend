@@ -4,11 +4,18 @@ import axios from 'axios';
 import styles from './CompanyList.module.css';
 import { Container } from "react-bootstrap";
 
+import CompanyUpdateModal from './CompanyUpdateModal';
 
 function CompanyList() {
     const copSeq = 1;
     let data = {};
     let output;
+
+    const [showModal, setShowModal] = useState(false);
+
+    const openModal = () => {
+        setShowModal(showModal => !showModal);
+      };
 
 
 
@@ -45,7 +52,16 @@ function CompanyList() {
                                 <span>회사</span>
                             </h3>
                             <div className={styles.buttonCon}>
-                              <button type="button" className={styles.button}>회사 추가</button>
+                            <button type="button" className={styles.button} onClick={openModal}>회사 추가</button>
+                            {
+                            showModal ?(
+                            <CompanyUpdateModal showModal={showModal}
+                            setShowModal={setShowModal}
+                            key="companyUpdateModal" 
+                            />
+                            ) : (
+                            <></>
+                            )}
                               <button type="button" className={styles.button}>수정</button>
                               <button type="button" className={styles.button}>삭제</button>
                             </div>

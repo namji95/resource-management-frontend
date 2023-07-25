@@ -15,6 +15,9 @@ import Car from './components/Car/Car';
 import ResourceList from './components/Car/ResourceList';
 import CompanyList from './components/company/CompanyList';
 import EmployeeList from './components/employee/EmployeeList';
+import DeviceForm from './components/Device/Device'
+import Form from './components/Device/Form'
+
 
 
  
@@ -62,15 +65,27 @@ function App() {
             <div className= "main" >
 
               <div style={{border : '1px solid rgba(0,0,0,.08)', backgroundColor :'white', width: windowWidth - 260, height: windowHeight - 50 , position: 'fixed', left: '260px', top: '50px', right: '0', bottom: '0' }}>
+              {/* <Form></Form> */}
                 <Routes>
+                  {/* 회원 */}
                   <Route path='/main' element = {<Calendar/>}></Route>
                   <Route path='/company' element = {<Company/>}></Route> 
                   <Route path='/device' element = {<Device/>}></Route> 
                   <Route path='/meeting' element = {<Meeting/>}></Route> 
                   <Route path='/car' element = {<Car/>}></Route> 
+                  
+                  
+
+                  {/* 관리자 */}
                   <Route path='/resourceList' element = {<ResourceList />}></Route>
+                  <Route path='/deviceform' element = {<DeviceForm></DeviceForm>}></Route>
                   <Route path='/companylist' element = {<CompanyList></CompanyList>}></Route>
-                  <Route path='./employee' element = {<EmployeeList></EmployeeList>}></Route>
+                  <Route path='/employeelist' element = {<EmployeeList></EmployeeList>}></Route>
+
+
+
+                  <Route path='/device' element = {<Device/>}></Route> 
+                  
               
                 </Routes>
               

@@ -3,15 +3,20 @@ import resourceListStyle from "./ResourceList.module.css";
 import {Table} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import FacilitySaveModal from './FacilitySaveModal';
+import DeviceSaveModal from "../Device/DeviceSaveModal";
+import DeviceSelectAll from "../Device/DeviceSelectAll";
 
 function ResourceList(props) {
 
   const [showModal, setShowModal] = useState(false);
-
+  const [showText, setShowText] = useState(false);
   const openModal = () => {
     setShowModal(showModal => !showModal);
   };
-  
+  const handleShowText = () => {
+   
+    setShowText(true);
+  };
   return (
     <div className={resourceListStyle.resourceTable}>
       <div className={resourceListStyle.topCategory}>
@@ -20,11 +25,16 @@ function ResourceList(props) {
         <input type="button" className={resourceListStyle.manage} value="설비"></input>
         <input type="button" onClick={openModal} className={resourceListStyle.facility_input} value="설비추가"></input>
         {
-          showModal ?
-          <FacilitySaveModal showModal={showModal} setShowModal={setShowModal} />
-          : <></>
-        }
+          showModal ?(
+          <DeviceSaveModal showModal={showModal}
+          setShowModal={setShowModal}
+          key="deviceSaveModal" 
+          />
+          ) : (
+           <></>
+        )}
       </div>
+    
         <hr className={resourceListStyle.firstLine} />
       <div className={resourceListStyle.resourceCategory}>
         <span>
@@ -44,6 +54,7 @@ function ResourceList(props) {
           <span>
             선택 자원
           </span>
+          <input type="button" value="조회"onClick={handleShowText}></input>
         </div>
         <div className={resourceListStyle.table}>
           <Table>
@@ -56,11 +67,15 @@ function ResourceList(props) {
               </tr>
             </thead>
             <tbody>
-              <tr className={resourceListStyle.resourceList}>
-                <td>
-                  asd
-                </td>
-              </tr>
+   
+             {showText && (
+                <tr className={resourceListStyle.resourceList}>
+                  <td>
+                    <DeviceSelectAll key = {showModal}></DeviceSelectAll>
+                    
+                  </td>
+                </tr>
+              )}
             </tbody>
           </Table>
         </div>

@@ -39,7 +39,7 @@ function DeviceSaveModal(props) {
     const FacilitySaveModal = (event) => {
 
         event.preventDefault();
-        axios.post("http://localhost:9000/DeviceSaveModal",  
+        axios.post("http://localhost:8080/DeviceSaveModal",  
             deviceObj
         ).then(response => {
             if (response.data != null) {    

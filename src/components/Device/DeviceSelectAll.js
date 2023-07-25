@@ -17,7 +17,7 @@ function DeviceSelectAll(props) {
 
     useEffect(() => {
         axios
-          .get("http://localhost:9000/DeviceSelectAll")
+          .get("http://localhost:8080/DeviceSelectAll")
           .then((response) => {
             console.log(response.data);
             setdeviceObj(response.data);

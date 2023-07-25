@@ -11,8 +11,10 @@ function EmployeeList() {
                             <h3 >
                                 <span>구성원</span>
                             </h3>
-                            <div style={{height: 20}}>
-                                <button type="button" className={styles.button}>구성원 추가</button>
+                            <div className={styles.buttonCon}>
+                              <button type="button" className={styles.button}>추가</button>
+                              <button type="button" className={styles.button}>수정</button>
+                              <button type="button" className={styles.button}>삭제</button>
                             </div>
                         </div>
                         <div className={styles.searchCon}>
@@ -52,31 +54,31 @@ function EmployeeList() {
                     <table class="table table-hover">
                     <thead class="table-light">
                         <tr>
-                        <th scope="col">#</th>
+                        <th scope="col"><input type='checkbox'></input></th>
                         <th scope="col">사번</th>
                         <th scope="col">이름</th>
-                        <th scope="col">자원 관리</th>
+                        <th scope="col">자원 관리 여부</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
+                        <th scope="row"><input type='checkbox'></input></th>
+                        <td>230710</td>
+                        <td>김하늘</td>
+                        <td>true</td>
                         </tr>
                         <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
+                        <th scope="row"><input type='checkbox'></input></th>
+                        <td>230711</td>
+                        <td>김왕돌</td>
+                        <td>true</td>
                         </tr>
                         <tr>
-                        <th scope="row">3</th>
+                        <th scope="row"><input type='checkbox'></input></th>
                         {/* <td colspan="2">Larry the Bird</td> */}
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
+                        <td>230712</td>
+                        <td>돌돌이</td>
+                        <td>false</td>
                         </tr>
                     </tbody>
                     </table>

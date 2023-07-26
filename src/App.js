@@ -11,7 +11,7 @@ import Company from './components/company/Company';
 import Device from './components/Device/Device';
 // import Mypage from './components/MyPage/PageForm';
 import Meeting from './components/Metting/InputDeviceForm';
-import ResourceList from './components/car/ResourceList';
+import ResourceList from './components/facility/ResourceList';
  
 function App() {
 
@@ -63,7 +63,7 @@ function App() {
                   {/* <Route path='/company' element = {<Company/>}></Route>  */}
                   <Route path='/device' element = {<Device/>}></Route> 
                   <Route path='/meeting' element = {<Meeting/>}></Route> 
-                  <Route path='/resourceList' element = {<ResourceList />}></Route>
+                  <Route path='/resourcelist' element = {<ResourceList />}></Route>
                 </Routes>
               
               </div>

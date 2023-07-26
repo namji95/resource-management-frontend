@@ -4,30 +4,33 @@ import facilitySaveStyle from "./FacilitySaveModal.module.css";
 
 function FacilitySaveModal(props) {
 
+    console.log(props);
 
     const defaultCarObj = {
         carName : "",
         carNumber :"",
         carDistance : "",
         carYear : "",
-        carImage : "",
+        // carImage : "",
         carExplan : ""
     }
 
+    // 객체 Key : value
+    
     const [carObj, setCarObj] = useState(defaultCarObj);
 
     const onChangeCar = (e) => {
         let newName = e.target.name;
         let newValue = e.target.value;
         const newObj = {
-            ...carObj,
+            ...carObj,//spread 연산자
             [newName] : newValue
         }
         setCarObj(newObj);
     }
 
     const onReset = () => {
-            setCarObj(defaultCarObj);
+        setCarObj(defaultCarObj);
     }
 
     const closeModal = () => {
@@ -37,6 +40,8 @@ function FacilitySaveModal(props) {
     const FacilitySaveModal = (event) => {
         event.preventDefault();
 
+    //     let file = event.target.value;
+
         // // 이미지를 선택하고 base64로 인코딩
         // const fileInput = document.querySelector('input[type="file"]');
         // const file = fileInput.files[0];
@@ -45,17 +50,17 @@ function FacilitySaveModal(props) {
         // reader.onloadend = () => {
         //     const base64Image = reader.result;
 
-        // // 이미지를 담은 FormData 생성
+        // 이미지를 담은 FormData 생성
         // const formData = new FormData();
         // formData.append("carName", carObj.carName);
         // formData.append("carNumber", carObj.carNumber);
         // formData.append("carDistance", carObj.carDistance);
         // formData.append("carYear", carObj.carYear);
-        // formData.append("carImage", base64Image);
+        // formData.append("file", carObj.carImage);
         // formData.append("carExplan", carObj.carExplan);
 
         //         // 서버로 전송
-        //         axios.post("http://localhost:8080/facilityModals", formData, {
+        //         axios.post("http://localhost:8080/FacilitySaveModal", formData, {
         //             headers: {
         //                 "Content-Type": "multipart/form-data"
         //             }
@@ -70,26 +75,28 @@ function FacilitySaveModal(props) {
         //         });
         //     };
         
-        //     if (file) {
-        //         reader.readAsDataURL(file);
-        //     }
+            // if (file) {
+            //     reader.readAsDataURL(file);
+            // }
+            
+            axios.post("http://localhost:8080/FacilitySaveModal", 
+                carObj
+            ).then (response => {
+    
+                if (response.data != null) {
+                    alert("등록이 완료되었습니다.");
+                } else {
+                    alert("이미 등록된 설비입니다. 다시 등록하세요");
+                }
 
-        axios.post("http://localhost:8080/FacilitySaveModal", 
-            carObj
-        ).then (response => {
-            if (response.data != null) {
-                alert("등록이 완료되었습니다.");
-            } else {
-                alert("이미 등록된 설비입니다. 다시 등록하세요");
-            }
-        }).catch (error => {
-            alert(error);
-        })
-    }
+            }).catch (error => {
+                alert(error);
+            })
+        }
 
     return (
         <div className={facilitySaveStyle.backgroud_block}>
-            <div class={facilitySaveStyle.black}/>
+            <div className={facilitySaveStyle.black}/>
             <div className={facilitySaveStyle.update_page}>
             <button className={facilitySaveStyle.cancelButton} onClick={closeModal}>X</button>
                 <form action="http://localhost:8080/FacilitySaveModal" method="POST" encType="multipart/form-data">

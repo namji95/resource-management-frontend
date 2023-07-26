@@ -23,6 +23,16 @@
     border: 1px solid;
 }
 
+.resourceListTable{
+    margin-top: 1%;
+    margin-left: 2%;
+}
+
+.resourceTable{
+    width: 100%;
+    height: 100%;
+}
+
 .resourceCategory{
     flex-direction: column;
     height: 100%;

@@ -13,25 +13,13 @@ const barData = [
   {
     title : '나의 예약정보',
     path : '/main',
+    icon : <AiIcons.AiFillContacts/>,
+    cName : 'navText'
+  },
+  {
+    title : '나의 프로필',
+    path : '/mypage',
     icon : <FaUserAlt/>,
-    cName : 'navText'
-  },
-  {
-    title : '회의실',
-    path : '/meeting',
-    icon : <AiIcons.AiFillHome/>,
-    cName : 'navText'
-  },
-  {
-    title : '모바일 기기',
-    path : '/deviceform',
-    icon : <AiIcons.AiFillMobile/>,
-    cName : 'navText'
-  },
-  {
-    title : '차량',
-    path : '/car',
-    icon : <AiIcons.AiFillCar/>,
     cName : 'navText'
   },
 ]
@@ -69,7 +57,7 @@ function Sidebar(){
     <>
       <nav className ={`${styles.navMenu} ${styles.navbarMargin}`}>         
         <ul className ={styles.navMenuItems} >
-          <Link to = "/room" >
+          <Link to = "/meeting" >
             <button className = {`${styles.reserveButton}`} style={{margin : '30px', marginRight : '60px', marginTop : '10px'}}>+ 예약하기</button>
           </Link>
           <div className={itemStyles.sideItem}>

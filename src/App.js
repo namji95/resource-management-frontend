@@ -83,11 +83,11 @@ function App() {
 
   // 이 useEffect() 필요한가...?.. redux 초기화..?
   useEffect(() => {
-    // dispatch(saveToken(localStorage.getItem('accessToken')));
-    // dispatch(saveInfo({
-    //   name : JSON.parse(localStorage.getItem('userInfo')).userName,
-    //   email : JSON.parse(localStorage.getItem('userInfo')).userEmail,
-    // }));
+    dispatch(saveToken(localStorage.getItem('accessToken')));
+    dispatch(saveInfo({
+      // name : JSON.parse(localStorage.getItem('userInfo')).userName,
+      // email : JSON.parse(localStorage.getItem('userInfo')).userEmail,
+    }));
   }, [dispatch])
 
   if (token === '' || token === null ) {
@@ -118,9 +118,9 @@ function App() {
               <div className= "main" >
                   <div style={{border : '1px solid rgba(0,0,0,.08)', overflow : 'hidden' ,backgroundColor :'white', width: windowWidth - 260, height: windowHeight - 50 , position: 'fixed', left: '260px', top: '50px', right: '0', bottom: '0' }}>
                     <Routes>
-                      <Route path='/' element = {<Calendar/>}></Route>
+                      <Route path='/' element = {<Calendar></Calendar>}></Route>
+                      <Route path='/meeting' element = {<Meeting/>}></Route> 
                       <Route path='/device' element = {<Device/>}></Route> 
-                      <Route path='/meeting' element = {<HeaderTokenTest/>}></Route> 
                       <Route path='/car' element = {<Car/>}></Route>
                       <Route path='/*' element = {<Calendar></Calendar>}></Route>
                     </Routes>

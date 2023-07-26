@@ -42,15 +42,6 @@ function ResourceList(props) {
           : <></>
         }
 
-          showModal ?(
-          <DeviceSaveModal showModal={showModal}
-          setShowModal={setShowModal}
-          key="deviceSaveModal" 
-          />
-          ) : (
-           <></>
-        )}
-
       </div>
     
         <hr className={resourceListStyle.firstLine} />

@@ -1,3 +1,5 @@
+/* 공통 CSS */
+
 .background_block{
     width: 100vw;
     height: 100vh;
@@ -5,7 +7,7 @@
     z-index: 998;
 }
 
-.black
+.back
 {
     position: absolute;
     top :0;
@@ -68,90 +70,7 @@
 .category{
     width: 100px;
     height: 20px;
-    margin-left: 40px;
-}
-
-.carNames{
-    display: flex;
-    color: blue;
-    margin-top: 15px;
-    font-size: 10px;
-}
-
-.carName{
-    height: 20px;
-    width: 100%;
-    max-width: 150px;
-    margin-left: 45px;
-}
-
-.carNumbers{
-    display: flex;
-    color: blue;
-    margin-top: 15px;
-    font-size: 10px;
-}
-
-.carNumber{
-    height: 20px;
-    width: 100%;
-    max-width: 150px;
-    margin-left: 35px;
-}
-
-.carDistances{
-    display: flex;
-    color: blue;
-    margin-top: 15px;
-    font-size: 10px;
-}
-
-.carDistance{
-    height: 20px;
-    width: 100%;
-    max-width: 150px;
-    margin-left: 35px;
-}
-
-.carYears{
-    display: flex;
-    color: blue;
-    margin-top: 15px;
-    font-size: 10px;
-}
-
-.carYear{
-    height: 20px;
-    width: 100%;
-    max-width: 150px;
-    margin-left: 35px;
-}
-
-
-.carImages{
-    display: flex;
-    margin-top: 15px;
-    font-size: 10px;
-}
-
-.carImage{
-    height: 20px;
-    width: 200px;
-    margin-left: 60px;
-}
-
-.explanations{
-    display: flex;
-    margin-top: 15px;
-    font-size: 12px;
-}
-
-.explanation{
-    height: 100px;
-    width: 100%;
-    max-width: 200px;
-    margin-left: 65px;
-    margin-right: 5px;
+    margin-left: 70px;
 }
 
 .firstLine{
@@ -171,7 +90,7 @@
     text-align: center;
     height: 20x;
     width: 80px;
-    margin-left: 40px;
+    margin-left: 70px;
 }
 
 .secondLine{
@@ -197,4 +116,103 @@
     margin-left: 10px;
     height: 25px;
     width: 65px;
+}
+
+/* Category 각각 CSS */
+
+.names{
+    display: flex;
+    color: blue;
+    margin-top: 15px;
+    font-size: 10px;
+}
+
+.name{
+    height: 20px;
+    width: 100%;
+    max-width: 150px;
+    margin-left: 75px;
+}
+
+.numbers{
+    display: flex;
+    color: blue;
+    margin-top: 15px;
+    font-size: 10px;
+}
+
+.number{
+    height: 20px;
+    width: 100%;
+    max-width: 150px;
+    margin-left: 65px;
+}
+
+.distances{
+    display: flex;
+    color: blue;
+    margin-top: 15px;
+    font-size: 10px;
+}
+
+.distance{
+    height: 20px;
+    width: 100%;
+    max-width: 150px;
+    margin-left: 65px;
+}
+
+.years{
+    display: flex;
+    color: blue;
+    margin-top: 15px;
+    font-size: 10px;
+}
+
+.year{
+    height: 20px;
+    width: 100%;
+    max-width: 150px;
+    margin-left: 65px;
+}
+
+
+.images{
+    display: flex;
+    margin-top: 15px;
+    font-size: 10px;
+}
+
+.image{
+    height: 20px;
+    width: 200px;
+    margin-left: 90px;
+}
+
+.explanations{
+    display: flex;
+    margin-top: 15px;
+    font-size: 12px;
+}
+
+.explanation{
+    height: 100px;
+    width: 100%;
+    max-width: 200px;
+    margin-left: 95px;
+    margin-right: 5px;
+}
+
+.Serials{
+    display: flex;
+    color: blue;
+    margin-top: 15px;
+    font-size: 10px;
+}
+
+.Serial{
+    height: 20px;
+    width: 100%;
+    max-width: 150px;
+    margin-left: 45px;
 }

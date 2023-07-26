@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import facilitySaveStyle from "../car/FacilitySaveModal.module.css";
+import facilitySaveStyle from "../facility/FacilitySaveModal.module.css
 
 function FacilitySaveModal(props) {
 
@@ -39,45 +39,6 @@ function FacilitySaveModal(props) {
 
     const FacilitySaveModal = (event) => {
         event.preventDefault();
-
-    //     let file = event.target.value;
-
-        // // 이미지를 선택하고 base64로 인코딩
-        // const fileInput = document.querySelector('input[type="file"]');
-        // const file = fileInput.files[0];
-        // const reader = new FileReader();
-
-        // reader.onloadend = () => {
-        //     const base64Image = reader.result;
-
-        // 이미지를 담은 FormData 생성
-        // const formData = new FormData();
-        // formData.append("carName", carObj.carName);
-        // formData.append("carNumber", carObj.carNumber);
-        // formData.append("carDistance", carObj.carDistance);
-        // formData.append("carYear", carObj.carYear);
-        // formData.append("file", carObj.carImage);
-        // formData.append("carExplan", carObj.carExplan);
-
-        //         // 서버로 전송
-        //         axios.post("http://localhost:8080/FacilitySaveModal", formData, {
-        //             headers: {
-        //                 "Content-Type": "multipart/form-data"
-        //             }
-        //         }).then (response => {
-        //             if (response.data != null) {
-        //                 alert("등록이 완료되었습니다.");
-        //             } else {
-        //                 alert("이미 등록된 설비입니다. 다시 등록하세요");
-        //             }
-        //         }).catch (error => {
-        //             alert(error);
-        //         });
-        //     };
-        
-            // if (file) {
-            //     reader.readAsDataURL(file);
-            // }
             
             axios.post("http://localhost:8080/FacilitySaveModal", 
                 carObj

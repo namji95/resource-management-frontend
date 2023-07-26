@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import resourceListStyle from "../car/ResourceList.module.css";
+import resourceListStyle from "../facility/ResourceList.module.css";
 import {Table} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import FacilitySaveModal from '../car/FacilitySaveModal';
-import FacilityModal from "./FacilityModal";
+import FacilitySaveModal from '../facility/FacilitySaveModal';
+import FacilityModal from "../facility/FacilityModal";
 import { Height } from "@mui/icons-material";
 
 function ResourceList(props) {

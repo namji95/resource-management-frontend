@@ -131,7 +131,11 @@
     height: 20px;
     width: 100%;
     max-width: 150px;
-    margin-left: 75px;
+    margin-left: 55px;
+}
+
+.carname{
+    margin-right: 20px;
 }
 
 .numbers{
@@ -214,5 +218,5 @@
     height: 20px;
     width: 100%;
     max-width: 150px;
-    margin-left: 45px;
+    margin-left: 65px;
 }

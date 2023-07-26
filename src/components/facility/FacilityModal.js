@@ -10,21 +10,21 @@ function FacilityModal(props) {
         carDistance : "",
         carYear : "",
         // carImage : "",
-        carExplan : ""
+        carExplain : ""
     }
 
-    const defaultMeetingObj = {
-        name : "",
-        roomNum :"",
-        description : "",
-        useDate : "",
+    const defaultSpaceObj = {
+        spcName : "",
+        spcCap : "",
+        spcExplain : "",
+        spcImage : "",
     }
 
     const defaultdeviceObj = {
         dvcName : "",
         dvcSerial: "",
         dvcBuy : "",
-        dvcExplan : "",
+        dvcExplain : "",
         dvcCreated : "",
         dvcUpdated : ""
     }
@@ -40,7 +40,7 @@ function FacilityModal(props) {
     // 객체 Key : value
     
     const [carObj, setCarObj] = useState(defaultCarObj);
-    const [meetingObj, setMeetingObj] = useState(defaultMeetingObj);
+    const [spaceObj, setSpaceObj] = useState(defaultSpaceObj);
     const [deviceObj, setdeviceObj] = useState(defaultdeviceObj);
 
     const onChangeCar = (e) => {
@@ -53,14 +53,14 @@ function FacilityModal(props) {
         setCarObj(newObj);
     }
 
-    const onChangeMeetingObj = (e) => {
+    const onChangeSpaceObj = (e) => {
         let newName = e.target.name;
         let newValue = e.target.value;
         const newObj = {
-            ...meetingObj,//spread 연산자
+            ...spaceObj,//spread 연산자
             [newName] : newValue
         }
-        setMeetingObj(newObj);
+        setSpaceObj(newObj);
     }
 
     const onChangedevice = (e) => {
@@ -78,7 +78,7 @@ function FacilityModal(props) {
 
     const onReset = () => {
         setCarObj(defaultCarObj);
-        setMeetingObj(defaultMeetingObj);
+        setSpaceObj(defaultSpaceObj);
         setdeviceObj(defaultdeviceObj);
         setCurrCategory("car");
     }
@@ -114,38 +114,38 @@ function FacilityModal(props) {
                     type='text'
                     className={facilityStyle.name}
                     placeholder="공간자원명"
-                    name="name"
-                    value={meetingObj.name}
-                    onChange={onChangeMeetingObj}></input>                
+                    name="spcName"
+                    value={spaceObj.spcName}
+                    onChange={onChangeSpaceObj}></input>                
                 </div>
                 <div className={facilityStyle.numbers}>
-                    ● 회의실번호
+                    ● 수용인원
                     <input
                     type='text'
                     className={facilityStyle.number}
                     placeholder="회의실번호"
-                    name="roomNum"
-                    value={meetingObj.roomNum}
-                    onChange={onChangeMeetingObj}></input>
+                    name="spcCap"
+                    value={spaceObj.spcCap}
+                    onChange={onChangeSpaceObj}></input>
                 </div>
                 <div className={facilityStyle.explanations}>
-                    ● 설명
+                    설명
                     <input 
                     type='text'
                     className={facilityStyle.explanation}
                     placeholder="회의실에 대한 설명"
-                    name ="description"
-                    value={meetingObj.description}
-                    onChange={onChangeMeetingObj}></input>
+                    name ="spcExplain"
+                    value={spaceObj.spcExplain}
+                    onChange={onChangeSpaceObj}></input>
                 </div>
-                <div className={facilityStyle.years}>
-                    ● 이용날짜
+                <div className={facilityStyle.images}>
+                    이미지
                     <input
-                    type='date'
-                    className={facilityStyle.year}
-                    name="carYear"
-                    value={meetingObj.useDate}
-                    onChange={onChangeMeetingObj}></input>                
+                    type='file'
+                    className={facilityStyle.image}
+                    name="spcImage"
+                    value={spaceObj.useDate}
+                    onChange={onChangeSpaceObj}></input>                
                 </div>
             </>
         )
@@ -155,7 +155,9 @@ function FacilityModal(props) {
         return (
             <>
                 <div className={facilityStyle.names}>
+                    <span className={facilityStyle.carname}>
                     ● 차량명
+                    </span>
                     <input
                     type='text'
                     className={facilityStyle.name}
@@ -208,8 +210,8 @@ function FacilityModal(props) {
                     type='text'
                     className={facilityStyle.explanation}
                     placeholder="차량 추가에 대한 설명"
-                    name ="carExplan"
-                    value={carObj.carExplan}
+                    name ="carExplain"
+                    value={carObj.carExplain}
                     onChange={onChangeCar}></input>
                 </div>
             </>
@@ -250,12 +252,12 @@ function FacilityModal(props) {
                     onChange={onChangedevice}></input>
                 </div>
                 <div className={facilityStyle.explanations}>
-                    기기 설명
+                    설명
                     <input
                     type='textarea'
                     className={facilityStyle.explanation}
-                    name="dvcExplan"
-                    value={deviceObj.dvcExplan}
+                    name="dvcExplain"
+                    value={deviceObj.dvcExplain}
                     onChange={onChangedevice}></input>                
                 </div>
                 

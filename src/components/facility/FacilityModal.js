@@ -20,6 +20,15 @@ function FacilityModal(props) {
         useDate : "",
     }
 
+    const defaultdeviceObj = {
+        dvcName : "",
+        dvcSerial: "",
+        dvcBuy : "",
+        dvcExplan : "",
+        dvcCreated : "",
+        dvcUpdated : ""
+    }
+
     const [currCategory, setCurrCategory] = useState("car");
 
     const onSelectChange = (e) => {
@@ -32,6 +41,7 @@ function FacilityModal(props) {
     
     const [carObj, setCarObj] = useState(defaultCarObj);
     const [meetingObj, setMeetingObj] = useState(defaultMeetingObj);
+    const [deviceObj, setdeviceObj] = useState(defaultdeviceObj);
 
     const onChangeCar = (e) => {
         let newName = e.target.name;
@@ -53,9 +63,23 @@ function FacilityModal(props) {
         setMeetingObj(newObj);
     }
 
+    const onChangedevice = (e) => {
+        const currentDatetime = new Date().toISOString();
+        let newName = e.target.name;
+        let newValue = e.target.value;
+        const newObj = {
+            ...deviceObj,
+            [newName] : newValue,
+            dvcCreated : currentDatetime,
+            dvcUpdated : currentDatetime
+        }   
+        setdeviceObj(newObj);
+    }
+
     const onReset = () => {
         setCarObj(defaultCarObj);
         setMeetingObj(defaultMeetingObj);
+        setdeviceObj(defaultdeviceObj);
         setCurrCategory("car");
     }
 
@@ -84,21 +108,21 @@ function FacilityModal(props) {
     const printMeetingForm = () => {
         return (
             <>
-                <div className={facilityStyle.carNames}>
-                    ● 회의실명
+                <div className={facilityStyle.names}>
+                    ● 공간자원명
                     <input
                     type='text'
-                    className={facilityStyle.carName}
-                    placeholder="회의실명"
+                    className={facilityStyle.name}
+                    placeholder="공간자원명"
                     name="name"
                     value={meetingObj.name}
                     onChange={onChangeMeetingObj}></input>                
                 </div>
-                <div className={facilityStyle.carNumbers}>
+                <div className={facilityStyle.numbers}>
                     ● 회의실번호
                     <input
                     type='text'
-                    className={facilityStyle.carNumber}
+                    className={facilityStyle.number}
                     placeholder="회의실번호"
                     name="roomNum"
                     value={meetingObj.roomNum}
@@ -114,22 +138,14 @@ function FacilityModal(props) {
                     value={meetingObj.description}
                     onChange={onChangeMeetingObj}></input>
                 </div>
-                <div className={facilityStyle.carYears}>
+                <div className={facilityStyle.years}>
                     ● 이용날짜
                     <input
                     type='date'
-                    className={facilityStyle.carYear}
+                    className={facilityStyle.year}
                     name="carYear"
                     value={meetingObj.useDate}
                     onChange={onChangeMeetingObj}></input>                
-                </div>
-                <hr className={facilityStyle.firstLine}/>
-                <div className={facilityStyle.companys}>
-                    사용 회사
-                    <input 
-                    type="button" 
-                    value="회사 선택" 
-                    className={facilityStyle.company}></input>
                 </div>
             </>
         )
@@ -138,50 +154,50 @@ function FacilityModal(props) {
     const printCarForm = () => {
         return (
             <>
-                <div className={facilityStyle.carNames}>
+                <div className={facilityStyle.names}>
                     ● 차량명
                     <input
                     type='text'
-                    className={facilityStyle.carName}
+                    className={facilityStyle.name}
                     placeholder="차량명"
                     name="carName"
                     value={carObj.carName}
                     onChange={onChangeCar}></input>                
                 </div>
-                <div className={facilityStyle.carNumbers}>
+                <div className={facilityStyle.numbers}>
                     ● 차량번호
                     <input
                     type='text'
-                    className={facilityStyle.carNumber}
+                    className={facilityStyle.number}
                     placeholder="차량번호"
                     name="carNumber"
                     value={carObj.carNumber}
                     onChange={onChangeCar}></input>
                 </div>
-                <div className={facilityStyle.carDistances}>
+                <div className={facilityStyle.distances}>
                     ● 주행거리
                     <input
                     type='number'
-                    className={facilityStyle.carDistance}
+                    className={facilityStyle.distance}
                     placeholder="주행거리"
                     name="carDistance"
                     value={carObj.carDistance}
                     onChange={onChangeCar}></input>
                 </div>
-                <div className={facilityStyle.carYears}>
+                <div className={facilityStyle.years}>
                     ● 차량연식
                     <input
                     type='date'
-                    className={facilityStyle.carYear}
+                    className={facilityStyle.year}
                     name="carYear"
                     value={carObj.carYear}
                     onChange={onChangeCar}></input>                
                 </div>
-                <div className={facilityStyle.carImages}>
+                <div className={facilityStyle.images}>
                     이미지
                     <input
                     type='file'
-                    className={facilityStyle.carImage}
+                    className={facilityStyle.image}
                     name="carImage"
                     value={carObj.carImage}
                     onChange={onChangeCar}></input>
@@ -196,57 +212,102 @@ function FacilityModal(props) {
                     value={carObj.carExplan}
                     onChange={onChangeCar}></input>
                 </div>
-                <hr className={facilityStyle.firstLine}/>
-                <div className={facilityStyle.companys}>
-                    사용 회사
-                    <input 
-                    type="button" 
-                    value="회사 선택" 
-                    className={facilityStyle.company}></input>
-                </div>
-
             </>
         )
     }
 
-const printBtn = () => {
-    const saveBtn = <input 
-                    type="submit" 
-                    value="저장"
-                    className={facilityStyle.save}
-                    onClick={FacilityModal}
-                    />;
-
-    const resetBtn =<input 
-                     onClick={onReset}
-                     type="reset"
-                     value="초기화"
-                     className={facilityStyle.cancel}
-                     />
-
-    return (
-            <div className={facilityStyle.sNcBtn}>
-                {resetBtn}
-                {saveBtn}
-            </div>
-    )
-}
-
-const printForm = (currCategory) => {
-    console.log("1");
-    if(currCategory == "car"){
-        return printCarForm();
-    }else{
-        return printMeetingForm();
+    const printDeviceForm = () => {
+        return (
+            <>
+                <div className={facilityStyle.names}>
+                    ● 전자기기명
+                    <input
+                    type='text'
+                    className={facilityStyle.name}
+                    placeholder="전자기기명"
+                    name="dvcName"
+                    value={deviceObj.dvcName}
+                    onChange={onChangedevice}></input>                
+                </div>
+                <div className={facilityStyle.Serials}>
+                    ● 제품번호
+                    <input
+                    type='text'
+                    className={facilityStyle.Serial}
+                    placeholder="제품번호"
+                    name="dvcSerial"
+                    value={deviceObj.dvcSerial}
+                    onChange={onChangedevice}></input>
+                </div>
+                <div className={facilityStyle.years}>
+                    ● 구입년도
+                    <input
+                    type='Date'
+                    className={facilityStyle.year}
+                    placeholder="구입년도"
+                    name="dvcBuy"
+                    value={deviceObj.dvcBuy}
+                    onChange={onChangedevice}></input>
+                </div>
+                <div className={facilityStyle.explanations}>
+                    기기 설명
+                    <input
+                    type='textarea'
+                    className={facilityStyle.explanation}
+                    name="dvcExplan"
+                    value={deviceObj.dvcExplan}
+                    onChange={onChangedevice}></input>                
+                </div>
+                
+                <div className={facilityStyle.images}>
+                    이미지
+                    <input
+                    type='file'
+                    className={facilityStyle.image}></input> 
+                </div>
+            </>
+        )
     }
-}
+
+    const printBtn = () => {
+        const saveBtn = <input 
+                        type="submit" 
+                        value="저장"
+                        className={facilityStyle.save}
+                        onClick={FacilityModal}
+                        />;
+
+        const resetBtn =<input 
+                         onClick={onReset}
+                         type="reset"
+                         value="초기화"
+                         className={facilityStyle.cancel}
+                         />
+
+        return (
+                <div className={facilityStyle.sNcBtn}>
+                    {resetBtn}
+                    {saveBtn}
+                </div>
+        )
+    }
+
+    const printForm = (currCategory) => {
+        if (currCategory == "car") {
+            return printCarForm();
+        }else if (currCategory == "space") {
+            return printMeetingForm();
+        }else if (currCategory == "device") {
+            return printDeviceForm();
+        }
+    }
 
 
 // ============================================== end logic
 
     return (
         <div className={facilityStyle.backgroud_block}>
-            <div className={facilityStyle.black}/>
+            <div className={facilityStyle.back}/>
             <div className={facilityStyle.update_page}>
             <button className={facilityStyle.cancelButton} onClick={closeModal}>X</button>
                 <form action="http://localhost:8080/FacilityModal" method="POST" encType="multipart/form-data">
@@ -257,13 +318,20 @@ const printForm = (currCategory) => {
                         카테고리
                         <select className={facilityStyle.category} value={currCategory} onChange={onSelectChange}>
                             <option value={"car"} selected>차량</option>
-                            <option value={"mobile"}>모바일 기기</option>
-                            <option value={"meeting"}>회의실</option>
-                            <option value={'edu'}>교육장</option>
+                            <option value={"device"}>모바일 기기</option>
+                            <option value={"space"}>공간자원원</option>
                         </select>
                     </div>
                     {printForm(currCategory)}
-                    <hr className={facilityStyle.secondLine}/>
+                        <hr className={facilityStyle.firstLine}/>
+                        <div className={facilityStyle.companys}>
+                            사용 회사
+                            <input 
+                            type="button" 
+                            value="회사 선택" 
+                            className={facilityStyle.company}></input>
+                        </div>
+                        <hr className={facilityStyle.secondLine}/>
                     {printBtn(currCategory)}
                 </form>
             </div>

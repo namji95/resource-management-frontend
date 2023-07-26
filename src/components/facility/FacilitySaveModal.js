@@ -57,7 +57,7 @@ function FacilitySaveModal(props) {
 
     return (
         <div className={facilitySaveStyle.backgroud_block}>
-            <div className={facilitySaveStyle.black}/>
+            <div className={facilitySaveStyle.back}/>
             <div className={facilitySaveStyle.update_page}>
             <button className={facilitySaveStyle.cancelButton} onClick={closeModal}>X</button>
                 <form action="http://localhost:8080/FacilitySaveModal" method="POST" encType="multipart/form-data">

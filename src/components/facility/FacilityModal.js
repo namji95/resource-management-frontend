@@ -321,7 +321,7 @@ function FacilityModal(props) {
                         <select className={facilityStyle.category} value={currCategory} onChange={onSelectChange}>
                             <option value={"car"} selected>차량</option>
                             <option value={"device"}>모바일 기기</option>
-                            <option value={"space"}>공간자원원</option>
+                            <option value={"space"}>공간</option>
                         </select>
                     </div>
                     {printForm(currCategory)}

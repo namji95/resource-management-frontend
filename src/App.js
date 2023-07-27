@@ -11,7 +11,6 @@ import Login from './components/member/Login';
 import Device from './components/Device/Device';
 // import Mypage from './components/MyPage/PageForm';
 import Meeting from './components/Metting/InputDeviceForm';
-import Car from './components/Car/Car';
 
 // redux 에 저장된 데이터 가져오기 위한 import
 import { useSelector } from 'react-redux';
@@ -120,8 +119,7 @@ function App() {
                     <Routes>
                       <Route path='/' element = {<Calendar></Calendar>}></Route>
                       <Route path='/meeting' element = {<Meeting/>}></Route> 
-                      <Route path='/device' element = {<Device/>}></Route> 
-                      <Route path='/car' element = {<Car/>}></Route>
+                      <Route path='/device' element = {<Device/>}></Route>
                       <Route path='/*' element = {<Calendar></Calendar>}></Route>
                     </Routes>
                     </div>

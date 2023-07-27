@@ -11,6 +11,7 @@ import dayjs from 'dayjs'
 import axios from 'axios'
 
 import './Calendar.css';
+import ViewCalendar from './ViewCalendar.module.css';
 
 import CalendarModal from './CalendarModal';
 
@@ -33,7 +34,7 @@ export default function Calendar() {
     }
 
     useEffect(() => {
-        axios.get('http://localhost:9000/api/calendar/events')
+        axios.get('http://localhost:8080/api/calendar/events')
         .then((response) => {
             const result = {
                 title: response.data.title,
@@ -108,9 +109,12 @@ export default function Calendar() {
         
     return (
         <Fragment>
-            &nbsp;
+            <div className={ViewCalendar.outer}>
             <FullCalendar
-                contentHeight={570}
+                handleWindowResize={true}
+                windowResizeDelay={0.3}
+                // contentHeight={500}
+                aspectRatio={1.8}
                 plugins={[momentTimezone, dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
                 initialView={'dayGridMonth'}
                 headerToolbar={HeaderToolbar}
@@ -142,6 +146,7 @@ export default function Calendar() {
                 calendarTimeEnd={calendarTimeEnd} // 예 ) 형식 : Thu Jul 07 2023 09:00:00 GMT+9000 (한국 표준 시)
                 eventUpdate={eventUpdate}
             />
+            </div>
         </Fragment>
     );
 }

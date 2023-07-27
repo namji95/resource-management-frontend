@@ -17,6 +17,11 @@ import DeviceForm from './components/Device/Device';
 import Form from './components/Device/Form';
 import Reservation from './components/admin/reservation/AdminReservation';
 import ResourceList from './components/facility/ResourceList';
+
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+
+import { saveToken, saveEvent, saveInfo } from './components/store/CounterSlice';
  
 function App() {
 

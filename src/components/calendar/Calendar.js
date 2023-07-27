@@ -34,7 +34,7 @@ export default function Calendar() {
     }
 
     useEffect(() => {
-        axios.get('http://localhost:9000/api/calendar/events')
+        axios.get('http://localhost:8080/api/calendar/events')
         .then((response) => {
             const result = {
                 title: response.data.title,

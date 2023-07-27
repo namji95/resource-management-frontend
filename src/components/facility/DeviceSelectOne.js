@@ -2,7 +2,7 @@ import { useState,useEffect } from "react";
 import axios from "axios";
 import facilitySaveStyle from './DeviceSaveModal.module.css';
 import {Table} from "react-bootstrap";
-function DeviceSelectAll(props) { 
+function DeviceSelectOne(props) { 
     
     const [deviceObj, setdeviceObj] =useState({
         dvcName : "",
@@ -16,7 +16,7 @@ function DeviceSelectAll(props) {
 
     useEffect(() => {
         axios
-          .get("http://localhost:8080/DeviceSelectAll")
+          .get("http://localhost:8080/DeviceSelectOne")
           .then((response) => {
             console.log(response.data);
             setdeviceObj(response.data);

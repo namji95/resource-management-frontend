@@ -64,7 +64,6 @@ function App() {
             <div className= "main" >
 
               <div style={{border : '1px solid rgba(0,0,0,.08)', backgroundColor :'white', width: windowWidth - 260, height: windowHeight - 50 , position: 'fixed', left: '260px', top: '50px', right: '0', bottom: '0' }}>
-              <Test></Test>
                 <Routes>
                   {/* 회원 */}
                   <Route path='/main' element = {<Calendar/>}></Route>

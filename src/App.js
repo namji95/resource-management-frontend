@@ -17,16 +17,7 @@ import DeviceForm from './components/Device/Device';
 import Form from './components/Device/Form';
 import Reservation from './components/admin/reservation/AdminReservation';
 import ResourceList from './components/facility/ResourceList';
-
-
-// redux 에 저장된 데이터 가져오기 위한 import
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-
-import { saveToken, saveEvent, saveInfo } from './components/store/CounterSlice';
-
-import { Hidden } from '@mui/material';
-
+ 
 function App() {
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -138,6 +129,8 @@ function App() {
                       <Route path='/resourcelist' element = {<ResourceList />}></Route>
 
                       <Route path='/*' element = {<Calendar></Calendar>}></Route>
+
+                    
                     </Routes>
                     </div>
               </div>

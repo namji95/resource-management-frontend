@@ -13,7 +13,7 @@ function MultipleInputsExample() {
       <div className='inputType'>
      <input type = "Date"></input>
      <input type = "Time"></input>
-     <text>--</text>
+     {/* <text>--</text> */}
      <input type = "Date"></input>
      <input type = "Time"></input>
      </div>

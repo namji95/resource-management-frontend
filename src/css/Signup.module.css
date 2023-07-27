@@ -1,9 +1,9 @@
 .page {
     position: absolute;
-    top: 0px;
+    top: 5%;
     bottom: 10px;
     width: 100%;
-    height: auto;
+    height: 90%;
     max-width: 600px;
     padding: 0 20px;
 
@@ -28,10 +28,10 @@
 }
 
 .title {
-    margin-top: 50px;
+    /* margin-top: 50px; */
     font-size: 26px;
     font-weight: 700;
-    text-align: left;
+    text-align: center;
     color: #262626;
 }
 
@@ -78,6 +78,13 @@
 .errorMessageWrap {
     margin-top: 8px;
     color: #ef0000;
+    font-size: 12px;
+    text-align: left;
+}
+
+.successMessageWrap {
+    margin-top: 8px;
+    color: #3CB371;
     font-size: 12px;
     text-align: left;
 }

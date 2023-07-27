@@ -51,7 +51,7 @@ const adminData = [
   },
 ]
 
-function Sidebar(){
+function Sidebar() {
 
   return (
     <>

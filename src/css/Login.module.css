@@ -3,9 +3,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 85%;
     background-color: white;
-    border-radius: 10%;
+    border-radius: 1%;
   }
   
   .imgContainer {
@@ -44,15 +44,19 @@
   }
   
   .bottomButton {
-    width: 100%;
+    width: 90%;
     height: 40px;
     margin-bottom: 10px;
     font-weight: bold;
     color: #fff;
     background-color: #007bff;
     border: none;
-    border-radius: 4px;
+    border-radius: 1rem;
     cursor: pointer;
+  }
+
+  .bottomButton:hover {
+    background-color: #1a83ff;
   }
   
   .link {
@@ -61,5 +65,10 @@
     margin-bottom: 10px;
     color: #007bff;
     text-decoration: none;
+  }
+
+  .loginCheck {
+    color: red;
+    visibility: none;
   }
   

@@ -1,4 +1,5 @@
 .header {
+    height: 50px;
     display: flex;
     margin-left: 0px;
     padding: 10px;
@@ -19,10 +20,16 @@
     top: 0;
     left: 0;
     right: 0;
-    z-index: 9999;
+    z-index: 9998;
     height: 50px;
 }
 
 .formControlButton {
     margin: 0px;
+}
+
+.userName {
+    border-radius: 1rem;
+    border-color: red;
+    
 }

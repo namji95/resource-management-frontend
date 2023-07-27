@@ -1,23 +1,32 @@
-import {Nav,Navbar,Button,Container,NavDropdown,Form} from 'react-bootstrap';
+import {Nav,Navbar,Button,Container,NavDropdown,Form, Dropdown} from 'react-bootstrap';
 // import Navbar from 'react-bootstrap/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from "../css/Header.module.css"
 import logo from '../images/wehago.png';
 
-
+import { saveToken, saveEvent } from '../components/store/CounterSlice';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { border } from '@mui/system';
 
 function Header() {
+
+  const dispatch = useDispatch();
+
+  const userData = useSelector((state) => state.info.info);
+
+  const logout = () => {
+    localStorage.removeItem('accessToken');
+    dispatch(saveToken(localStorage.getItem('accessToken')));
+  }
+  
   return (
     <>
       <Navbar className={styles.fixedHeader} >
-        <Container className = {styles.header}>
+        <Container fluid className = {styles.header}>
           <img className = {styles.logo} alt = "logo" src = {logo}></img>
           <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-            <Nav className="me-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#features">Features</Nav.Link>
-              <Nav.Link href="#pricing">Pricing</Nav.Link>
-            </Nav>
+            
           <div>
             <Form className="d-flex" >
               <Form.Control
@@ -30,9 +39,15 @@ function Header() {
             </Form>
           </div>
 
-            <div>
-              
-            </div>
+          <div className="dropdown" style={{backgroundColor : '#f4f6fc'}}>
+            <a className="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{backgroundColor : '#f4f6fc', border : 'none'}}>
+              <b style={{color : '#8d8d8d'}}>{userData.name}</b> &nbsp; <b style={{color : '#8d8d8d'}}>{userData.email}</b>
+            </a>
+            <ul className="dropdown-menu text-center" style={{textAlign: 'center'}}>
+              <li><a className="dropdown-item" href="#">개인정보</a></li>
+              <li><a className="dropdown-item" onClick={logout}>로그아웃</a></li>
+            </ul>
+          </div>
             
         </Container>
       </Navbar>

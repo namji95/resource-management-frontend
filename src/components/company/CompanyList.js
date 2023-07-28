@@ -2,14 +2,21 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import styles from './CompanyList.module.css';
-import { Container } from "react-bootstrap";
-
-import CompanyUpdateModal from './CompanyUpdateModal';
+import { Container, ModalBody, ModalFooter, ModalHeader } from "react-bootstrap";
+import { Button, Modal } from 'reactstrap';
+import CompanyModal from './CompanyModal';
+import TestModal from './TestModal';
 
 function CompanyList() {
-
+ // develop
     const copSeq = 1;
     let data = {};
+
+    // modal
+    const [modal, setModal] = useState(false);
+    const toggle = () => {
+        setModal(!modal);
+    }
 
     const [companyObj, setCompanyObj] = useState({
         copSeq: "",
@@ -25,10 +32,7 @@ function CompanyList() {
         axios.get('http://localhost:8080/api/company')
             .then((result) => {
                 console.log(result.data.data.companyList)
-                // setCompanyObj(...result.data.data.companyList)
                 setCompanyObj(result.data.data.companyList)
-
-                data = result.data;
                 setLoading(false);
             })
 
@@ -51,9 +55,10 @@ function CompanyList() {
                 <div className={styles.title}>
                     <h3 ><span>회사</span></h3>
                     <div className={styles.buttonCon}>
-                        <button type="button" className={styles.button}>회사 추가</button>
+                        <button type="button" className={styles.button} onClick={toggle}>추가</button>
                         <button type="button" className={styles.button}>수정</button>
                         <button type="button" className={styles.button}>삭제</button>
+                        {/* 삭제 버튼 누르면 백엔드로 상태값 false로 바꾸게 요청하기, 그리고 다시 조회해서 테이블에 안보이게하기 */}
                     </div>
                 </div>
             </div>
@@ -73,7 +78,7 @@ function CompanyList() {
                         </thead>
                         <tbody>
                             {companyObj.map((company, index) => (
-                                <tr key={index}>
+                                <tr key={index} onClick={toggle} >
                                     <th scope="row"><input type='checkbox'></input></th>
                                     <td>{company.copRegNum}</td>
                                     <td>{company.copName}</td>
@@ -84,6 +89,17 @@ function CompanyList() {
                     </table>
                 )}
             </div>
+
+            <Modal isOpen={modal} fade={true} toggle={toggle}>
+                            <ModalHeader toggle={toggle}>회사정보</ModalHeader>
+                            <ModalBody>
+                                <TestModal />
+                            </ModalBody>
+                            <ModalFooter>
+                                <Button color='primary' onClick={toggle}>확인</Button>
+                                <Button color='secondary' onClick={toggle}>닫기</Button>
+                            </ModalFooter>
+                        </Modal>
         </Container>
 
         <div>

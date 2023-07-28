@@ -8,7 +8,7 @@ import styles from './CompanyUpdate.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-function CompanyUpdateModal(props) {
+function CompanyModal(props) {
   let data = {};
   const copSeq = 1;
 
@@ -141,4 +141,4 @@ const FacilitySaveModal = (event) => {
 }
 }
 
-export default CompanyUpdateModal;
+export default CompanyModal;

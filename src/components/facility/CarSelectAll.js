@@ -2,10 +2,10 @@ import { useState,useEffect } from "react";
 import axios from "axios";
 import facilitySaveStyle from '../Device/DeviceSaveModal.module.css';
 import {Table} from "react-bootstrap";
+import FacilityModifyModal from "./FacilityModifyModal";
 
-function CarSelectAll(props) { 
-    
-    // const [carObj, setcarObj] = useState([])
+function CarSelectAll(props) {
+
     const [loading, setLoading] = useState(true);
     const [carObj, setcarObj] = useState({
         carName : "",
@@ -21,7 +21,7 @@ function CarSelectAll(props) {
           .get("http://localhost:8080/api/car")
           .then((response) => {
             console.log(response.data);
-            setcarObj(response.data);
+            setcarObj(response.data.carList);
             setLoading(false); // 데이터 가져오기가 완료되면 로딩 상태를 false로 변경
           })
           .catch((error) => {
@@ -29,7 +29,7 @@ function CarSelectAll(props) {
             setLoading(false); // 데이터 가져오기가 실패하더라도 로딩 상태를 false로 변경
           });
       }, []);
-    
+
       return (
         <div>
           {loading ? (
@@ -44,6 +44,7 @@ function CarSelectAll(props) {
                   <th>차량 연식</th>
                   <th>차량 설명</th>
                   <th>차량 이미지</th>
+                  <th>수정 및 삭제</th>
                 </tr>
               </thead>
               <tbody>
@@ -54,8 +55,10 @@ function CarSelectAll(props) {
                    <td>{car.carDistance}</td>
                    <td>{car.carYear}</td>
                    <td>{car.carExplain}</td>
-                   <td>{car.carImage}</td>
-                 </tr>
+                   <td><img src={car.carImage}></img></td>
+                   <td><input type="button" value="수정 및 삭제" />
+                   </td>
+                 </tr> 
                 ))}
               </tbody>
             </Table>

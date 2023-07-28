@@ -71,7 +71,7 @@ function Signup() {
 
         if (id.length > 6) {
 
-            axios.post('http://localhost:9000/api/user/duplicate', {}, {
+            axios.post('http://localhost:8080/api/user/duplicate', {}, {
                 params : {
                     userId : id,
                 }

@@ -57,7 +57,6 @@ function Company() {
 
 
         <button className={styles.bottomButton}  onClick={() => {
-                // axios.post('https://deeb-112-221-198-150.ngrok-free.app/member', {
                 axios.post('http://localhost:9000/api/company', {
                     copRegNum: copRegNum,
                     copName: copName,

@@ -7,6 +7,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
 import {useState,useEffect } from "react";
 import ChangePasswordModal from './PwModal';
+import axios from 'axios';
 
 function MyPage(){
 
@@ -14,32 +15,63 @@ function MyPage(){
 
   const [Users,setUsers] = useState({
     userName : "",
-    userEmail : "",
+    userEmail : "", 
     userImage : ""
   })
+  const [image,setImage] = useState('');
 
   const [showModal, setShowModal] = useState(false);
 
   const handleImageChange = (event) => {
+
     const selectedFile = event.target.files[0];
 
+    console.log(selectedFile);
+
     if (selectedFile) {
-      const reader = new FileReader();
+       const reader = new FileReader();
 
       reader.onloadend = () => {
+
         setUsers((prevUsers) => ({
           ...prevUsers,
           userImage: reader.result // 선택한 이미지를 userImage 상태에 바로 저장이 될까
         }));
       };
 
+      setImage(selectedFile.name)
+      
       reader.readAsDataURL(selectedFile);
     }
-  };
-  const saveMypage = (e) => {
     
-  }
+  };
 
+  const saveMypage = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+
+    formData.append("image", image);
+
+
+      axios.post("http://localhost:8080/api/MyPageImageTest", formData, {
+                headers: {'Content-Type' : 'multipart/form-data', charset: 'UTF-8'},
+            })
+            .then (response => {
+              console.log(response.data);
+             })
+            .catch (error => {
+                alert(error);
+            })
+        }
+  // const changeUser = (e) =>{
+  //   let newName = e.target.name;
+  //   let newValue = e.target.value;
+  //   const newObj = {
+  //     ...Users,
+  //     [newName] : newValue
+  //   }
+  //   setUsers(newObj);
+  // }
   const psdButton = () => {
     setShowModal(showModal => !showModal);
   }
@@ -50,14 +82,14 @@ function MyPage(){
       setUsers((prevUsers) => ({
         ...prevUsers,
         userEmail: userInfo.userEmail,
-        userId : userInfo.userId,
-        userPwd : userInfo.userPwd,
         userName : userInfo.userName,
         userImage : userInfo.userImage
       }))
 
     }
   }, []);
+
+  useEffect(() => {console.log(image)}, [image])
 
     return(
     <div>
@@ -89,24 +121,24 @@ function MyPage(){
 
 
         <Form.Group as={Row}>
-        <Form.Label column sm="2">닉네임 
+        <Form.Label column sm="2">이름 
         </Form.Label>
         <Col sm="2">
-          <Form.Control type="text" placeholder={Users.userName }/>
+          <Form.Control type="text" Value={Users.userName} readOnly/>
         </Col>
         </Form.Group>
         <hr/>
+        <Form.Group as={Row}>
+        <Form.Label column sm="2">Email 
+        </Form.Label>
+        <Col sm="2">
+          <Form.Control type="text" Value = {Users.userEmail}readOnly/>
+        </Col>
+        <ChangePasswordModal show={showModal} onHide={() => setShowModal(false)} />
+        </Form.Group>
       
-        <Form.Group as={Row}>
-        <Form.Label column sm="2">ID 
-        </Form.Label>
-        <Col sm="2">
-          <Form.Control type="text" value = {Users.userId}/>
-        </Col>
-        </Form.Group>
-        <hr/>
             
-        <Form.Group as={Row}>
+        {/* <Form.Group as={Row}>
         <Form.Label column sm="2">PassWord
         </Form.Label>
         <Col sm="2">
@@ -118,16 +150,9 @@ function MyPage(){
               : <></>
             }
         </Col>
-        </Form.Group>
+        </Form.Group> */}
         <hr/>
-        <Form.Group as={Row}>
-        <Form.Label column sm="2">Email 
-        </Form.Label>
-        <Col sm="2">
-          <Form.Control type="text" value = {Users.userEmail}/>
-        </Col>
-        <ChangePasswordModal show={showModal} onHide={() => setShowModal(false)} />
-        </Form.Group>
+      
       </fieldset>
       </div>
     </div>

@@ -30,7 +30,7 @@
 .resourceCategory{
     flex-direction: column;
     height: 100%;
-    max-height: 580px;
+    max-height: 610px;
     overflow: scroll;
     /* max h 이거 스크롤 영역 정하는거 알아서 */
     width: 15%;
@@ -62,6 +62,7 @@
     flex-direction: column;
     width: 85%;
     height: 100%;
+    max-height: 610px;
     
     float: right;
 

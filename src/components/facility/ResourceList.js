@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import resourceListStyle from './ResourceList.module.css';
 import {Table} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import FacilitySaveModal from './FacilitySaveModal';
 import FacilityModal from "./FacilityModal";
 import { Height } from "@mui/icons-material";
-import DeviceSaveModal from "../Device/DeviceSaveModal";
-import DeviceSelectAll from "../Device/DeviceSelectAll";
+import CarSelectAll from "./CarSelectAll";
 
 function ResourceList(props) {
 
@@ -49,8 +47,6 @@ function ResourceList(props) {
             }
         </div>
       </div>
-    
-        {/* <hr className={resourceListStyle.firstLine} /> */}
 
       <div className={resourceListStyle.resourceCategory}>
         <div>
@@ -74,7 +70,7 @@ function ResourceList(props) {
              {showText && (
                 <tr className={resourceListStyle.resourceList}>
                   <td>
-                    <DeviceSelectAll key = {showModal}></DeviceSelectAll>
+                    <CarSelectAll key = {showModal}></CarSelectAll>
                     
                   </td> 
                 </tr>

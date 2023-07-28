@@ -9,32 +9,25 @@ function FacilityModal(props) {
         carNumber :"",
         carDistance : "",
         carYear : "",
-        // carImage : "",
-        carExplain : ""
+        carExplain : "",
     }
-
     const defaultSpaceObj = {
         spcName : "",
         spcCap : "",
         spcExplain : "",
         spcImage : "",
+        spcCreated : "",
+        spcUpdated : ""
     }
 
     const defaultdeviceObj = {
         dvcName : "",
         dvcSerial: "",
         dvcBuy : "",
+        bvcImage : "",
         dvcExplain : "",
         dvcCreated : "",
         dvcUpdated : ""
-    }
-
-    const [currCategory, setCurrCategory] = useState("car");
-
-    const onSelectChange = (e) => {
-        let newValue = e.target.value;
-        setCurrCategory(newValue);
-        console.log(currCategory);
     }
 
     // 객체 Key : value
@@ -42,23 +35,39 @@ function FacilityModal(props) {
     const [carObj, setCarObj] = useState(defaultCarObj);
     const [spaceObj, setSpaceObj] = useState(defaultSpaceObj);
     const [deviceObj, setdeviceObj] = useState(defaultdeviceObj);
+    const [image, setImage] = useState(null);
+    const [currCategory, setCurrCategory] = useState("car");
+
+    let data = {
+        carName : carObj.carName,
+        carNumber : carObj.carNumber,
+        carDistance : carObj.carDistance,
+        carYear : carObj.carYear,
+        carExplain : carObj.carExplain
+    }
 
     const onChangeCar = (e) => {
+        const currentDatetime = new Date().toISOString();
         let newName = e.target.name;
         let newValue = e.target.value;
         const newObj = {
             ...carObj,//spread 연산자
-            [newName] : newValue
+            [newName] : newValue,
+            carCreated : currentDatetime,
+            carUpdated : currentDatetime
         }
         setCarObj(newObj);
     }
 
     const onChangeSpaceObj = (e) => {
+        const currentDatetime = new Date().toISOString();
         let newName = e.target.name;
         let newValue = e.target.value;
         const newObj = {
             ...spaceObj,//spread 연산자
-            [newName] : newValue
+            [newName] : newValue,
+            spcCreated : currentDatetime,
+            spcUpdated : currentDatetime
         }
         setSpaceObj(newObj);
     }
@@ -76,8 +85,25 @@ function FacilityModal(props) {
         setdeviceObj(newObj);
     }
 
+    const onSelectChange = (e) => {
+        let newValue = e.target.value;
+        setCurrCategory(newValue);
+        console.log(currCategory);
+    }
+    
+    const onChangeImageInput = e => {
+        setImage(e.target.files[0])
+    ;}
+
+    const formData = new FormData();
+
+    formData.append("image", image);
+    formData.append("data", new Blob([JSON.stringify(data)],{
+        type: "application/json"
+    }));
+
     const onReset = () => {
-        setCarObj(defaultCarObj);
+        setCarObj(data);
         setSpaceObj(defaultSpaceObj);
         setdeviceObj(defaultdeviceObj);
         setCurrCategory("car");
@@ -89,18 +115,17 @@ function FacilityModal(props) {
 
     const FacilityModal = (event) => {
         event.preventDefault();
-            
-            axios.post("http://localhost:8080/FacilityModal", 
-                carObj
-            ).then (response => {
-    
-                if (response.data != null) {
-                    alert("등록이 완료되었습니다.");
-                } else {
-                    alert("이미 등록된 설비입니다. 다시 등록하세요");
-                }
-
-            }).catch (error => {
+            console.log(image);
+            console.log(data);
+            console.log(formData);
+            axios.post("http://localhost:8080/api/car", formData, {
+                headers: {'Content-Type' : 'multipart/form-data', charset: 'UTF-8'},
+            })
+            .then (response => {
+                data = response.data;
+                alert("등록 완료")
+            })
+            .catch (error => {
                 alert(error);
             })
         }
@@ -163,7 +188,7 @@ function FacilityModal(props) {
                     className={facilityStyle.name}
                     placeholder="차량명"
                     name="carName"
-                    value={carObj.carName}
+                    value={data.carName}
                     onChange={onChangeCar}></input>                
                 </div>
                 <div className={facilityStyle.numbers}>
@@ -173,7 +198,7 @@ function FacilityModal(props) {
                     className={facilityStyle.number}
                     placeholder="차량번호"
                     name="carNumber"
-                    value={carObj.carNumber}
+                    value={data.carNumber}
                     onChange={onChangeCar}></input>
                 </div>
                 <div className={facilityStyle.distances}>
@@ -183,7 +208,7 @@ function FacilityModal(props) {
                     className={facilityStyle.distance}
                     placeholder="주행거리"
                     name="carDistance"
-                    value={carObj.carDistance}
+                    value={data.carDistance}
                     onChange={onChangeCar}></input>
                 </div>
                 <div className={facilityStyle.years}>
@@ -192,17 +217,17 @@ function FacilityModal(props) {
                     type='date'
                     className={facilityStyle.year}
                     name="carYear"
-                    value={carObj.carYear}
+                    value={data.carYear}
                     onChange={onChangeCar}></input>                
                 </div>
                 <div className={facilityStyle.images}>
                     이미지
                     <input
-                    type='file'
+                    type='file'accept="image/jpg,image/png,image/jpeg,image/gif"
                     className={facilityStyle.image}
                     name="carImage"
-                    value={carObj.carImage}
-                    onChange={onChangeCar}></input>
+                    value={data.carImage}
+                    onChange={onChangeImageInput}></input>
                 </div>
                 <div className={facilityStyle.explanations}>
                     설명
@@ -211,7 +236,7 @@ function FacilityModal(props) {
                     className={facilityStyle.explanation}
                     placeholder="차량 추가에 대한 설명"
                     name ="carExplain"
-                    value={carObj.carExplain}
+                    value={data.carExplain}
                     onChange={onChangeCar}></input>
                 </div>
             </>

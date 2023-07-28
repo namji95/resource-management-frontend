@@ -4,35 +4,60 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import './PageForm.css';
 import InputGroup from 'react-bootstrap/InputGroup';
-import React, { useRef, useState } from 'react';
-import Avatar from 'react-avatar';
+import Button from 'react-bootstrap/Button';
+import {useState,useEffect } from "react";
+import ChangePasswordModal from './PwModal';
 
 function MyPage(){
-  const fileInput = useRef(null);
-  const [file, setFile] = useState(null);
-  const [image, setImage] = useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");
 
-  const handleAvatarClick = () => {
-    fileInput.current.click();
-  };
 
-  const handleFileInputChange = (event) => {
-    if (event.target.files[0]) {
-      setFile(event.target.files[0]);
-    } else { // 업로드 취소할 시
-      setImage("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");
-      return;
+
+  const [Users,setUsers] = useState({
+    userName : "",
+    userEmail : "",
+    userImage : ""
+  })
+
+  const [showModal, setShowModal] = useState(false);
+
+  const handleImageChange = (event) => {
+    const selectedFile = event.target.files[0];
+
+    if (selectedFile) {
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        setUsers((prevUsers) => ({
+          ...prevUsers,
+          userImage: reader.result // 선택한 이미지를 userImage 상태에 바로 저장이 될까
+        }));
+      };
+
+      reader.readAsDataURL(selectedFile);
     }
-
-    // 화면에 프로필 사진 표시
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        setImage(reader.result);
-      }
-    };
-    reader.readAsDataURL(event.target.files[0]);
   };
+  const saveMypage = (e) => {
+    
+  }
+
+  const psdButton = () => {
+    setShowModal(showModal => !showModal);
+  }
+  
+  useEffect(() => {
+    if (localStorage.getItem('userInfo')) {
+      const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+      setUsers((prevUsers) => ({
+        ...prevUsers,
+        userEmail: userInfo.userEmail,
+        userId : userInfo.userId,
+        userPwd : userInfo.userPwd,
+        userName : userInfo.userName,
+        userImage : userInfo.userImage
+      }))
+
+    }
+  }, []);
 
     return(
     <div>
@@ -40,89 +65,69 @@ function MyPage(){
       <div className="MyPageform-container">
       <fieldset className="MyPagefieldset-container">
       <Form.Group as={Row}>
-        <Form.Label column sm="2">{"<"}내 프로필 
+        <Form.Label column sm="2">내 프로필 
         </Form.Label>
+        <Col sm = "2">
+        <InputGroup className='buttongroup'>
+    
+    <Button type="submit" className='submit' onClick={saveMypage}>저장</Button>{' '}
+    <Button as="input" type="button"className='buttoncancle' value="취소" />{' '}
+    </InputGroup>
+        </Col>
        </Form.Group> 
+
+
       <Form.Group as={Row}>
-        <Form.Label column sm="3">
-          
-        <Avatar
-        src={image}
-        style={{ margin: '20px' }}
-        size={200}
-        onClick={handleAvatarClick}
-      />
-      <input
-        type="file"
-        accept="image/*"
-        ref={fileInput}
-        onChange={handleFileInputChange}
-        style={{ display: 'none' }}
-      />
-        
-        
+        <Form.Label column sm="2">
+            <img src={Users.userImage} style={{ width: '240px', height: '150px',marginRight : '50px'}} />
         </Form.Label>
+        <Col sm = "2">
+        <Form.Control type = "file" onChange={handleImageChange} className='imgtag'></Form.Control>
+        </Col>
         </Form.Group>
+
+
 
         <Form.Group as={Row}>
         <Form.Label column sm="2">닉네임 
         </Form.Label>
         <Col sm="2">
-          <Form.Control type="text" placeholder="닉네임" />
+          <Form.Control type="text" placeholder={Users.userName }/>
         </Col>
         </Form.Group>
         <hr/>
       
-         <Form.Group as={Row} className="mb-3">
-         <Form.Label column sm="2">
-          핸드폰 
-         </Form.Label>
-         <Col sm="4"> 
-         <Form>
-      <Row>
-        <Col>
-      
-          <Form.Control placeholder="대한민국 +82" />
-        </Col>
-        <Col sm = "9">
-          <Form.Control placeholder="'-'없이 숫자만 입력해주세요." />
-        </Col>
-      </Row>
-    </Form>
-         </Col> 
-        </Form.Group><hr/>
         <Form.Group as={Row}>
         <Form.Label column sm="2">ID 
         </Form.Label>
         <Col sm="2">
-          <Form.Control type="text" placeholder="ID" />
+          <Form.Control type="text" value = {Users.userId}/>
         </Col>
         </Form.Group>
         <hr/>
-        <Row className="align-items-center">
             
-        <Form.Label column sm="2">이메일
+        <Form.Group as={Row}>
+        <Form.Label column sm="2">PassWord
         </Form.Label>
-        <Col xs="auto">
-          <Form.Label htmlFor="inlineFormInput" visuallyHidden>
-            Name
-          </Form.Label>
-          <Form.Control
-            className="mb-2"
-            id="inlineFormInput"
-            placeholder="douzone"
-          />
+        <Col sm="2">
+        <Button as="input" type="button"className='buttoncancle'onClick={psdButton} value="변경하려면 여기를 누르세용!" />{' '}
+
+        {
+              showModal ?
+              <ChangePasswordModal showModal={showModal} setShowModal={setShowModal} />
+              : <></>
+            }
         </Col>
-        <Col xs="auto">
-          <Form.Label htmlFor="inlineFormInputGroup" visuallyHidden>
-            Username
-          </Form.Label>
-          <InputGroup className="mb-2">
-            <InputGroup.Text>@</InputGroup.Text>
-            <Form.Control id="inlineFormInputGroup" placeholder="douzone.co.kr" />
-          </InputGroup>
+        </Form.Group>
+        <hr/>
+        <Form.Group as={Row}>
+        <Form.Label column sm="2">Email 
+        </Form.Label>
+        <Col sm="2">
+          <Form.Control type="text" value = {Users.userEmail}/>
         </Col>
-        </Row>
+        <ChangePasswordModal show={showModal} onHide={() => setShowModal(false)} />
+        </Form.Group>
       </fieldset>
       </div>
     </div>

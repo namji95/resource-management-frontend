@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import resourceListStyle from './ResourceList.module.css';
-import {Table} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import FacilityModal from "./FacilityModal";
 import { Height } from "@mui/icons-material";

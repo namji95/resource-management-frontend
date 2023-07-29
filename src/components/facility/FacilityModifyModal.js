@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import facilityStyle from "./FacilityModal.module.css";
 
-function FacilityModal(props) {
+function FacilityModifyModal(props) {
 
     const defaultCarObj = {
         carName : "",
@@ -113,12 +113,12 @@ function FacilityModal(props) {
         props.setShowModal(!props.showModal);
     }
 
-    const FacilityModal = (event) => {
+    const FacilityModifyModal = (event) => {
         event.preventDefault();
             console.log(image);
             console.log(data);
             console.log(formData);
-            axios.post("http://localhost:8080/api/car", formData, {
+            axios.put("http://localhost:8080/api/car", formData, {
                 headers: {'Content-Type' : 'multipart/form-data', charset: 'UTF-8'},
             })
             .then (response => {
@@ -299,9 +299,9 @@ function FacilityModal(props) {
     const printBtn = () => {
         const saveBtn = <input 
                         type="submit" 
-                        value="저장"
+                        value="수정"
                         className={facilityStyle.save}
-                        onClick={FacilityModal}
+                        onClick={FacilityModifyModal}
                         />;
 
         const resetBtn =<input 
@@ -337,7 +337,7 @@ function FacilityModal(props) {
             <div className={facilityStyle.back}/>
             <div className={facilityStyle.update_page}>
             <button className={facilityStyle.cancelButton} onClick={closeModal}>X</button>
-                <form action="http://localhost:8080/FacilityModal" method="POST" encType="multipart/form-data">
+                <form action="http://localhost:8080/FacilityModifyModal" method="POST" encType="multipart/form-data">
                     <div className={facilityStyle.essential}>
                         ● 필수 항목
                     </div>
@@ -366,4 +366,4 @@ function FacilityModal(props) {
     )
 }
 
-export default FacilityModal;
+export default FacilityModifyModal;

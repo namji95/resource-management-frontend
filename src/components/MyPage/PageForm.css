@@ -9,4 +9,8 @@
     border: 1px solid #ccc; /* 테두리 스타일 */
     border-radius: 5px; /* 테두리 굴곡 */
   }
-  
+.imgtag {
+    display: block;
+    margin-top: 30%; /* 맨 아래로 배치할 때 위쪽 여백 조절 */
+  }
+

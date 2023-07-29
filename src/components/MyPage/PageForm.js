@@ -16,7 +16,8 @@ function MyPage(){
   const [Users,setUsers] = useState({
     userName : "",
     userEmail : "", 
-    userImage : ""
+    userImage : "",
+    userId : ""
   })
   const [image,setImage] = useState('');
 
@@ -39,7 +40,7 @@ function MyPage(){
         }));
       };
 
-      setImage(selectedFile.name)
+      setImage(selectedFile)
       
       reader.readAsDataURL(selectedFile);
     }
@@ -48,10 +49,14 @@ function MyPage(){
 
   const saveMypage = (e) => {
     e.preventDefault();
+    let data = {
+      userId : Users.userId
+    }
     const formData = new FormData();
-
+    formData.append("data",new Blob([JSON.stringify(data)],{
+      type : "application/json"
+    }));
     formData.append("image", image);
-
 
       axios.post("http://localhost:8080/api/MyPageImageTest", formData, {
                 headers: {'Content-Type' : 'multipart/form-data', charset: 'UTF-8'},
@@ -83,7 +88,8 @@ function MyPage(){
         ...prevUsers,
         userEmail: userInfo.userEmail,
         userName : userInfo.userName,
-        userImage : userInfo.userImage
+        userImage : userInfo.userImage,
+        userId : userInfo.userId
       }))
 
     }
@@ -136,22 +142,6 @@ function MyPage(){
         </Col>
         <ChangePasswordModal show={showModal} onHide={() => setShowModal(false)} />
         </Form.Group>
-      
-            
-        {/* <Form.Group as={Row}>
-        <Form.Label column sm="2">PassWord
-        </Form.Label>
-        <Col sm="2">
-        <Button as="input" type="button"className='buttoncancle'onClick={psdButton} value="변경하려면 여기를 누르세용!" />{' '}
-
-        {
-              showModal ?
-              <ChangePasswordModal showModal={showModal} setShowModal={setShowModal} />
-              : <></>
-            }
-        </Col>
-        </Form.Group> */}
-        <hr/>
       
       </fieldset>
       </div>

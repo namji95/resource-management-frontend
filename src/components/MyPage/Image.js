@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-// import Avatar from 'react-avatar';
+import Avatar from 'react-avatar';
 
 function ProfileImage() {
   const fileInput = useRef(null);

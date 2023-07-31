@@ -1,3 +1,16 @@
+.head {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5%;
+    margin-bottom: 1%;
+}
+
+.headBtn {
+    background-color:#1a83ff;
+    
+    margin: 0%;
+}
+
 .page {
     position: absolute;
     top: 10%;
@@ -25,7 +38,7 @@
     text-align: left;
 }
 
-.bottomButton {
+/* .bottomButton {
     width: 100%;
     height: 48px;
     border: none;
@@ -38,7 +51,7 @@
     margin: 1px;
     margin-top: 50px;
 
-}
+} */
 
 
 

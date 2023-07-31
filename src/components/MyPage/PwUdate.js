@@ -11,6 +11,8 @@ function EditProfileForm({ show, onClose }) {
   const [isFirstInputVisible, setIsFirstInputVisible] = useState(false);
   const [error, setError] = useState(null);
   const [isSecondInputVisible, setIsSecondInputVisible] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
     const [Users,setUsers] = useState({
     userId : "",
     userPwd : ""
@@ -70,6 +72,8 @@ function EditProfileForm({ show, onClose }) {
               alert("인증 성공")
               setIsFirstInputVisible(true);
               setIsSecondInputVisible(true);
+              setIsAuthenticated(true); // 인증 상태를 true로 설정합니다.
+         
           
             }
           })
@@ -112,7 +116,7 @@ function EditProfileForm({ show, onClose }) {
   }
   return (
     <Modal show={show} style={{ top: '20px', left: '36%' }}>
-      <Modal.Header closeButton>
+      <Modal.Header closeButton onClick={onClose}>
       <Modal.Title>비밀번호 변경</Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -146,10 +150,13 @@ function EditProfileForm({ show, onClose }) {
   />
 </Form.Group>
           </>
-      )}  <Button variant="primary" onClick = {handleSubmit}type="button">
-            확인
-          </Button>
-        </Form>
+      )}  
+       {!isAuthenticated && (
+              <Button variant="primary" onClick={handleSubmit} type="button">
+                확인
+              </Button>
+            )}
+         </Form>
       </Modal.Body>
       <Modal.Footer>
       <Button variant="secondary" onClick={PwdSubmit}>

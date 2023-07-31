@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import axios from "axios";
 
-function TestModal() {
+function TestModal(props) {
 
     const copSeq = 2;
     let data = {};

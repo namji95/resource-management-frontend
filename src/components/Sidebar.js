@@ -27,7 +27,7 @@ const barData = [
 const adminData = [
   {
     title : '회사 관리',
-    path : '/companylist',
+    path : '/company',
     icon : <AiIcons.AiFillShop/>,
     cName : 'navText'
   },

@@ -3,6 +3,9 @@ import axios from 'axios';
 import styles from '../../css/Signup.module.css';
 import { style } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
+import DaumPostcode from 'react-daum-postcode';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -12,14 +15,20 @@ function Signup() {
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
+    const [selectedOption, setSelectedOption] = useState('남');
+    const [address, setAddress] = useState('');
 
     const [idValid, setIdValid] = useState(false);
     const [passValid, setPassValid] = useState(false);
     const [passConfirmValid, setPassConfirmValid] = useState(false);
     const [emailValid, setEmailValid] = useState(false);
     const [notAllow, setNotAllow] = useState(true);
-
     const [idCheck, setIdCheck] = useState('');
+    const [phoneErrorValid, setPhoneErrorValid] = useState(null);
+    const [phoneValid, setPhoneValid] = useState(false);
+    const [showPostcode, setShowPostCode] = useState(false);
+    const [addressValid, setAddressValid] = useState(false);
 
     // let data = {};
 
@@ -41,28 +50,67 @@ function Signup() {
         setEmail(e.target.value);
     }
 
-    const signUpHandler = () => {
-        axios.post('http://localhost:8080/api/user/signup', {
-            userId : id,
-            userPwd : password,
-            userName : name,
-            userEmail : email,
-        }).then((response) => {
-            console.log(response)
-            navigate("/")
-        }).catch((error) => {
-            console.log(error)
-        })
+    const handlePhone = (e) => {
+        const { value } = e.target;
+        setPhone(value);
+
+        const pattern = /^[0-9]{3}-[0-9]{3,4}-[0-9]{4}$/;
+        setPhoneErrorValid(pattern.test(value) ? "" : "올바른 전화번호 형식이 아닙니다.")
     }
+
+    const handleAddress = (data) => {
+        setAddress(`[${data.zonecode}] ${data.address}`);
+        setShowPostCode(false);
+    }
+
+    const handleOptionChange = (e) => {
+        setSelectedOption(e.target.value);
+    }
+
+    const handleOpenPostcode = () => {
+        setShowPostCode(true);
+    }
+
+    async function signUpHandler() {
+        try {
+          const response = await axios.post('http://localhost:8080/api/user/signup', {
+            userId: id,
+            userPwd: password,
+            userName: name,
+            userEmail: email,
+            userPhone: phone,
+            userGender: selectedOption,
+            userAddress: address,
+          });
+      
+          toast.success(response.data.message, {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 2000,
+          });
+        } catch (error) {
+          toast.error('회원가입 실패 -- backend error 로직 아직 안됨', {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 2000,
+          });
+        }
+        
+        // await를 사용하여 알림이 표시된 후에 navigate()를 실행
+        await new Promise((resolve) => // resolve promise가 성공적으로 완료되었을때
+        {
+            console.log(resolve);
+            setTimeout(resolve, 3000)
+        });
+        navigate("/");
+      }
     
     useEffect(() => {
 
-        if(emailValid && passConfirmValid && idValid) {
+        if(emailValid && passConfirmValid && idValid && phoneValid && addressValid) {
             setNotAllow(false);
         } else {
             setNotAllow(true);
         }
-    }, [emailValid, passConfirmValid, idValid])
+    }, [emailValid, passConfirmValid, idValid, phoneValid, addressValid])
 
     useEffect(() => {
     }, [passwordConfirm, password])
@@ -123,7 +171,19 @@ function Signup() {
             setEmailValid(false);
         }
 
-    }, [password, passwordConfirm , email])
+        if (phoneErrorValid === "") {
+            setPhoneValid(true);
+        } else {
+            setPhoneValid(false);
+        }
+
+        if (address !== '') {
+            setAddressValid(true);
+        } else {
+            setAddressValid(false);
+        }
+
+    }, [password, passwordConfirm , email, phone, address])
 
     return (
         <React.Fragment>
@@ -199,6 +259,62 @@ function Signup() {
                             }}
                         />
                     </div>
+
+                    <div className={styles.inputTitle}>전화번호</div>
+                    <div className={styles.inputWrap}>
+                        <input type="tel"
+                                id='phone'
+                                name='phone'
+                                className={styles.input}
+                                onChange={handlePhone}
+                                pattern="[0-9]{3}-[0-9]{3,4}-[0-9]{4}" 
+                                placeholder="010-1234-5678" 
+                                required 
+                        />
+                    </div>
+                    {phoneErrorValid && <div className={styles.errorMessageWrap}>{phoneErrorValid}</div>}
+
+
+                    <div className={styles.inputTitle}>성별</div>
+                    <div className={styles.inputWrap} style={{borderColor : 'white', padding : '0.3em'}}>
+                        <label>
+                            <input
+                                type='radio'
+                                name='options'
+                                value='남'
+                                checked={selectedOption === '남'}
+                                onChange={handleOptionChange}
+                            />
+                            <span style={{ marginLeft : '8px', fontSize : '0.9em'}}>남</span>
+                        </label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <label>
+                            <input
+                                type='radio'
+                                name='options'
+                                value='여'
+                                checked={selectedOption === '여'}
+                                onChange={handleOptionChange}
+                            />
+                            <span style={{ marginLeft : '8px', fontSize : '0.9em'}}>여</span>
+                        </label>
+                    </div>
+
+                    <div className={styles.inputTitle}>우편번호 검색</div>
+                    <div className={styles.inputWrap}>
+                    <button onClick={handleOpenPostcode} style={{margin : '0px', padding : '5px', float : 'left', fontSize : '12px'}}>주소 검색</button>
+                        {showPostcode && (
+                            <div>
+                                <DaumPostcode
+                                onComplete={handleAddress}
+                                style={{ width: "100%", height: "500px" }}
+                                />
+                            </div>
+                        )}
+                        <div style={{fontSize : '12px', margin: 'auto'}}>{address}</div>
+                    </div>
+                    
+
                     <div className={styles.inputTitle}>이메일 주소</div>
                     <div className={styles.inputWrap}>
                         <input 
@@ -225,64 +341,12 @@ function Signup() {
                 </button>
                </div>
 
-
-
-
             </div>
 
+            <div>
+                <ToastContainer style={{width: '350px', fontSize: '14px'}}/>
+            </div>
 
-
-
-
-
-            {/* <container>
-                <h2> 회원가입</h2>
-                <br/>
-                <div>
-                    아이디<br/>
-                    <input label="아이디" placeholder="아이디를 입력해주세요." value={memberId} onChange={(e) => {
-                        setMemberId(e.target.value);
-                        console.log(memberId);
-                    }}></input>
-                    <br/>비밀번호<br/>
-                    <input label="비밀번호" placeholder="비밀번호를 입력해주세요." value={memberPw} onChange={(e) => {
-                        setmemberPw(e.target.value);
-                    }}>
-                    </input>
-                    <br/>이름<br/>
-                    <input label="이름" placeholder="" value={memberName} onChange={(e) => {
-                        setMemberName(e.target.value);
-                    }}>
-                    </input>
-                    
-
-                    
-                </div>
-
-                <button onClick={() => {
-                // axios.post('https://deeb-112-221-198-150.ngrok-free.app/member', {
-                axios.post('http://localhost:9000/api/signup', {
-                    memberId: memberId,
-                    memberPw: memberPw,
-                    memberName: memberName,
-                    memberRank: memberRank,
-                    memberPosition: memberPosition,
-                    memberEnterDate: memberEnterDate,
-                    teamSeq: teamSeq
-                })
-                .then((result) => {
-                    data = result.data;
-                    console.log(data)
-                    
-                })
-                .catch((error) => {
-                    console.log('요청실패');
-                    console.log(error);
-                })
-            }}>회원가입</button>
-        
-        
-        </container> */}
         </React.Fragment>
     );
 };

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import styles from './CompanyList.module.css';
+import styles from './css/CompanyList.module.css';
 import { Container, ModalBody, ModalFooter, ModalHeader } from "react-bootstrap";
 import { Button, Modal } from 'reactstrap';
 import CompanyModal from './CompanyModal';
 import TestModal from './TestModal';
+import Loading from '../common/Loading';
 
 function CompanyList() {
  // develop
@@ -69,7 +70,7 @@ function CompanyList() {
 
             <div className={styles.content_body}>
                 {loading ? (
-                    <div>Loading...</div>
+                    <Loading/>
                 ) : (
                     <table class="table table-hover">
                         <thead class="table-light">

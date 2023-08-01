@@ -17,6 +17,7 @@ import DeviceForm from './components/Device/Device';
 import Form from './components/Device/Form';
 import Reservation from './components/admin/reservation/AdminReservation';
 import ResourceList from './components/facility/ResourceList';
+import Employee from './components/employee/Employee';
 
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
@@ -140,6 +141,8 @@ function App() {
                       <Route path='/deviceform' element = {<DeviceForm></DeviceForm>}></Route>
                       <Route path='/device' element = {<Device/>}></Route> 
                       <Route path='/resourcelist' element = {<ResourceList />}></Route>
+                      <Route path='/employee' element = {<Employee />}></Route>
+
 
                       <Route path='/*' element = {<Calendar></Calendar>}></Route>
 

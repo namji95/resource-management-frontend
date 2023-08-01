@@ -15,10 +15,11 @@ function DeviceModifyModal(props) {
     const [image, setImage] = useState(null);
 
     useEffect(() => {
+        console.log(props.selectDevice);
         if (props.selectDevice) {
             setDeviceObj(props.selectDevice);
         }
-    }, [props.selectDevice]);
+    }, []);
 
     const closeModifyModal = () => {
         props.setUpdateModal(false);
@@ -43,6 +44,14 @@ function DeviceModifyModal(props) {
             [newName] : newValue,
             deviceCreated : currentDateTime,
             deviceUpdated : currentDateTime
+        }
+        setDeviceObj(newObj);
+    }
+
+    const onChangeDevice1 = (seq) =>{
+        const newObj = {
+            ...deviceObj,
+            dvcSeq : seq
         }
         setDeviceObj(newObj);
     }
@@ -78,7 +87,8 @@ function DeviceModifyModal(props) {
             alert("변경 실패",error)
         });
     }
-    const printDeviceUpdateForm = () => {
+    const printDeviceUpdateForm = (seq) => {
+        onChangeDevice1(seq);
         return (
             <>
                 <div className={deviceModifyStyle.names}>
@@ -162,7 +172,7 @@ function DeviceModifyModal(props) {
                     <div className={deviceModifyStyle.essential}>
                         ● 필수 항목
                     </div>
-                        {printDeviceUpdateForm()}
+                        {printDeviceUpdateForm(props.selectDevice.dvcSeq)}
                         <hr className={deviceModifyStyle.firstLine}/>
                         <div className={deviceModifyStyle.companys}>
                             사용 회사

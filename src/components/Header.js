@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navbar, Button, Container, Form } from 'react-bootstrap';
 import styles from '../css/Header.module.css';
 import logo from '../images/wehago.png';
@@ -26,21 +26,18 @@ function Header() {
     setShowEditProfile(false);
   };
 
+  useEffect(() => {
+    console.log(userData);
+  }, [])
+
   return (
     <>
       <Navbar className={styles.fixedHeader}>
         <Container fluid className={styles.header}>
+        <div className="d-flex align-items-center">
           <img className={styles.logo} alt="logo" src={logo}></img>
-          <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-
-          <div>
-            <Form className="d-flex">
-              <Form.Control type="search" placeholder="Search" className="me-2" aria-label="Search" />
-              <Button variant="outline-primary" className={styles.formControlButton}>
-                Search
-              </Button>
-            </Form>
-          </div>
+          <Navbar.Brand>Navbar</Navbar.Brand>
+        </div>
 
           <div className="dropdown" style={{ backgroundColor: '#f4f6fc' }}>
             <a
@@ -51,8 +48,8 @@ function Header() {
               aria-expanded="false"
               style={{ backgroundColor: '#f4f6fc', border: 'none' }}
             >
-              <b style={{ color: '#8d8d8d' }}>{userData.name}</b> &nbsp;
-              <b style={{ color: '#8d8d8d' }}>{userData.email}</b>
+              <b style={{ color: '#8d8d8d' }}>{userData.userName}</b> &nbsp;
+              <b style={{ color: '#8d8d8d' }}>{userData.userEmail}</b>
             </a>
             <ul className="dropdown-menu text-center" style={{ textAlign: 'center' }}>
               <li>

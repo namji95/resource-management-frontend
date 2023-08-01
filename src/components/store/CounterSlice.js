@@ -4,9 +4,16 @@ const initialState = {
     token : '', // jwt accessToken 정보
     event : '', // 캘린더에 적용될 event 객체
     info : {
-        name : '',
-        email : '',
-        company : '',
+        copSeq : '',
+        copName : '',
+        userSeq : '',
+        userId : '',
+        userName : '',
+        userEmail : '',
+        userImage : '',
+        empPosition : '',
+        empImage : '',
+        authLevel : '',
     },
 };
 
@@ -24,8 +31,16 @@ const infoSlice = createSlice({
             },
             saveInfo : (state, action) => { // 서버에서 받아온 유저 데이터를 저장
                 state.info =  {
-                    name : action.payload.name,
-                    email : action.payload.email,
+                    copSeq : action.payload.copSeq,
+                    copName : action.payload.copName,
+                    userSeq : action.payload.userSeq,
+                    userId : action.payload.userId,
+                    userName : action.payload.userName,
+                    userEmail : action.payload.userEmail,
+                    userImage : action.payload.userImage,
+                    empPosition : action.payload.empPosition,
+                    empImage : action.payload.empImage,
+                    authLevel : action.payload.authLevel,
                 }
             }, 
         }

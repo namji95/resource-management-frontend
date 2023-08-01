@@ -11,7 +11,11 @@
 
 table tr{
     border-bottom: 1px solid rgb(196, 196, 196);
+    overflow: scroll;
 }
+
+
+
 
 .content_head {
     margin-top: 5%;

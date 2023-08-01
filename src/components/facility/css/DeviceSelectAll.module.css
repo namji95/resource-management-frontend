@@ -1,0 +1,45 @@
+.resourceListTable tr, th, td{
+    width: 100%;
+    background-color: #f4f6fc;
+    border: 0px;
+}
+
+.resourceListTable th{    
+    height: 30px;
+}
+
+.resourceTable{
+    width: 1060px;
+    padding: 15px;
+}
+
+.resourceTable td {
+    background-color: white;
+    border-top: 15px solid #f4f6fc;
+}
+
+.check{
+    width: 3%;
+}
+
+.name{
+    width: 20%;
+}
+
+.number{
+    width: 30%;
+}
+
+.year{
+    width: 20%;
+}
+
+.explain{
+    width: 20%;
+}
+
+.image{
+    width: 150px;
+    height: 100px;
+    
+}

@@ -97,7 +97,6 @@ function Signup() {
         // await를 사용하여 알림이 표시된 후에 navigate()를 실행
         await new Promise((resolve) => // resolve promise가 성공적으로 완료되었을때
         {
-            console.log(resolve);
             setTimeout(resolve, 3000)
         });
         navigate("/");

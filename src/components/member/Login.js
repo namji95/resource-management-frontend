@@ -33,20 +33,27 @@ function Login() {
       .then((result) => {
         data = result.data;
 
-        console.log(data);
-
-        if (data.statusCode === 401) {
-          setCheckFail("아이디나 비밀번호를 다시 확인해주세요.");
-        } else if (data.statusCode === 200) {
-          localStorage.setItem("accessToken", data.tokenDTO.authorization);
+        if (data.status === "OK") {
+          localStorage.setItem("accessToken", data.data.tokenDTO.authorization);
           if (localStorage.getItem("accessToken").includes("Bearer")) {
-                localStorage.setItem("userInfo", JSON.stringify(data.userDTO));
-                dispatch(saveToken(localStorage.getItem("accessToken"))); // redux-toolkit 에 토큰 저장
-                dispatch(saveInfo({
-                    name : data.userDTO.userName,
-                    email : data.userDTO.userEmail,
-                }));
-            }
+            localStorage.setItem("userInfo", JSON.stringify(data.data.userDTO));
+            dispatch(saveToken(localStorage.getItem("accessToken"))); // redux-toolkit에 토큰 저장
+            dispatch(saveInfo({
+              copSeq : data.data.userDTO.copSeq,
+              copName : data.data.userDTO.copName,
+              userSeq : data.data.userDTO.userSeq,
+              userId : data.data.userDTO.userId,
+              userName : data.data.userDTO.userName,
+              userEmail : data.data.userDTO.userEmail,
+              userImage : data.data.userDTO.userImage,
+              empPosition : data.data.userDTO.empPosition,
+              empImage : data.data.userDTO.empImage,
+              authLevel : data.data.userDTO.authLevel,
+            }))
+          }
+        }
+        else {
+          setCheckFail("아이디나 비밀번호를 다시 확인해주세요.");
         }
       })
       .catch((error) => {

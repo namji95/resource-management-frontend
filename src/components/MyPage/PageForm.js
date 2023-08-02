@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 import {useState,useEffect } from "react";
 import ChangePasswordModal from './PwModal';
 import axios from 'axios';
+import CalendarValue from '../CalendarValue';
 
 function MyPage(){
 
@@ -144,6 +145,7 @@ function MyPage(){
         </Form.Group>
       
       </fieldset>
+      <CalendarValue></CalendarValue>
       </div>
     </div>
     );

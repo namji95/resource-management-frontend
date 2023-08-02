@@ -94,7 +94,7 @@ function App() {
 
     return (
       <div className = "App" style={{height : '100%'}}>
-        <React.Fragment>
+        <React.Fragment>=
           <div className = "body" style={{backgroundColor: '#F7F7F7'}}>
             <div className= "main" >
             <Routes>

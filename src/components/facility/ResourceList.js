@@ -60,17 +60,16 @@ function ResourceList(props) {
     setSearchObj(newObj);
   }
 
-  const onSearch = () => {
-    axios.get(`http://localhost:8080/api/query_type?=${searchObj.query_type}&search_string?=${searchObj.searchString}`, formData, config)
-    .then(response => {
-        console.log(response.data);
-        alert("변경 완료");
-    })
-    .catch(error => {
-        alert("변경 실패",error)
-    });
-}
-  }
+//   const onSearch = () => {
+//     axios.post("http://localhost:8080/api/car", formData, config)
+//     .then(response => {
+//         console.log(response.data);
+//         alert("변경 완료");
+//     })
+//     .catch(error => {
+//         alert("변경 실패",error)
+//     });
+// }
 
 // //backend
 
@@ -92,14 +91,14 @@ function ResourceList(props) {
       <div className={resourceListStyle.topCategory}>
         <div className={resourceListStyle.facilitySearch}>
           <form>
-            <select onSelect={onChangeSearchObj} value={searchObj.type}>
+            {/* <select onSelect={onChangeSearchObj} value={searchObj.type}>
               <option name="type" value="all" selected >전체</option>
               <option name="type" value="car" >차량</option>
               <option name="type" value="device" >전자기기</option>
               <option name="type" value="space" >공간</option>
-            </select>
+            </select> */}
             {/* switch (type) */}
-            <select onSelect={onChangeSearchObj} value={searchObj.type}>
+            {/* <select onSelect={onChangeSearchObj} value={searchObj.type}>
               <option name="queryType" value="carSeq" >차량관리번호seq</option>
               <option name="queryType" value="carName" >차량이룸</option>
               <option name="queryType" value="carNum" >차량번호</option>
@@ -122,14 +121,14 @@ function ResourceList(props) {
               <option name="queryType" value="carName" >차량이룸</option>
               <option name="queryType" value="carNum" >차량번호</option>
               <option name="queryType" value="carYears" >차량연식</option>
-            </select>
+            </select> */}
             {/* switch (type) */}
             <input 
             type="search" 
             placeholder="선택 자원 조회" 
-            name="searchString"
+            // name="searchString"
             onChange={onChangeSearchObj} />
-            <input type="submit" value="조회"onChange={handleShow} onClick={onSearch} ></input>
+            <input type="submit" value="조회"onChange={handleShow} ></input>
           </form>
         </div>
         <div className={resourceListStyle.selectFacility}>

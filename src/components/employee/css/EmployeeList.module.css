@@ -24,11 +24,13 @@
 
 .button {
     background-color:#1a83ff;
-    /* float: right; */
-    /* right: 100%; */
-    margin: 0px;
-    margin-right: 3%;
-    /* padding: 0; */
+    color: white;
+    margin: 0%;
+    padding: 10px 20px; /* 내부 여백 */
+    color: #ffffff;
+    border: none; 
+    border-radius: 5px;
+    cursor: pointer; 
 
 }
 

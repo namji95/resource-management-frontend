@@ -4,21 +4,18 @@ import Row from 'react-bootstrap/Row';
 
 function PlaintextExample() {
   return (
-      <Form.Group as={Row} className="mb-3">
-        <Form.Label column sm="2">제목 
-        </Form.Label>
-        <Col sm="10">
-          <Form.Control type="text" placeholder="제목을 입력하세요." />
-        </Col>
-      </Form.Group>
-
-// <Form.Group as={Row} className="mb-3">
-// <Form.Label column sm="2">장소
-// </Form.Label>
-
-// <Col sm="10">
-//   <Form.Control type="text" placeholder="장소를 입력하세요. " />
-// </Col>
+    <InputGroup>
+    <Form.Label column sm="2" style={{padding : '1.1rem', paddingRight : '2.3rem'}}>
+        일시 
+      </Form.Label>
+      <div className='inputType'>
+    <input type = "Date" value={Datevalue} onChange={handleDate} style={{ border : '1px solid #dee2e6', borderRadius : '0.375rem'}}></input> &nbsp;
+    <input type = "Time" onChange={handleTime} style={{ border : '1px solid #dee2e6', borderRadius : '0.375rem'}}></input>
+    <text> - </text>
+    <input type = "Date" style={{ border : '1px solid #dee2e6', borderRadius : '0.375rem', marginLeft : '0.5em'}}></input> &nbsp;
+    <input type = "Time" style={{ border : '1px solid #dee2e6', borderRadius : '0.375rem'}}></input>
+    </div>
+    </InputGroup>
   );
 }
 

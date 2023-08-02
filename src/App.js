@@ -91,24 +91,24 @@ function App() {
     }
   }, [dispatch])
 
-  // if (token === '' || token === null ) {
+  if (token === '' || token === null ) {
 
-  //   return (
-  //     <div className = "App" style={{height : '100%'}}>
-  //       <React.Fragment>
-  //         <div className = "body" style={{backgroundColor: '#F7F7F7'}}>
-  //           <div className= "main" >
-  //           <Routes>
-  //               <Route path='/' element = {<Login/>}></Route>
-  //               <Route path='/signup' element = {<Signup/>}></Route>
-  //               <Route path='/*' element = {<Navigate to = "/"/>}></Route>
-  //           </Routes>
-  //           </div>
-  //         </div>
-  //       </React.Fragment>
-  //     </div>
-  //   );
-  // }
+    return (
+      <div className = "App" style={{height : '100%'}}>
+        <React.Fragment>=
+          <div className = "body" style={{backgroundColor: '#F7F7F7'}}>
+            <div className= "main" >
+            <Routes>
+                <Route path='/' element = {<Login/>}></Route>
+                <Route path='/signup' element = {<Signup/>}></Route>
+                <Route path='/*' element = {<Navigate to = "/"/>}></Route>
+            </Routes>
+            </div>
+          </div>
+        </React.Fragment>
+      </div>
+    );
+  }
 
   return (
     <div className = "App">

@@ -43,7 +43,7 @@ function DeviceSelectAll(props) {
 
       return (
         <div>
-            <Table className={DeviceSelectAllStyle.resourceListTable}>
+            <Table>
                 <div className={DeviceSelectAllStyle.resourceTable}>
                     <thead>
                       <tr>
@@ -57,7 +57,7 @@ function DeviceSelectAll(props) {
                     </thead>
                     <tbody>
                       {deviceObj.map((device, index) => (
-                          <tr key={index} onClick={() => handleInfoClick(device)}>
+                          <tr key={index} onClick={() => handleInfoClick(device)} className={DeviceSelectAllStyle.deviceInformation}>
                              <td className={DeviceSelectAllStyle.check}>
                               <input 
                               type="checkbox" 

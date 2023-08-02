@@ -7,16 +7,30 @@
     z-index: 998;
 }
 
-.back
-{
+.back{
     position: absolute;
-    top :0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 999;
     width: 100vw;
     height: 100vh;
     opacity: 0.5;
     background-color: black;
 }
+    
+    /* position: absolute;: 해당 요소의 위치를 부모 요소를 기준으로 절대적으로 지정합니다. */
+    /* top: 50%;: 요소의 상단을 부모 요소의 상단으로부터 50%의 위치에 배치합니다. */
+    /* left: 50%;: 요소의 왼쪽을 부모 요소의 왼쪽으로부터 50%의 위치에 배치합니다. */
+    /* transform: translate(-50%, -50%);: 해당 요소를 현재 위치로부터 좌측으로 50%, */
+                                       /* 상단으로부터 50%만큼 이동시킵니다. */
+                                       /* 이렇게 함으로써 요소의 중심이 정확히 부모 요소의 중심에 위치하게 됩니다. */
+    /* z-index: 999;: 요소의 쌓임 순서를 결정하는 값입니다. 값이 높을수록 다른 요소보다 위에 쌓이게 됩니다. */
+    /* width: 100vw;: 요소의 너비를 뷰포트(Viewport)의 100%로 설정합니다. 즉, 화면 전체 너비와 같게 됩니다. */
+    /* height: 100vh;: 요소의 높이를 뷰포트의 100%로 설정합니다. 즉, 화면 전체 높이와 같게 됩니다. */
+    /* opacity: 0.5;: 요소의 불투명도를 0.5로 설정합니다. 0이면 완전 투명, 1이면 완전 불투명입니다. */
+    /* background-color: black;: 요소의 배경색을 검정색으로 설정합니다. */
+    
 
 .update_page{
     position: absolute;
@@ -30,7 +44,6 @@
     left: 50%;
     transform: translate(-50%, 0);
 
-    opacity: 1;
     border-radius: 8px;
 
     z-index: 1000;
@@ -112,7 +125,7 @@
     width: 65px;
 }
 
-.save{
+.update{
     margin-left: 10px;
     height: 25px;
     width: 65px;

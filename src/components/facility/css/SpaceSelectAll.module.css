@@ -1,0 +1,42 @@
+.resourceListTable{
+    width: 100%;
+}
+
+.resourceTable{
+    width: 100%;
+    min-width: 1060px;
+    
+    padding: 15px;
+    
+    background-color: blueviolet;
+    border: 0px;
+}
+
+.spaceInformation{
+    width: 1060px;
+    height: 30px;
+    background-color: white;
+    border-top: 15px solid blueviolet;
+}
+
+.check{
+    width: 3%;
+}
+
+.name{
+    width: 20%;
+}
+
+.number{
+    width: 20%;
+}
+
+.explain{
+    width: 20%;
+}
+
+.image{
+    width: 150px;
+    height: 100px;
+    
+}

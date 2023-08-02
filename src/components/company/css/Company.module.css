@@ -7,9 +7,16 @@
 
 .headBtn {
     background-color:#1a83ff;
-    
+    color: white;
     margin: 0%;
+    padding: 10px 20px; /* 내부 여백 */
+    color: #ffffff;
+    border: none; 
+    border-radius: 5px;
+    cursor: pointer; 
+    
 }
+
 
 .page {
     position: absolute;

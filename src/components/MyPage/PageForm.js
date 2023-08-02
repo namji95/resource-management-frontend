@@ -10,16 +10,26 @@ import ChangePasswordModal from './PwModal';
 import axios from 'axios';
 import CalendarValue from '../CalendarValue';
 
-function MyPage(){
+import { useSelector } from 'react-redux';
 
+function MyPage() {
 
+  const userDataInRedux = useSelector((state) => state.info.info);
 
   const [Users,setUsers] = useState({
+    copSeq : "",
+    copRegNum : "", 
+    copName : "",
+    userSeq : "",
+    userId : "",
     userName : "",
-    userEmail : "", 
+    userEmail : "",
     userImage : "",
-    userId : ""
+    empPosition : "",
+    empImage : "",
+    authLevel : "",
   })
+
   const [image,setImage] = useState('');
 
   const [showModal, setShowModal] = useState(false);
@@ -27,8 +37,6 @@ function MyPage(){
   const handleImageChange = (event) => {
 
     const selectedFile = event.target.files[0];
-
-    console.log(selectedFile);
 
     if (selectedFile) {
        const reader = new FileReader();
@@ -49,21 +57,25 @@ function MyPage(){
   };
 
   const saveMypage = (e) => {
+
     e.preventDefault();
+
     let data = {
       userId : Users.userId
     }
+
     const formData = new FormData();
     formData.append("data",new Blob([JSON.stringify(data)],{
       type : "application/json"
     }));
+
     formData.append("image", image);
 
-      axios.post("http://localhost:8080/api/MyPageImageTest", formData, {
+      axios.post("http://localhost:8080/api/mypage/image/update", formData, {
                 headers: {'Content-Type' : 'multipart/form-data', charset: 'UTF-8'},
             })
             .then (response => {
-              console.log(response.data);
+              localStorage.setItem("userInfo", JSON.stringify(Users));
              })
             .catch (error => {
                 alert(error);
@@ -78,22 +90,26 @@ function MyPage(){
   //   }
   //   setUsers(newObj);
   // }
-  const psdButton = () => {
-    setShowModal(showModal => !showModal);
-  }
+  // const psdButton = () => {
+  //   setShowModal(showModal => !showModal);
+  // }
   
   useEffect(() => {
-    if (localStorage.getItem('userInfo')) {
-      const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-      setUsers((prevUsers) => ({
-        ...prevUsers,
-        userEmail: userInfo.userEmail,
-        userName : userInfo.userName,
-        userImage : userInfo.userImage,
-        userId : userInfo.userId
-      }))
 
-    }
+    setUsers((prevUsers) => ({
+      ...prevUsers,
+      copSeq : userDataInRedux.copSeq,
+      copRegNum : userDataInRedux.copRegNum, 
+      copName : userDataInRedux.copName,
+      userSeq : userDataInRedux.userSeq,
+      userId : userDataInRedux.userId,
+      userName : userDataInRedux.userName,
+      userEmail : userDataInRedux.userEmail,
+      userImage : userDataInRedux.userImage,
+      empPosition : userDataInRedux.empPosition,
+      empImage : userDataInRedux.empImage,
+      authLevel : userDataInRedux.authLevel,
+    }))
   }, []);
 
   useEffect(() => {console.log(image)}, [image])

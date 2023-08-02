@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import axios from 'axios';
-import styles from './css/CompanyList.module.css';
+import styles from './css/EmployeeList.module.css';
 
 const Td = ({item, handleRemove, handleEdit}) => {
         
@@ -8,11 +8,8 @@ const Td = ({item, handleRemove, handleEdit}) => {
     const onRemove = () => {
         
         // 백엔드
-        console.log(item.copSeq);
-        axios.put(`http://localhost:8080/api/company/del/${Number(item.copSeq)}`, {
-          copRegNum: item.copSeq,
-          copName: item.copName,
-          copState: false
+        console.log(item.empSeq);
+        axios.post(`http://localhost:8080/api/employee/del/${Number(item.empSeq)}`, {
         })
         .then((response) => {
             console.log(response.data)
@@ -24,7 +21,7 @@ const Td = ({item, handleRemove, handleEdit}) => {
         })
 
         // 프론트엔드 테이블에서 삭제
-        handleRemove(item.copSeq)
+        handleRemove(item.empSeq)
 
     }
 
@@ -36,10 +33,10 @@ const Td = ({item, handleRemove, handleEdit}) => {
         <>
             <tr >
                 <th scope="row"><input type='checkbox'></input></th>
-                <td>{item.copSeq}</td>
-                <td>{item.copRegNum}</td>
-                <td>{item.copName}</td>
-                {/* <td>{item.copState.toString()}</td> */}
+                <td>{item.empSeq}</td>
+                <td>{item.empName}</td>
+                <td>{item.empPosition}</td>
+                <td>{item.authLevel}</td>
                 <td><button type="button" className={styles.button} onClick={onEdit}>수정</button></td>
                 <td><button type="button" className={styles.button} onClick={onRemove}>삭제</button></td>
             </tr> 

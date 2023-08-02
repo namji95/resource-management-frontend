@@ -17,6 +17,7 @@ import DeviceForm from './components/Device/Device';
 import Form from './components/Device/Form';
 import Reservation from './components/admin/reservation/AdminReservation';
 import ResourceList from './components/facility/ResourceList';
+import Employee from './components/employee/Employee';
 
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
@@ -84,8 +85,16 @@ function App() {
     dispatch(saveToken(localStorage.getItem('accessToken')));
     if (localStorage.getItem('userInfo')) {
       dispatch(saveInfo({
-        name : JSON.parse(localStorage.getItem('userInfo')).userName,
-        email : JSON.parse(localStorage.getItem('userInfo')).userEmail,
+        copSeq : JSON.parse(localStorage.getItem('userInfo')).copSeq,
+        copName : JSON.parse(localStorage.getItem('userInfo')).copName,
+        userSeq : JSON.parse(localStorage.getItem('userInfo')).userSeq,
+        userId : JSON.parse(localStorage.getItem('userInfo')).userId,
+        userName : JSON.parse(localStorage.getItem('userInfo')).userName,
+        userEmail : JSON.parse(localStorage.getItem('userInfo')).userEmail,
+        userImage : JSON.parse(localStorage.getItem('userInfo')).userImage,
+        empPosition : JSON.parse(localStorage.getItem('userInfo')).empPosition,
+        empImage : JSON.parse(localStorage.getItem('userInfo')).empImage,
+        authLevel : JSON.parse(localStorage.getItem('userInfo')).authLevel,
       }));
     }
   }, [dispatch])
@@ -94,7 +103,7 @@ function App() {
 
     return (
       <div className = "App" style={{height : '100%'}}>
-        <React.Fragment>
+        <React.Fragment>=
           <div className = "body" style={{backgroundColor: '#F7F7F7'}}>
             <div className= "main" >
             <Routes>
@@ -132,6 +141,8 @@ function App() {
                       <Route path='/deviceform' element = {<DeviceForm></DeviceForm>}></Route>
                       <Route path='/device' element = {<Device/>}></Route> 
                       <Route path='/resourcelist' element = {<ResourceList />}></Route>
+                      <Route path='/employee' element = {<Employee />}></Route>
+
 
                       <Route path='/*' element = {<Calendar></Calendar>}></Route>
 

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from 'axios';
 
 import Form from 'react-bootstrap/Form';
-import styles from './CompanyAdd.module.css';
+import styles from './css/CompanyAdd.module.css';
 import { Container } from 'react-bootstrap';
 
 const CompanyAdd = ({ onSaveData, handleCancel }) => {

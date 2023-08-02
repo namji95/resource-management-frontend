@@ -19,8 +19,8 @@ const Company = () => {
         setAddModal(!addModal);
     }
 
-    // ?? 고유값으로 사용될 값 ref를 사용하여 변수담기
-    const nextCopSeq = useRef(11);
+    // ?? 고유값으로 사용될 값 ref를 사용하여 변수담기 ㅎㅎ fake.. id..
+    const nextCopSeq = useRef(15);
 
     useEffect(() => {
         axios.get('http://localhost:8080/api/company')
@@ -69,7 +69,7 @@ const Company = () => {
             // spread 연산자
             setInfo((prev) => {
                 return [...prev, {
-                    copSeq: data.copSeq,
+                    copSeq: nextCopSeq.current,
                     copRegNum: data.copRegNum,
                     copName: data.copName,
                     copState: data.copState,

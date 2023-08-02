@@ -56,7 +56,7 @@ function SpaceSelectAll(props) {
                     </thead>
                     <tbody>
                         {spaceObj.map((space, index) => (
-                            <tr key={index} onClick={() => handleInfoClick(space)}>
+                            <tr key={index} onClick={() => handleInfoClick(space)} className={SpaceSelectAllStyle.spaceInformation}>
                                <td className={SpaceSelectAllStyle.check}>
                                 <input type="checkbox"
                                 checked={space.checked || false}

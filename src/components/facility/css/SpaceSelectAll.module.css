@@ -1,21 +1,22 @@
-.resourceListTable tr, th, td{
+.resourceListTable{
     width: 100%;
-    background-color: #f4f6fc;
-    border: 0px;
-}
-
-.resourceListTable th{    
-    height: 30px;
 }
 
 .resourceTable{
-    width: 1060px;
+    width: 100%;
+    min-width: 1060px;
+    
     padding: 15px;
+    
+    background-color: blueviolet;
+    border: 0px;
 }
 
-.resourceTable td {
+.spaceInformation{
+    width: 1060px;
+    height: 30px;
     background-color: white;
-    border-top: 15px solid #f4f6fc;
+    border-top: 15px solid blueviolet;
 }
 
 .check{

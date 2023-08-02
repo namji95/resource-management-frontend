@@ -141,15 +141,16 @@ const Company = () => {
  
              <div className={styles.content_body}>
              <table class="table table-hover">
-                         <thead class="table-light">
+                         <thead class="table">
                              <tr>
-                                 <th scope="col"><input type='checkbox'></input></th>
-                                 <th scope="col">일련번호</th>
-                                 <th scope="col">사업자등록번호</th>
-                                 <th scope="col">회사명</th>
+                            
+                                 <th scope><input type='checkbox'></input></th>
+                                 <th scope>일련번호</th>
+                                 <th>사업자등록번호</th>
+                                 <th>회사명</th>
                                  {/* <th scope="col">회사 상태</th> */}
-                                 <th scope="col">수정</th>
-                                 <th scope="col">삭제</th>
+                                 <th>수정</th>
+                                 <th>삭제</th>
                              </tr>
                          </thead>
                          <Tr info={info} handleRemove={handleRemove} handleEdit={handleEdit}></Tr>

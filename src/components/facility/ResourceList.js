@@ -42,48 +42,6 @@ function ResourceList(props) {
   };
   // 상태관리 함수 정의 후 각 함수의 열기/닫기 보이기/숨기기 함수 정의
 
-  //-----------------------
-  // 검색 
-
-  const [searchObj, setSearchObj] = {
-    type : "all",
-    searchString : ""
-  };
-
-  const onChangeSearchObj = (e) => {
-    let newName = e.target.name;
-    let newValue = e.target.value;
-    const newObj = {
-        ...searchObj,
-        [newName] : newValue
-    }
-    setSearchObj(newObj);
-  }
-
-//   const onSearch = () => {
-//     axios.post("http://localhost:8080/api/car", formData, config)
-//     .then(response => {
-//         console.log(response.data);
-//         alert("변경 완료");
-//     })
-//     .catch(error => {
-//         alert("변경 실패",error)
-//     });
-// }
-
-// //backend
-
-// select * from tb_cars where '${queryType}' ='${searchString}';
-// car_name : carName 프라이드
-
-// let search_string = "값 받아온거";
-
-// let 완전일치검색 = ` select * from ${tableType} where '${queryType}' ='${searchString}' `;
-// let 부분일치검색 = ` select * from tb_cars where  '${queryType}' like '%${searchString}%' `;
-
-
-  //-----------------------
-
   return (
     <div className={resourceListStyle.resourceTable}>
 
@@ -91,43 +49,10 @@ function ResourceList(props) {
       <div className={resourceListStyle.topCategory}>
         <div className={resourceListStyle.facilitySearch}>
           <form>
-            {/* <select onSelect={onChangeSearchObj} value={searchObj.type}>
-              <option name="type" value="all" selected >전체</option>
-              <option name="type" value="car" >차량</option>
-              <option name="type" value="device" >전자기기</option>
-              <option name="type" value="space" >공간</option>
-            </select> */}
-            {/* switch (type) */}
-            {/* <select onSelect={onChangeSearchObj} value={searchObj.type}>
-              <option name="queryType" value="carSeq" >차량관리번호seq</option>
-              <option name="queryType" value="carName" >차량이룸</option>
-              <option name="queryType" value="carNum" >차량번호</option>
-              <option name="queryType" value="carYears" >차량연식</option>
-            </select>
-            <select onSelect={onChangeSearchObj} value={searchObj.type}>
-              <option name="queryType" value="carSeq" >디바이스 seq</option>
-              <option name="queryType" value="carName" >차량이룸</option>
-              <option name="queryType" value="carNum" >차량번호</option>
-              <option name="queryType" value="carYears" >차량연식</option>
-            </select>
-            <select onSelect={onChangeSearchObj} value={searchObj.type}>
-              <option name="queryType" value="carSeq" >차량관리번호seq</option>
-              <option name="queryType" value="carName" >차량이룸</option>
-              <option name="queryType" value="carNum" >차량번호</option>
-              <option name="queryType" value="carYears" >차량연식</option>
-            </select>
-            <select onSelect={onChangeSearchObj} value={searchObj.type}>
-              <option name="queryType" value="carSeq" >차량관리번호seq</option>
-              <option name="queryType" value="carName" >차량이룸</option>
-              <option name="queryType" value="carNum" >차량번호</option>
-              <option name="queryType" value="carYears" >차량연식</option>
-            </select> */}
-            {/* switch (type) */}
             <input 
             type="search" 
             placeholder="선택 자원 조회" 
-            // name="searchString"
-            onChange={onChangeSearchObj} />
+            name="facilitySearch" />
             <input type="submit" value="조회"onChange={handleShow} ></input>
           </form>
         </div>

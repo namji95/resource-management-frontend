@@ -85,8 +85,16 @@ function App() {
     dispatch(saveToken(localStorage.getItem('accessToken')));
     if (localStorage.getItem('userInfo')) {
       dispatch(saveInfo({
-        name : JSON.parse(localStorage.getItem('userInfo')).userName,
-        email : JSON.parse(localStorage.getItem('userInfo')).userEmail,
+        copSeq : JSON.parse(localStorage.getItem('userInfo')).copSeq,
+        copName : JSON.parse(localStorage.getItem('userInfo')).copName,
+        userSeq : JSON.parse(localStorage.getItem('userInfo')).userSeq,
+        userId : JSON.parse(localStorage.getItem('userInfo')).userId,
+        userName : JSON.parse(localStorage.getItem('userInfo')).userName,
+        userEmail : JSON.parse(localStorage.getItem('userInfo')).userEmail,
+        userImage : JSON.parse(localStorage.getItem('userInfo')).userImage,
+        empPosition : JSON.parse(localStorage.getItem('userInfo')).empPosition,
+        empImage : JSON.parse(localStorage.getItem('userInfo')).empImage,
+        authLevel : JSON.parse(localStorage.getItem('userInfo')).authLevel,
       }));
     }
   }, [dispatch])

@@ -8,7 +8,6 @@ function SpaceModifyModal(props) {
         spcName : "",
         spcCap : "",
         spcExplain : "",
-        spcImage : ""
     }
 
     const [spaceObj, setSpaceObj] = useState(defaultSpaceObj);
@@ -31,7 +30,6 @@ function SpaceModifyModal(props) {
         spcName: spaceObj.spcName,
         spcCap: spaceObj.spcCap,
         spcExplain: spaceObj.spcExplain,
-        spcImage: spaceObj.spcImage
     };
 
     const onChangeDevice = (e) => {
@@ -82,33 +80,23 @@ function SpaceModifyModal(props) {
         return (
             <>
                 <div className={SpaceModifyStyle.names}>
-                    ● 전자기기명
+                    ● 공간자원명
                     <input
                     type='text'
                     className={SpaceModifyStyle.name}
-                    placeholder="전자기기명"
-                    name="dvcName"
-                    value={data.dvcName}
+                    placeholder="공간자원명"
+                    name="spcName"
+                    value={data.spcName}
                     onChange={onChangeDevice}></input>                
                 </div>
                 <div className={SpaceModifyStyle.Serials}>
-                    ● 제품번호
+                    ● 수용인원
                     <input
                     type='text'
                     className={SpaceModifyStyle.Serial}
-                    placeholder="제품번호"
-                    name="dvcSerial"
-                    value={data.dvcSerial}
-                    onChange={onChangeDevice}></input>
-                </div>
-                <div className={SpaceModifyStyle.years}>
-                    ● 구입년도
-                    <input
-                    type='Date'
-                    className={SpaceModifyStyle.year}
-                    placeholder="구입년도"
-                    name="dvcBuy"
-                    value={data.dvcBuy}
+                    placeholder="수용인원"
+                    name="spcCap"
+                    value={data.spcCap}
                     onChange={onChangeDevice}></input>
                 </div>
                 <div className={SpaceModifyStyle.explanations}>
@@ -116,8 +104,8 @@ function SpaceModifyModal(props) {
                     <input
                     type='textarea'
                     className={SpaceModifyStyle.explanation}
-                    name="dvcExplain"
-                    value={data.dvcExplain}
+                    name="spcExplain"
+                    value={data.spcExplain}
                     onChange={onChangeDevice}></input>                
                 </div>
                 <div className={SpaceModifyStyle.images}>
@@ -125,8 +113,8 @@ function SpaceModifyModal(props) {
                     <input
                     type='file'accept="image/jpg,image/png,image/jpeg,image/gif"
                     className={SpaceModifyStyle.image}
-                    name="dvcImage"
-                    value={data.dvcImage}
+                    name="spcImage"
+                    value={data.spcImage}
                     onChange={onChangeImageInput}></input>
                 </div>
             </>

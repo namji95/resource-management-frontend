@@ -1,21 +1,6 @@
-<<<<<<< HEAD
-.resourceListTable tr, th, td{
-    width: 10%;
-    background-color: #f4f6fc;
-    border: 0px;
-}
-
-.resourceListTable th{    
-    height: 30px;
-=======
-.resourceListTable{
-    width: 100%;
->>>>>>> 6bb673b01a87422506a0f8e5e737e1f6b8be8dbe
-}
-
 .resourceTable{
-    width: 100%;
-    min-width: 1060px;
+        width: 100%;
+        min-width: 1060px;
     
     padding: 15px;
     
@@ -24,10 +9,14 @@
 }
 
 .spaceInformation{
-    width: 1060px;
     height: 30px;
     background-color: white;
     border-top: 15px solid blueviolet;
+}
+
+.tablehead{
+    width: 100%;
+    min-width: 1050px;
 }
 
 .check{

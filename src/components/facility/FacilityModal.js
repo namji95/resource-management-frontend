@@ -83,7 +83,7 @@ function FacilityModal(props) {
         setCarObj(newObj);
     }
 
-    const onChangeSpaceObj = (e) => {
+    const onChangeSpace = (e) => {
         const currentDatetime = new Date().toISOString();
         let newName = e.target.name;
         let newValue = e.target.value;
@@ -316,7 +316,7 @@ function FacilityModal(props) {
                     placeholder="공간자원명"
                     name="spcName"
                     value={Data.spcName}
-                    onChange={onChangeSpaceObj}></input>                
+                    onChange={onChangeSpace}></input>                
                 </div>
                 <div className={facilityStyle.numbers}>
                     ● 수용인원
@@ -326,7 +326,7 @@ function FacilityModal(props) {
                     placeholder="회의실번호"
                     name="spcCap"
                     value={Data.spcCap}
-                    onChange={onChangeSpaceObj}></input>
+                    onChange={onChangeSpace}></input>
                 </div>
                 <div className={facilityStyle.explanations}>
                     설명
@@ -336,7 +336,7 @@ function FacilityModal(props) {
                     placeholder="회의실에 대한 설명"
                     name ="spcExplain"
                     value={Data.spcExplain}
-                    onChange={onChangeSpaceObj}></input>
+                    onChange={onChangeSpace}></input>
                 </div>
                 <div className={facilityStyle.images}>
                     이미지

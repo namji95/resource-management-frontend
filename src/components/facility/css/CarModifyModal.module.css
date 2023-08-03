@@ -193,19 +193,6 @@
     margin-left: 65px;
 }
 
-
-.images{
-    display: flex;
-    margin-top: 15px;
-    font-size: 10px;
-}
-
-.image{
-    height: 20px;
-    width: 200px;
-    margin-left: 90px;
-}
-
 .explanations{
     display: flex;
     margin-top: 15px;
@@ -220,16 +207,14 @@
     margin-right: 5px;
 }
 
-.Serials{
+.images{
     display: flex;
-    color: blue;
     margin-top: 15px;
     font-size: 10px;
 }
 
-.Serial{
+.image{
     height: 20px;
-    width: 100%;
-    max-width: 150px;
-    margin-left: 65px;
+    width: 200px;
+    margin-left: 90px;
 }

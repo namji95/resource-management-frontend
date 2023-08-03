@@ -1,5 +1,16 @@
+<<<<<<< HEAD
+.resourceListTable tr, th, td{
+    width: 10%;
+    background-color: #f4f6fc;
+    border: 0px;
+}
+
+.resourceListTable th{    
+    height: 30px;
+=======
 .resourceListTable{
     width: 100%;
+>>>>>>> 6bb673b01a87422506a0f8e5e737e1f6b8be8dbe
 }
 
 .resourceTable{

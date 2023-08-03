@@ -13,7 +13,14 @@ table tr{
     border-bottom: 1px solid rgb(196, 196, 196);
     overflow: scroll;
 }
-
+table th{
+    width: 10%;
+}
+/* .resourceListTable tr, th, td{
+    width: 100%;
+    background-color: #f4f6fc;
+    border: 0px;
+} */
 
 
 

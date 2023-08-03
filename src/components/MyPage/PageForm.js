@@ -8,7 +8,6 @@ import Button from 'react-bootstrap/Button';
 import {useState,useEffect } from "react";
 import ChangePasswordModal from './PwModal';
 import axios from 'axios';
-import CalendarValue from '../CalendarValue';
 
 import { useSelector } from 'react-redux';
 
@@ -28,6 +27,7 @@ function MyPage() {
     empPosition : "",
     empImage : "",
     authLevel : "",
+    // userAdress : ""
   })
 
   const [image,setImage] = useState('');
@@ -61,7 +61,15 @@ function MyPage() {
     e.preventDefault();
 
     let data = {
-      userId : Users.userId
+      userId : Users.userId,
+      copSeq : Users.copSeq,
+      copRegNum : Users.copRegNum,
+      copName : Users.copName,
+      userSeq : Users.userSeq,
+      userName : Users.userName,
+      userEmail : Users.userEmail,
+      empPosition : Users.empPosition,
+      authLevel : Users.authLevel
     }
 
     const formData = new FormData();
@@ -109,6 +117,7 @@ function MyPage() {
       empPosition : userDataInRedux.empPosition,
       empImage : userDataInRedux.empImage,
       authLevel : userDataInRedux.authLevel,
+      // userAddress : userDataInRedux.userAddress
     }))
   }, []);
 
@@ -120,17 +129,14 @@ function MyPage() {
       <div className="MyPageform-container">
       <fieldset className="MyPagefieldset-container">
       <Form.Group as={Row}>
-        <Form.Label column sm="2">내 프로필 
-        </Form.Label>
-        <Col sm = "2">
-        <InputGroup className='buttongroup'>
-    
-    <Button type="submit" className='submit' onClick={saveMypage}>저장</Button>{' '}
-    <Button as="input" type="button"className='buttoncancle' value="취소" />{' '}
-    </InputGroup>
-        </Col>
-       </Form.Group> 
-
+          <Form.Label column sm="2">나의 프로필</Form.Label>
+          <Col sm={{ span: 5, offset: 2 }}> {/* 버튼을 맨 오른쪽으로 배치 */}
+            <InputGroup className='buttongroup'>
+              <Button type="submit" className='submit' onClick={saveMypage}>저장</Button>
+              <Button as="input" type="button" className='buttoncancle' value="취소" />
+            </InputGroup>
+          </Col>
+        </Form.Group>
 
       <Form.Group as={Row}>
         <Form.Label column sm="2">
@@ -159,9 +165,31 @@ function MyPage() {
         </Col>
         <ChangePasswordModal show={showModal} onHide={() => setShowModal(false)} />
         </Form.Group>
-      
+        <hr/>
+        <Form.Group as={Row}>
+        <Form.Label column sm="2">직책 
+        </Form.Label>
+        <Col sm="2">
+          <Form.Control type="text" Value = {Users.empPosition}readOnly/>
+        </Col>
+        </Form.Group>
+        <hr/>
+        <Form.Group as={Row}>
+        <Form.Label column sm="2">권한 
+        </Form.Label>
+        <Col sm="2">
+          <Form.Control type="text" Value = {Users.authLevel}readOnly/>
+        </Col>
+        </Form.Group>
+        <hr/>
+        <Form.Group as={Row}>
+        <Form.Label column sm="2">주소 
+        </Form.Label>
+        <Col sm="2">
+          <Form.Control type="text" Value = "형이 백단 구현 다되면 나옴"readOnly/>
+        </Col>
+        </Form.Group>
       </fieldset>
-      <CalendarValue></CalendarValue>
       </div>
     </div>
     );

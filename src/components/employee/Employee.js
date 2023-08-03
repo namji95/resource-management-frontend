@@ -20,7 +20,9 @@ const Employee = () => {
 
     const [updateModal, setUpdateModal] = useState(false);
     const [addModal, setAddModal] = useState(false);
-    
+    const [pageNum, setPageNum] = useState(1);
+    const [pageSize,setPageSize] = useState(5);
+
     const toggle = () => {
         setAddModal(!addModal);
     }
@@ -29,8 +31,8 @@ const Employee = () => {
     const nextEmpSeq = useRef(9);
 
     useEffect(() => {
-        axios.get('http://localhost:8080/api/employee')
-            .then((result) => {
+        axios.get(`http://localhost:8080/api/employee?pageNum=${pageNum}&pageSize=${pageSize}`)
+       .then((result) => {
                 console.log(result.data.data.employeeList)
                 setInfo(result.data.data.employeeList)
                 console.log("info찍어보기")
@@ -44,7 +46,7 @@ const Employee = () => {
                 setLoading(false);
             });
 
-    }, []);
+    }, [pageNum,pageSize]);
 
     // 테이블에서 데이터 저장(추가/수정)
     // 저장된 데이터에 seq가 있는 경우 수정 없는 경우 추가
@@ -121,6 +123,14 @@ const Employee = () => {
         setUpdateModal(false);
         setAddModal(false);
     }
+    const handleNextPage = () => {
+        setPageNum((prevPageNum) => prevPageNum + 1);
+    }
+    const handlePrevPage = () => {
+        if (pageNum > 1) {
+            setPageNum((prevPageNum) => prevPageNum - 1);
+        }
+    }
 
     return (
         <>
@@ -150,6 +160,7 @@ const Employee = () => {
                              </tr>
                          </thead>
                          <Tr info={info} handleRemove={handleRemove} handleEdit={handleEdit}></Tr>
+
                      </table> 
                      {
                         addModal && <EmployeeAdd toggle={toggle} onSaveData={handleSave} handleCancel={handleCancel} handleEditSubmit={handleEditSubmit}/>
@@ -158,7 +169,27 @@ const Employee = () => {
                      {
                         updateModal && <EmployeeUpdate selectedData={selected} handleCancel={handleCancel} handleEditSubmit={handleEditSubmit}/>
                      }
+                     
              </div>
+             <div className={styles.pagination}>
+                            {/* 이전 버튼 */}
+                            <button
+                                type="button"
+                                className={styles.pageBtn}
+                                onClick={handlePrevPage}
+                            >
+                                이전
+                            </button>
+
+                            {/* 다음 버튼 */}
+                            <button
+                                type="button"
+                                className={styles.pageBtn}
+                                onClick={handleNextPage}
+                            >
+                                다음
+                            </button>
+                            </div>
             </Container>
         </div>
 

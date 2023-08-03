@@ -72,7 +72,7 @@ function Sidebar() {
           
           </Link>
       
-          <CalendarSide></CalendarSide>
+          
           <div className={itemStyles.sideItem}>
           {barData.map((item,index)=>{
             return (

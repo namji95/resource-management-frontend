@@ -89,11 +89,11 @@ function SpaceModifyModal(props) {
                     value={data.spcName}
                     onChange={onChangeDevice}></input>                
                 </div>
-                <div className={SpaceModifyStyle.Serials}>
+                <div className={SpaceModifyStyle.Caps}>
                     ● 수용인원
                     <input
                     type='text'
-                    className={SpaceModifyStyle.Serial}
+                    className={SpaceModifyStyle.Cap}
                     placeholder="수용인원"
                     name="spcCap"
                     value={data.spcCap}

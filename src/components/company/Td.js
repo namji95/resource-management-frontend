@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from 'axios';
-import styles from './css/CompanyList.module.css';
+import styles from './css/Company.module.css';
 
 const Td = ({item, handleRemove, handleEdit}) => {
         

@@ -1,37 +1,35 @@
 import React, { useState } from "react";
+import axios from "axios";
+
 import resourceListStyle from './css/ResourceList.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 import FacilityModal from "./FacilityModal";
 import CarSelectAll from "./CarSelectAll";
 import DeviceSelectAll from "./DeviceSelectAll";
 import SpaceSelectAll from "./SpaceSelectAll";
-import axios from "axios";
+
 
 function ResourceList(props) {
 
   // 상태 (state) 변수들
   const [showModal, setShowModal] = useState(false);
-  // showModal : 모달 창의 보이기 / 숨기기 상태를 관리
   const [show, setShow] = useState(false);
-  // show : 보이기 / 숨기기 상태를 관리
   const [carResourceListClick, setCarResourceListwClick] = useState(false);
-  // carResourceListClick : 차량 자원 리스트를 보이기 / 숨기기 상태 관리
   const [deviceResourceListClick, setDeviceResourceListClick] = useState(false);
-  // carResourceListClick : 차량 자원 리스트를 보이기 / 숨기기 상태 관리
   const [spaceResourceListClick, setspaceResourceListClick] = useState(false);
-  // carResourceListClick : 차량 자원 리스트를 보이기 / 숨기기 상태 관리
-  const [facilitySelectType, setFacilitySelectType] = useState ("car");
-  // facilitySelectType : select에서 선택된 것의 상태 관리
-  const [facilityType, setFacilityType] = useState("queryType");
-  // facilityType : select에서 선택된 것의 상태 관리
+  const [facilitySelectType, setFacilitySelectType] = useState ("ex");
+  const [facilityType, setFacilityType] = useState({
+    queryType : ""
+  });
   // const [queryType, setQueryType] = useState("");
-  // 하위 select option의 queryType 상태 관리 하위 select에서 선택한 값 저장
   const [searchString, setSearchString] = useState("");
+
+  //---------------------- 상태관리 ----------------------------//
 
   const openModal = () => {
     setShowModal(showModal => !showModal);
   };
-  // 모달 창 열기 / 닫기 함수
   const onClickCarResource = () => {
     setCarResourceListwClick(!carResourceListClick);
   }
@@ -41,30 +39,35 @@ function ResourceList(props) {
   const onClickSpaceResource = () => {
     setspaceResourceListClick(!spaceResourceListClick);
   }
-  // 자원 리스트 클릭 시 보이게 / 숨기게 하는 함수
   const handleShow = () => {
     setShow(!show);
   };
-  // 보이기 함수
-  // 상태관리 함수 정의 후 각 함수의 열기/닫기 보이기/숨기기 함수 정의
-
   const handleFacilitySelectType = (e) => {
     setFacilitySelectType(e.target.value);
-    console.log(setFacilitySelectType);
+    console.log(e.target.value);
   }
-  const handleFacilityType = (event) => {
-    setFacilityType(event.target.value);
-    console.log(setFacilityType);
+  const handleFacilityType = (e) => {
+    let newName = e.target.name;
+    let newValue = e.target.value;
+    const newType = {
+      ...facilityType,
+      [newName] : newValue
+    }
+    setFacilityType(newType);
+    console.log(e.target.name);
+    console.log(e.target.value);
+    console.log(newType);
   }
-  // select 태그의 상태 값 변하게 하는 함수
-  const handleSearchString = (event) => {
-    setSearchString(event.target.value);
-    console.log(searchString);
+  const handleSearchString = (e) => {
+    setSearchString(e.target.value);
+    console.log(e.target.value);
   }
+  // 상태관리 함수 정의 후 각 함수의 열기/닫기 보이기/숨기기 함수 정의 //
+
 
   const onSearch = (e) => {
     e.preventDefault();
-    axios.get(`http://localhost:8080/api/${facilitySelectType}/search?${facilityType}=${searchString}`)
+    axios.get(`http://localhost:8080/api/${facilitySelectType}/search?queryType=${facilityType.queryType}&searchString=${searchString}`)
     .then(response => {
         console.log(response.data);
         alert("조회 완료");
@@ -76,7 +79,6 @@ function ResourceList(props) {
 
   return (
     <div className={resourceListStyle.resourceTable}>
-
       {/* 상단 카테고리 */}
       <div className={resourceListStyle.topCategory}>
         <div className={resourceListStyle.facilitySearch}>
@@ -85,7 +87,8 @@ function ResourceList(props) {
           <select  
             className={resourceListStyle.selectBox} 
             onChange={handleFacilitySelectType}>
-              <option value="car" selected>차량</option>
+              <option value="ex" selected>선택</option>
+              <option value="car">차량</option>
               <option value="device">모바일 기기</option>
               <option value="space">공간</option>
           </select>

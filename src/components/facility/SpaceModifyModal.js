@@ -76,13 +76,25 @@ function SpaceModifyModal(props) {
     const spaceDeleteModal = (event) => {
         event.preventDefault();
 
-        const formdata = new FormData();
+        const formData = new FormData();
 
         const config = {
             headers: { 'content-Type' : 'multipart/form-data' }
         }
 
-        formData.append("image",)
+        formData.append("image", image);
+        formData.append("data", new Blob([JSON.stringify(data)],{
+            type: "application/json"
+        }));
+
+        axios.post(`http://localhost:8080/api/space/del/${props.selectSpace.spcSeq}`, formData, config)
+        .then(response => {
+            console.log(response.data);
+            alert("삭제 완료")
+        })
+        .catch(error => {
+            alert("삭제 실패", error);
+        })
     }
     const printSpaceUpdateForm = () => {
         return (

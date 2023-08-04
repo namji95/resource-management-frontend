@@ -8,11 +8,13 @@ import Calendar from './components/calendar/Calendar';
 import Signup from './components/member/Signup';
 import Login from './components/member/Login';
 import Company from './components/company/Company';
+import Device from './components/Device/Device';
 import Mypage from './components/MyPage/PageForm';
 import Meeting from './components/Metting/InputDeviceForm';
 import CompanyList from './components/company/CompanyList';
 import EmployeeList from './components/employee/EmployeeList';
 import DeviceForm from './components/Device/Device';
+import Form from './components/Device/Form';
 import Reservation from './components/admin/reservation/AdminReservation';
 import ResourceList from './components/facility/ResourceList';
 import Employee from './components/employee/Employee';
@@ -129,6 +131,7 @@ function App() {
                       {/* 회원 */}
                       <Route path='/main' element = {<Calendar/>}></Route>
                       <Route path='/company' element = {<Company/>}></Route> 
+                      <Route path='/device' element = {<Device/>}></Route> 
                       <Route path='/meeting' element = {<Meeting/>}></Route> 
                       <Route path='/mypage' element = {<Mypage/>}></Route> 
 
@@ -136,6 +139,7 @@ function App() {
                       <Route path='/employeelist' element = {<EmployeeList />}></Route>
                       <Route path='/reservation' element = {<Reservation />}></Route>
                       <Route path='/deviceform' element = {<DeviceForm></DeviceForm>}></Route>
+                      <Route path='/device' element = {<Device/>}></Route> 
                       <Route path='/resourcelist' element = {<ResourceList />}></Route>
                       <Route path='/employee' element = {<Employee />}></Route>
 

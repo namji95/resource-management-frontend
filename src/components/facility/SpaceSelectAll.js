@@ -43,9 +43,9 @@ function SpaceSelectAll(props) {
 
       return (
         <div>
-            <Table className={SpaceSelectAllStyle.resourceListTable}>
+            <Table>
                 <div className={SpaceSelectAllStyle.resourceTable}>
-                    <thead>
+                    <thead className={SpaceSelectAllStyle.tablehead}>
                       <tr>
                         <th className={SpaceSelectAllStyle.check}><input type="checkbox" /></th>
                         <th className={SpaceSelectAllStyle.name}>공간자원명</th>
@@ -56,7 +56,7 @@ function SpaceSelectAll(props) {
                     </thead>
                     <tbody>
                         {spaceObj.map((space, index) => (
-                            <tr key={index} onClick={() => handleInfoClick(space)}>
+                            <tr key={index} onClick={() => handleInfoClick(space)} className={SpaceSelectAllStyle.spaceInformation}>
                                <td className={SpaceSelectAllStyle.check}>
                                 <input type="checkbox"
                                 checked={space.checked || false}

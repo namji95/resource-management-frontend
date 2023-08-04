@@ -8,7 +8,6 @@ function SpaceModifyModal(props) {
         spcName : "",
         spcCap : "",
         spcExplain : "",
-        spcImage : ""
     }
 
     const [spaceObj, setSpaceObj] = useState(defaultSpaceObj);
@@ -31,7 +30,6 @@ function SpaceModifyModal(props) {
         spcName: spaceObj.spcName,
         spcCap: spaceObj.spcCap,
         spcExplain: spaceObj.spcExplain,
-        spcImage: spaceObj.spcImage
     };
 
     const onChangeDevice = (e) => {
@@ -49,10 +47,6 @@ function SpaceModifyModal(props) {
 
     const onChangeImageInput = e => {
         setImage(e.target.files[0]);
-    }
-
-    const onReset = () => {
-        setSpaceObj(data);
     }
 
     const SpaceUpdateModal = (event) => {
@@ -78,37 +72,51 @@ function SpaceModifyModal(props) {
             alert("변경 실패",error)
         });
     }
+
+    const spaceDeleteModal = (event) => {
+        event.preventDefault();
+
+        const formData = new FormData();
+
+        const config = {
+            headers: { 'content-Type' : 'multipart/form-data' }
+        }
+
+        formData.append("image", image);
+        formData.append("data", new Blob([JSON.stringify(data)],{
+            type: "application/json"
+        }));
+
+        axios.post(`http://localhost:8080/api/space/del/${props.selectSpace.spcSeq}`, formData, config)
+        .then(response => {
+            console.log(response.data);
+            alert("삭제 완료")
+        })
+        .catch(error => {
+            alert("삭제 실패", error);
+        })
+    }
     const printSpaceUpdateForm = () => {
         return (
             <>
                 <div className={SpaceModifyStyle.names}>
-                    ● 전자기기명
+                    ● 공간자원명
                     <input
                     type='text'
                     className={SpaceModifyStyle.name}
-                    placeholder="전자기기명"
-                    name="dvcName"
-                    value={data.dvcName}
+                    placeholder="공간자원명"
+                    name="spcName"
+                    value={data.spcName}
                     onChange={onChangeDevice}></input>                
                 </div>
-                <div className={SpaceModifyStyle.Serials}>
-                    ● 제품번호
+                <div className={SpaceModifyStyle.Caps}>
+                    ● 수용인원
                     <input
                     type='text'
-                    className={SpaceModifyStyle.Serial}
-                    placeholder="제품번호"
-                    name="dvcSerial"
-                    value={data.dvcSerial}
-                    onChange={onChangeDevice}></input>
-                </div>
-                <div className={SpaceModifyStyle.years}>
-                    ● 구입년도
-                    <input
-                    type='Date'
-                    className={SpaceModifyStyle.year}
-                    placeholder="구입년도"
-                    name="dvcBuy"
-                    value={data.dvcBuy}
+                    className={SpaceModifyStyle.Cap}
+                    placeholder="수용인원"
+                    name="spcCap"
+                    value={data.spcCap}
                     onChange={onChangeDevice}></input>
                 </div>
                 <div className={SpaceModifyStyle.explanations}>
@@ -116,8 +124,8 @@ function SpaceModifyModal(props) {
                     <input
                     type='textarea'
                     className={SpaceModifyStyle.explanation}
-                    name="dvcExplain"
-                    value={data.dvcExplain}
+                    name="spcExplain"
+                    value={data.spcExplain}
                     onChange={onChangeDevice}></input>                
                 </div>
                 <div className={SpaceModifyStyle.images}>
@@ -125,8 +133,8 @@ function SpaceModifyModal(props) {
                     <input
                     type='file'accept="image/jpg,image/png,image/jpeg,image/gif"
                     className={SpaceModifyStyle.image}
-                    name="dvcImage"
-                    value={data.dvcImage}
+                    name="spcImage"
+                    value={data.spcImage}
                     onChange={onChangeImageInput}></input>
                 </div>
             </>
@@ -144,7 +152,7 @@ function SpaceModifyModal(props) {
                             type="reset"
                             value="초기화"
                             className={SpaceModifyStyle.cancel}
-                            onClick={onReset}/>
+                            onClick={spaceDeleteModal}/>
         return (
             <div className={SpaceModifyStyle.sNcBtn}>
                 {resetBtn}

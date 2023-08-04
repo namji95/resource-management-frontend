@@ -9,14 +9,21 @@ import Button from 'react-bootstrap/Button';
 import './Button.css'
 import InputGroup from 'react-bootstrap/InputGroup';
 import axios from 'axios';
-import { height } from '@mui/system';
+import CalendarSide from '../CalendarSide';
+import moment from 'moment/moment';
+import CalendarValue from '../CalendarValue';
 
 function InputDeviceForm() {
+
   
+
 const [selectedOption, setSelectedOption] = useState('');
 const [title,setTitle] = useState('');
 const[date,setDate] = useState('');
 const[time,setTime] = useState('');
+
+
+
 
 const handleOptionChange = (e) => {
   setSelectedOption(e.target.value);
@@ -44,10 +51,9 @@ const testSubmit =(e) =>{
 }
 
 
-
   return (
 
-    <div style={{height : '100%', marginTop : '15px' }}>
+    <div style={{height : '100%', marginTop   : '15px' }}>
       
       <div className="form-container ">
       <fieldset className="fieldset-container-meet" >
@@ -61,12 +67,11 @@ const testSubmit =(e) =>{
         </Col>
         </Row>
       </Form.Group>
-
-
       <InputGroup>
       <Form.Label column sm="2" style={{padding : '1.1rem', paddingRight : '2.3rem'}}>
           일시 
         </Form.Label>
+      
         <div className='inputType'>
       <input type = "Date" onChange={handleDate} style={{ border : '1px solid #dee2e6', borderRadius : '0.375rem'}}></input> &nbsp;
       <input type = "Time" onChange={handleTime} style={{ border : '1px solid #dee2e6', borderRadius : '0.375rem'}}></input>

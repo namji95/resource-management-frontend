@@ -3,11 +3,18 @@ import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import * as IoIcons from "react-icons/io";
 
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 import { FaUserAlt } from "react-icons/fa";
 import {Link} from 'react-router-dom';
 import styles from "../css/Sidebar.module.css";
 import itemStyles from '../css/SidebarItem.module.css';
 import { green, red } from '@mui/material/colors';
+import moment from 'moment/moment';
+import './sidebarDate.css';
+import CalendarSide from './CalendarSide';
+
+
 
 const barData = [
   {
@@ -27,13 +34,13 @@ const barData = [
 const adminData = [
   {
     title : '회사 관리',
-    path : '/companylist',
+    path : '/company',
     icon : <AiIcons.AiFillShop/>,
     cName : 'navText'
   },
   {
     title : '구성원 관리',
-    path : '/employeelist',
+    path : '/employee',
     icon : <AiIcons.AiOutlineTeam/>,
     cName : 'navText'
   },
@@ -51,15 +58,21 @@ const adminData = [
   },
 ]
 
+
 function Sidebar() {
+
+
 
   return (
     <>
       <nav className ={`${styles.navMenu} ${styles.navbarMargin}`}>         
         <ul className ={styles.navMenuItems} >
           <Link to = "/meeting" >
-            <button className = {`${styles.reserveButton}`} style={{margin : '30px', marginRight : '60px', marginTop : '10px'}}>+ 예약하기</button>
+            <button className = {`${styles.reserveButton}`} style={{margin : '30px', marginRight : '60px', marginTop : '10px', color : 'white'}}>+ 예약하기</button>
+          
           </Link>
+      
+          
           <div className={itemStyles.sideItem}>
           {barData.map((item,index)=>{
             return (

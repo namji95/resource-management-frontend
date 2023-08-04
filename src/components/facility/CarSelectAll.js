@@ -43,7 +43,7 @@ function CarSelectAll(props) {
 
       return (
         <div>
-          <Table className={CarSelectAllStyle.resourceListTable}>
+          <Table>
             <div className={CarSelectAllStyle.resourceTable}>
               <thead>
                 <tr>
@@ -58,7 +58,9 @@ function CarSelectAll(props) {
               </thead>
               <tbody>
                 {carObj.map((car, index) => (
-                  <tr key={index} onClick={() => handleInfoClick(car)}>
+                  <tr key={index} 
+                      className={CarSelectAllStyle.carInformation} 
+                      onClick={() => handleInfoClick(car)}>
                     {/* 각 행을 클릭할 때 해당 행의 정보를 선택 */}
                     <td className={CarSelectAllStyle.check}>
                       <input

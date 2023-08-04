@@ -60,10 +60,6 @@ function DeviceModifyModal(props) {
         setImage(e.target.files[0]);
     }
 
-    const onReset = () => {
-        setDeviceObj(data);
-    }
-
     const DeviceUpdateModal = (event) => {
         event.preventDefault();
 
@@ -84,7 +80,31 @@ function DeviceModifyModal(props) {
             alert("변경 완료");
         })
         .catch(error => {
-            alert("변경 실패",error)
+            alert("변경 실패",error);
+        });
+    }
+
+    const DeviceDeleteModal = (event) => {
+        event.preventDefault();
+
+        const formData = new FormData();
+
+        const config = {
+            headers : { 'Content-Type' : 'multipart/form-data' }
+        }
+
+        formData.append("image", image);
+        formData.append("data", new Blob([JSON.stringify(data)],{
+            type: "application/json"
+        }));
+
+        axios.post(`http://localhost:8080/api/device/del/${props.selectDevice.dvcSeq}`, formData, config)
+        .then(response => {
+            console.log(response.data);
+            alert("삭제 완료");
+        })
+        .catch(error => {
+            alert("삭제 실패", error);
         });
     }
     const printDeviceUpdateForm = (seq) => {
@@ -154,7 +174,7 @@ function DeviceModifyModal(props) {
                             type="reset"
                             value="초기화"
                             className={deviceModifyStyle.cancel}
-                            onClick={onReset}/>
+                            onClick={DeviceDeleteModal}/>
         return (
             <div className={deviceModifyStyle.sNcBtn}>
                 {resetBtn}

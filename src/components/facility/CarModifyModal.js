@@ -51,10 +51,6 @@ function CarModifyModal(props) {
         setImage(e.target.files[0]);
     }
 
-    const onReset = () => {
-        setCarObj(data);
-    }
-
     const CarUpdateModal = (event) => {
         event.preventDefault();
 
@@ -78,6 +74,31 @@ function CarModifyModal(props) {
             alert("변경 실패",error)
         });
     }
+
+    const  CarDeleteModal = (event) => {
+        event.preventDefault();
+
+        const formData = new FormData();
+
+        const config = {
+            headers : { 'Content-Type' : 'multipart/form-data' }
+        }
+
+        formData.append("image", image);
+        formData.append("data", new Blob([JSON.stringify(data)],{
+            type: "application/json"
+        }));
+
+        axios.post(`http://localhost:8080/api/car/del/${props.selectCar.carSeq}`, formData, config)
+        .then(response => {
+            console.log(response.data);
+            alert("삭제 완료");
+        })
+        .catch(error => {
+            alert("삭제 실패", error)
+        });
+    }
+
     const printCarUpdateForm = () => {
         return (
             <>
@@ -153,10 +174,11 @@ function CarModifyModal(props) {
                             onClick={CarUpdateModal} 
                             />
         const resetBtn = <input 
-                            type="reset"
-                            value="초기화"
+                            type="submit"
+                            value="삭제"
                             className={carUpdateStyle.cancel}
-                            onClick={onReset}/>
+                            onClick={CarDeleteModal}
+                            />
         return (
             <div className={carUpdateStyle.sNcBtn}>
                 {resetBtn}

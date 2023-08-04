@@ -20,6 +20,10 @@
     margin: 8px;
 }
 
+.selectBox {
+    border-radius: 10px;
+}
+
 .updatebutton{
     margin-left: 400px;
 }

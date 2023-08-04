@@ -49,10 +49,6 @@ function SpaceModifyModal(props) {
         setImage(e.target.files[0]);
     }
 
-    const onReset = () => {
-        setSpaceObj(data);
-    }
-
     const SpaceUpdateModal = (event) => {
         event.preventDefault();
 
@@ -75,6 +71,18 @@ function SpaceModifyModal(props) {
         .catch(error => {
             alert("변경 실패",error)
         });
+    }
+
+    const spaceDeleteModal = (event) => {
+        event.preventDefault();
+
+        const formdata = new FormData();
+
+        const config = {
+            headers: { 'content-Type' : 'multipart/form-data' }
+        }
+
+        formData.append("image",)
     }
     const printSpaceUpdateForm = () => {
         return (
@@ -132,7 +140,7 @@ function SpaceModifyModal(props) {
                             type="reset"
                             value="초기화"
                             className={SpaceModifyStyle.cancel}
-                            onClick={onReset}/>
+                            onClick={spaceDeleteModal}/>
         return (
             <div className={SpaceModifyStyle.sNcBtn}>
                 {resetBtn}

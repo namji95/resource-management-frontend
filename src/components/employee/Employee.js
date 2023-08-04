@@ -22,6 +22,8 @@ const Employee = () => {
     const [addModal, setAddModal] = useState(false);
     const [pageNum, setPageNum] = useState(1);
     const [pageSize,setPageSize] = useState(5);
+    const [totalPage,setTotalPage] = useState(); // 총 페이지 수 (임의로 예시로 10으로 설정)
+    const pageNumbers = Array.from({ length: totalPage }, (_, index) => index + 1);
 
     const toggle = () => {
         setAddModal(!addModal);
@@ -35,18 +37,38 @@ const Employee = () => {
        .then((result) => {
                 console.log(result.data.data.employeeList)
                 setInfo(result.data.data.employeeList)
-                console.log("info찍어보기")
-                console.log(info)
+                console.log("info찍어보기1")
+                setTotalPage(result.data.data.total);
+                
                 setLoading(false);
             })
 
             .catch((error) => {
-                console.log('요청실패');
+                console.log('요청실패1');
                 console.log(error);
                 setLoading(false);
             });
 
     }, [pageNum,pageSize]);
+
+    const handlePageChange = (pageNumber) => {
+        setPageNum(pageNumber);
+        setLoading(true);
+
+        axios.get(`http://localhost:8080/api/employee?pageNum=${pageNumber}&pageSize=${pageSize}`)
+            .then((result) => {
+                console.log(result.data.data.employeeList);
+                setInfo(result.data.data.employeeList);
+                console.log("info찍어보기2");
+             
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.log('요청실패2');
+                console.log(error);
+                setLoading(false);
+            });
+    }
 
     // 테이블에서 데이터 저장(추가/수정)
     // 저장된 데이터에 seq가 있는 경우 수정 없는 경우 추가
@@ -123,9 +145,13 @@ const Employee = () => {
         setUpdateModal(false);
         setAddModal(false);
     }
+
+
+    //////////다음 버튼
     const handleNextPage = () => {
         setPageNum((prevPageNum) => prevPageNum + 1);
     }
+    //////////이전 버튼
     const handlePrevPage = () => {
         if (pageNum > 1) {
             setPageNum((prevPageNum) => prevPageNum - 1);
@@ -180,7 +206,16 @@ const Employee = () => {
                             >
                                 이전
                             </button>
-
+                               {pageNumbers.map((pageNumber) => (
+                               <button
+                                   key={pageNumber}
+                                  type="button"
+                                  className={styles.pageNumberBtn}
+                                 onClick={() => handlePageChange(pageNumber)}
+                               >
+                                 {pageNumber}
+                                </button>
+                                    ))}
                             {/* 다음 버튼 */}
                             <button
                                 type="button"
@@ -189,7 +224,7 @@ const Employee = () => {
                             >
                                 다음
                             </button>
-                            </div>
+              </div>
             </Container>
         </div>
 

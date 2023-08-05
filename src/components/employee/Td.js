@@ -1,6 +1,6 @@
 import React from "react";
 import axios from 'axios';
-import styles from './css/EmployeeList.module.css';
+import styles from './css/Employee.module.css';
 
 const Td = ({item, handleRemove, handleEdit}) => {
         

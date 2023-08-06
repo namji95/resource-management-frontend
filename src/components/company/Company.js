@@ -143,7 +143,7 @@ const Company = () => {
              <table class="table table-hover">
                          <thead class="table-light">
                              <tr>
-                                 <th scope="col"><input type='checkbox'></input></th>
+                                 {/* <th scope><input type='checkbox'></input></th> */}
                                  <th scope="col">일련번호</th>
                                  <th scope="col">사업자등록번호</th>
                                  <th scope="col">회사명</th>

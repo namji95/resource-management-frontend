@@ -1,5 +1,5 @@
 import { Container, Form, Button } from "react-bootstrap";
-import styles from './css/EmployeeList.module.css';
+import styles from './css/Employee.module.css';
 
 function EmployeeList() {
     return (

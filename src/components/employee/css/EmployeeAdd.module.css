@@ -61,13 +61,24 @@
   }
   
   .buttonCancel {
-      margin: 0%;
+    background-color:white;
+    color: #1a83ff;
+    margin: 0%;
+    padding: 10px 20px;
+    border: 1px solid #1a83ff; 
+    border-radius: 5px;
+    cursor: pointer; 
     }
   
   .buttonSave {
-    margin: 0%;
-    background-color: #1a83ff;
+    background-color:#1a83ff;
     color: white;
+    margin: 0%;
+    padding: 10px 20px;
+    color: #ffffff;
+    border: none; 
+    border-radius: 5px;
+    cursor: pointer; 
 
   }
   

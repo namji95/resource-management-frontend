@@ -32,7 +32,7 @@ function Header() {
 
   return (
     <>
-      <Navbar className={styles.fixedHeader}>
+      <Navbar className={styles.fixedHeader} style={{position : 'fixed'}}>
         <Container fluid className={styles.header}>
         <div className="d-flex align-items-center">
           <img className={styles.logo} alt="logo" src={logo}></img>

@@ -12,6 +12,7 @@ import itemStyles from '../css/SidebarItem.module.css';
 import { green, red } from '@mui/material/colors';
 import moment from 'moment/moment';
 import './sidebarDate.css';
+import CalendarSide from './CalendarSide';
 
 import { useSelector } from 'react-redux';
 
@@ -38,7 +39,7 @@ const adminData = [
     cName : 'navText'
   },
   {
-    title : '구성원 관리',
+    title : '사원 관리',
     path : '/employee',
     icon : <AiIcons.AiOutlineTeam/>,
     cName : 'navText'
@@ -77,14 +78,18 @@ function Sidebar() {
           <Link to = "/meeting" >
             <button className = {`${styles.reserveButton}`} style={{margin : '30px', marginRight : '60px', marginTop : '10px', color : 'white'}}>+ 예약하기</button>
           </Link>
-
-          <div className='custom-calendar'>
-            <Calendar onChange={setValue} value={Datevalue} />
-            <div className="text-gray-500 mt-4">
-
-              {moment(Datevalue).format("YYYY년 MM월 DD일")} 
-
-            </div>
+      
+          <div className={itemStyles.sideItem}>
+          {barData.map((item,index)=>{
+            return (
+              <li key = {index} className={`${styles.item} ${styles[item.cName]}`}>
+                <Link to = {item.path}>
+                  {item.icon} &nbsp;&nbsp;
+                  <span style={{color : '#306AA3'}}>{item.title}</span>
+                </Link>
+              </li>
+            )
+          })}
           </div>
 
           <div className={itemStyles.sideItem}>

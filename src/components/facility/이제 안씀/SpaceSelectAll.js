@@ -28,7 +28,7 @@ function SpaceSelectAll(props) {
           .get("http://localhost:8080/api/space")
           .then((response) => {
             console.log(response.data);
-            setSpaceObj(response.data.spaceList);
+            setSpaceObj(response.data.list);
           })
           .catch((error) => {
             console.error("기기 정보를 가져오는데 실패했습니다.", error);

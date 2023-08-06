@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import axios from "axios";
-import facilityStyle from "./css/FacilityModal.module.css";
+import facilityStyle from "./css/FacilityInsertModal.module.css";
 
-function FacilityModal(props) {
+function FacilityInsertModal({showInsertModal,setShowInsertModal, getList}) {
 
     const defaultCarObj = {
         carName : "",
@@ -134,10 +134,10 @@ function FacilityModal(props) {
     }
 
     const closeModal = () => {
-        props.setShowModal(!props.showModal);
+        setShowInsertModal(!setShowInsertModal);
     }
 
-    const FacilityModal = (event) => {
+    const FacilityInsertModal = (event) => {
         event.preventDefault();
         console.log(image);
         console.log(Data);
@@ -176,6 +176,8 @@ function FacilityModal(props) {
         .then(response => {
             console.log(response.data);
             alert("등록 완료");
+            getList(null,currCategory);
+            setShowInsertModal(!showInsertModal);
         })
         .catch(error => {
             alert("등록 실패",error);
@@ -356,7 +358,7 @@ function FacilityModal(props) {
                         type="submit" 
                         value="저장"
                         className={facilityStyle.save}
-                        onClick={FacilityModal}
+                        onClick={FacilityInsertModal}
                         />;
 
         const resetBtn = <input 
@@ -392,7 +394,7 @@ function FacilityModal(props) {
             <div className={facilityStyle.back}/>
             <div className={facilityStyle.update_page}>
             <button className={facilityStyle.cancelButton} onClick={closeModal}>X</button>
-                <form action="http://localhost:8080/FacilityModal" method="POST" encType="multipart/form-Data">
+                <form>
                     <div className={facilityStyle.essential}>
                         ● 필수 항목
                     </div>
@@ -421,4 +423,4 @@ function FacilityModal(props) {
     )
 }
 
-export default FacilityModal;
+export default FacilityInsertModal;

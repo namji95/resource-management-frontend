@@ -27,9 +27,11 @@ const EmployeeUpdate = ({selectedData, handleCancel, handleEditSubmit}) => {
 
     // 백엔드
     console.log(edited.empSeq);
-    setEmpSeq({...selectedData.empSeq})
+    // setEmpSeq({...selectedData.empSeq})
+    setEmpSeq()
     console.log('내가찍어보고싶은거')
     console.log(empSeq);
+
 
     axios.post(`http://localhost:8080/api/employee/${Number(edited.empSeq)}`, {
         empName: edited.empName,

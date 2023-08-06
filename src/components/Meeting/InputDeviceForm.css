@@ -18,3 +18,8 @@
     height: 10%;
     
   }
+  .custom-datetime-picker .react-datetime-picker__calendar {
+    /* 원하는 크기를 지정 (예: 200px) */
+    width: 200px;
+  }
+  

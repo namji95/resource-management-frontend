@@ -10,7 +10,7 @@ import Login from './components/member/Login';
 import Company from './components/company/Company';
 import Device from './components/Device/Device';
 import Mypage from './components/MyPage/PageForm';
-import Meeting from './components/Metting/InputDeviceForm';
+import Meeting from './components/Meeting/InputDeviceForm';
 import CompanyList from './components/company/CompanyList';
 import EmployeeList from './components/employee/EmployeeList';
 import DeviceForm from './components/Device/Device';

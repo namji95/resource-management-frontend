@@ -12,58 +12,70 @@ import axios from 'axios';
 import CalendarSide from '../CalendarSide';
 import moment from 'moment/moment';
 import CalendarValue from '../CalendarValue';
-
+import MeetingResourceList from './ResourceList';
+import DateTimePicker from 'react-datetime-picker';
 function InputDeviceForm() {
 
-  
+  ///////////////////////////////////////////// 시간은 라이브러리 써야겠다.... 크롬 되돌리기 라이브러리로..
 
-const [selectedOption, setSelectedOption] = useState('');
+
 const [title,setTitle] = useState('');
-const[date,setDate] = useState('');
-const[time,setTime] = useState('');
+const [date, setDate] = useState('');
+const [time, setTime] = useState('');
 
+const availableTimeSlots = ['10:00', '11:00', '13:00', '14:00', '15:00']; // 예약 가능한 시간대
 
-
-
-const handleOptionChange = (e) => {
-  setSelectedOption(e.target.value);
+const handleDateChange = (event) => {
+  const selectedDate = event.target.value;
+  const currentDate = new Date().toISOString().split('T')[0]; // 현재 날짜를 가져옴 (YYYY-MM-DD 형식)
+  if (selectedDate >= currentDate) {
+    setDate(selectedDate);
+  } else {
+    alert('과거 날짜는 선택할 수 없습니다.');
+  }
 };
 
-const handleTitle = (e) =>{
-  setTitle(e.target.value);
-}
-const handleDate = (e) =>{
-  setDate(e.target.value);
-}
-const handleTime = (e) =>{
-  setTime(e.target.value);
-}
+const handleTimeChange = (event) => {
+  setTime(event.target.value);
+};
+
+const isSlotAvailable = (selectedDate, selectedTime) => {
+  // 선택한 날짜와 시간이 예약 가능한 시간대에 포함되는지 확인
+  const selectedDateTime = `${selectedDate} ${selectedTime}`;
+  return availableTimeSlots.includes(selectedTime) && new Date(selectedDateTime) > new Date();
+};
+
+const handleSubmit = (event) => {
+  event.preventDefault();
+  if (isSlotAvailable(date, time)) {
+    // 여기서 예약 정보를 처리하는 로직을 추가할 수 있습니다.
+    console.log('예약 날짜:', date);
+    console.log('예약 시간:', time);
+  } else {
+    alert('선택한 시간은 예약이 불가능합니다.');
+  }
+};
 const testSubmit =(e) =>{
   e.preventDefault();
   axios.post('http://localhost:9000/devices',{
-    title : title,
-    date : date,
-    time : time
+    title : title
   }).then(response=>{
     console.log(title);
     console.log(response.data);
   })
 }
 
-
   return (
 
     <div style={{height : '100%', marginTop   : '15px' }}>
       
-      <div className="form-container ">
-      <fieldset className="fieldset-container-meet" >
-     
+    
       <Form.Group style={{marginTop : '2em'}}>
         <Row>
         <Form.Label column sm="2" style={{fontSize : '1em', }}>제목 
         </Form.Label>
         <Col sm="8">
-          <Form.Control type="text" value={title} onChange={handleTitle} placeholder="제목을 입력하세요." />
+          <Form.Control type="text" value={title}  placeholder="제목을 입력하세요." />
         </Col>
         </Row>
       </Form.Group>
@@ -73,8 +85,9 @@ const testSubmit =(e) =>{
         </Form.Label>
       
         <div className='inputType'>
-      <input type = "Date" onChange={handleDate} style={{ border : '1px solid #dee2e6', borderRadius : '0.375rem'}}></input> &nbsp;
-      <input type = "Time" onChange={handleTime} style={{ border : '1px solid #dee2e6', borderRadius : '0.375rem'}}></input>
+        <input type="date" value={date} onChange={handleDateChange} />
+        <input type="time" value={time} onChange={handleTimeChange} />
+     
       <text> - </text>
       <input type = "Date" style={{ border : '1px solid #dee2e6', borderRadius : '0.375rem', marginLeft : '0.5em'}}></input> &nbsp;
       <input type = "Time" style={{ border : '1px solid #dee2e6', borderRadius : '0.375rem'}}></input>
@@ -82,40 +95,10 @@ const testSubmit =(e) =>{
       </InputGroup>
   
       
-    <Form.Group as={Row} className="mb-3">
-   <Form.Label column sm="2">
-     
-   </Form.Label>
-   <Col sm="6">
-     <Row>
-       <Col sm="3">
-         <Form.Check type="checkbox" label="종일" />
-       </Col>
-       <Col sm="5">
-       </Col>
-     </Row>
-   </Col>
- </Form.Group>
       
       
       <hr/>
-      <Form style={{marginTop : '1em'}}>
-    <Form.Group as={Row} className="mb-3" style={{marginBottom : '0.3%'}}>
-      <Form.Label column sm="2">
-       캘린더 
-      </Form.Label>
-      <Col sm="8"> 
-        <Form.Select aria-label="Default select example">
-      <option>[기본]김동민</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </Form.Select>
-      </Col>
-    </Form.Group>
-
     
-  </Form>
       <Form>
       <Form.Group as={Row} className="mb-3" style={{marginBottom : '0.3%'}}>
         <Form.Label column sm="2">
@@ -144,32 +127,16 @@ const testSubmit =(e) =>{
    <Form.Label column sm="2" style={{marginBottom : '0.3%'}}>
      설비
    </Form.Label>
-   <Col sm="6">
+   <Col sm="10">
      <Row>
      <Col sm="10"> 
-        <Form.Select aria-label="Default select example">
-      <option>회의실</option>
-      <option value="교육장">교육장</option>
-    </Form.Select>
+      <MeetingResourceList></MeetingResourceList>
       </Col>
        
      </Row>
    </Col>
  </Form.Group>
  
- <Form.Group as={Row} className="mb-3" style={{marginBottom : '0.3%'}}>
-        <Form.Label column sm="2">장소
-        </Form.Label>
-        
-        <Col sm="8">
-          <Form.Control type="text" placeholder="장소를 입력하세요. " />
-        </Col>
-        <Form.Label column sm="2">
-        </Form.Label>
-        {/* <Col sm = "8">
-          <Form.Control type = "file"/>
-          </Col> */}
-      </Form.Group>
      <Form>
     
     
@@ -185,35 +152,6 @@ const testSubmit =(e) =>{
  </Form>
       <Form>
       <Form.Group as={Row} className="mb-3">
-            <Form.Label column sm="2">
-              공개
-            </Form.Label>
-            <Col sm="2">
-              <Col sm="6">
-                <Form.Check
-                  type="radio"
-                  label="공개"
-                  name="checkboxGroup"
-                  value="option1"
-                  checked={selectedOption === 'option1'}
-                  onChange={handleOptionChange}
-                  style={{ paddingTop: '0.4em' }}
-                />
-              </Col>
-            </Col>
-            <Col sm="2">
-              <Col sm="">
-                <Form.Check
-                  type="radio"
-                  label="비공개"
-                  name="checkboxGroup"
-                  value="option2"
-                  checked={selectedOption === 'option2'}
-                  onChange={handleOptionChange}
-                  style={{ paddingTop: '0.4em', textAlign: 'left' }}
-                />
-              </Col>
-            </Col>
             {/* 저장 버튼 */}
             <Col sm="4">
               <Button
@@ -246,10 +184,7 @@ const testSubmit =(e) =>{
 
     </Form>
     
-      </fieldset>
-    
-      </div>
-
+   
     </div>
   );
 }

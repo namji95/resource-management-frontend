@@ -1,25 +1,27 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import styles from '../../css/Signup.module.css';
-import { style } from '@mui/system';
+import styles from './css/Signup.module.css';
 import { useNavigate } from 'react-router-dom';
 import DaumPostcode from 'react-daum-postcode';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Modal } from 'react-bootstrap';
 
 
 
 function Signup() {
-    const [id, setId] = useState("");
+    const [id, setId] = useState('');
+    const [temporaryId, setTemporaryId] = useState('');
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState('');
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [phone, setPhone] = useState("");
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
     const [selectedOption, setSelectedOption] = useState('남');
     const [address, setAddress] = useState('');
 
     const [idValid, setIdValid] = useState(false);
+    const [idRegex, setIdRegex] = useState(false);
     const [passValid, setPassValid] = useState(false);
     const [passConfirmValid, setPassConfirmValid] = useState(false);
     const [emailValid, setEmailValid] = useState(false);
@@ -30,12 +32,18 @@ function Signup() {
     const [showPostcode, setShowPostCode] = useState(false);
     const [addressValid, setAddressValid] = useState(false);
 
+    const [showAddressModal, setShowAddressModal] = useState(false);
+
     // let data = {};
 
     const navigate = useNavigate();
 
-    const handleIdCheck = (e) => {
-        setId(e.target.value);
+    const handleTemporaryId = (e) => {
+        setTemporaryId(e.target.value);
+    }
+
+    const handleIdCheck = () => {
+        setId(temporaryId);
     }
 
     const handlePassword = (e) => {
@@ -51,6 +59,7 @@ function Signup() {
     }
 
     const handlePhone = (e) => {
+
         const { value } = e.target;
         setPhone(value);
 
@@ -69,11 +78,19 @@ function Signup() {
 
     const handleOpenPostcode = () => {
         setShowPostCode(true);
+        setShowAddressModal(true);
+    }
+
+    const handleCloseAddressModal = () => {
+        setShowPostCode(false);
+        setShowAddressModal(false);
     }
 
     async function signUpHandler() {
+
         try {
-          const response = await axios.post('http://localhost:8080/api/user/signup', {
+
+        const response = await axios.post('http://localhost:8080/api/user/signup', {
             userId: id,
             userPwd: password,
             userName: name,
@@ -81,42 +98,46 @@ function Signup() {
             userPhone: phone,
             userGender: selectedOption,
             userAddress: address,
-          });
-      
-          toast.success(response.data.message, {
+        });
+
+        console.log(response.data);
+
+        toast.success(response.data, {
             position: toast.POSITION.TOP_CENTER,
             autoClose: 2000,
-          });
-        } catch (error) {
-          toast.error('회원가입 실패 -- backend error 로직 아직 안됨', {
-            position: toast.POSITION.TOP_CENTER,
-            autoClose: 2000,
-          });
-        }
-        
-        // await를 사용하여 알림이 표시된 후에 navigate()를 실행
+        });
+
+          // await를 사용하여 알림이 표시된 후에 navigate()를 실행
         await new Promise((resolve) => // resolve promise가 성공적으로 완료되었을때
         {
-            setTimeout(resolve, 3000)
+            setTimeout(resolve , 3000)
         });
-        navigate("/");
-      }
+
+        navigate("/")
+
+        } catch (error) {
+            toast.error('잘못된 요청입니다.', {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 2000,
+                });
+        }
+
+    }
     
     useEffect(() => {
-
-        if(emailValid && passConfirmValid && idValid && phoneValid && addressValid) {
+        if(emailValid && passConfirmValid && idValid && phoneValid && addressValid && idRegex) {
             setNotAllow(false);
         } else {
             setNotAllow(true);
         }
-    }, [emailValid, passConfirmValid, idValid, phoneValid, addressValid])
+    }, [emailValid, passConfirmValid, idValid, phoneValid, addressValid, idRegex])
 
     useEffect(() => {
     }, [passwordConfirm, password])
 
     useEffect(() => {
 
-        if (id.length > 6) {
+        if (id.length > 6 && idRegex === true) {
 
             axios.post('http://localhost:8080/api/user/duplicate', {}, {
                 params : {
@@ -141,9 +162,16 @@ function Signup() {
             setIdValid(false);
         }
 
-    }, [id, idCheck])
+    }, [id, idCheck, idRegex])
 
     useEffect(() => {
+
+        const idRegex = /^[A-Za-z0-9]+$/;
+        if (idRegex.test(id)) {
+            setIdRegex(true);
+        } else {
+            setIdRegex(false);
+        }
 
         const passwordRegex = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])(?!.*[^a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]).{8,20}$/;
         if(passwordRegex.test(password)) {
@@ -162,7 +190,7 @@ function Signup() {
             setPassConfirmValid(false);
         }
 
-        const emailRegex = /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+        const emailRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,}$/;;
 
         if(emailRegex.test(email)) {
             setEmailValid(true);
@@ -182,7 +210,7 @@ function Signup() {
             setAddressValid(false);
         }
 
-    }, [password, passwordConfirm , email, phone, address])
+    }, [id, password, passwordConfirm , email, phone, address])
 
     return (
         <React.Fragment>
@@ -201,8 +229,9 @@ function Signup() {
                             type='text'
                             placeholder='영어로 7자 이상'
                             className={styles.input}
-                            value={id}
-                            onChange={handleIdCheck}
+                            value={temporaryId}
+                            onChange={handleTemporaryId}
+                            onBlur={handleIdCheck}
                         />
                     </div>
                     { idCheck === 'OK' && id.length > 0 ? <p className={styles.successMessageWrap}>사용 가능한 아이디입니다.</p> 
@@ -301,14 +330,14 @@ function Signup() {
 
                     <div className={styles.inputTitle}>우편번호 검색</div>
                     <div className={styles.inputWrap}>
-                    <button onClick={handleOpenPostcode} style={{margin : '0px', padding : '5px', float : 'left', fontSize : '12px'}}>주소 검색</button>
+                    <button onClick={handleOpenPostcode} className={styles.address}>주소 검색</button>
                         {showPostcode && (
-                            <div>
+                            <Modal show={showAddressModal} onHide={handleCloseAddressModal}>
                                 <DaumPostcode
                                 onComplete={handleAddress}
                                 style={{ width: "100%", height: "500px" }}
                                 />
-                            </div>
+                            </Modal>
                         )}
                         <div style={{fontSize : '12px', margin: 'auto'}}>{address}</div>
                     </div>

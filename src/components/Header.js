@@ -12,7 +12,7 @@ function Header() {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.info.info);
   const logout = () => {
-    localStorage.removeItem('accessToken');
+    localStorage.clear();
     dispatch(saveToken(localStorage.getItem('accessToken')));
   };
   const [showEditProfile, setShowEditProfile] = useState(false);

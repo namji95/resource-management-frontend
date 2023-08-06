@@ -13,7 +13,7 @@ import { green, red } from '@mui/material/colors';
 import moment from 'moment/moment';
 import './sidebarDate.css';
 
-
+import { useSelector } from 'react-redux';
 
 const barData = [
   {
@@ -57,12 +57,18 @@ const adminData = [
   },
 ]
 
-
 function Sidebar() {
-  const [Datevalue, setValue] = useState();
-  console.log(Datevalue);
-  
 
+  const user = useSelector((state) => state.info.info);
+
+  const authenticated = () => {
+  
+    const authLevel = user.authLevel === 'MANAGER' || user.authLevel === 'MASTER';
+    
+    return authLevel;
+  }
+
+  const [Datevalue, setValue] = useState();  
 
   return (
     <>
@@ -70,30 +76,32 @@ function Sidebar() {
         <ul className ={styles.navMenuItems} >
           <Link to = "/meeting" >
             <button className = {`${styles.reserveButton}`} style={{margin : '30px', marginRight : '60px', marginTop : '10px', color : 'white'}}>+ 예약하기</button>
-          
           </Link>
+
           <div className='custom-calendar'>
             <Calendar onChange={setValue} value={Datevalue} />
-         <div className="text-gray-500 mt-4">
+            <div className="text-gray-500 mt-4">
 
-           {moment(Datevalue).format("YYYY년 MM월 DD일")} 
+              {moment(Datevalue).format("YYYY년 MM월 DD일")} 
 
-         </div>
-    </div>
-          <div className={itemStyles.sideItem}>
-          {barData.map((item,index)=>{
-            return (
-              <li key = {index} className={`${styles.item} ${styles[item.cName]}`}>
-                <Link to = {item.path}>
-                  {item.icon} &nbsp;&nbsp;
-                  <span style={{color : '#306AA3'}}>{item.title}</span>
-                </Link>
-              </li>
-            )
-          })}
+            </div>
           </div>
-          <br/>
-          관리자 메뉴
+
+          <div className={itemStyles.sideItem}>
+            {barData.map((item,index)=>{
+              return (
+                <li key = {index} className={`${styles.item} ${styles[item.cName]}`}>
+                  <Link to = {item.path}>
+                    {item.icon} &nbsp;&nbsp;
+                    <span style={{color : '#306AA3'}}>{item.title}</span>
+                  </Link>
+                </li>
+              )
+            })}
+          </div>
+
+          {authenticated() ? 
+
           <div className={itemStyles.sideItem}>
           {adminData.map((item,index)=>{
             return (
@@ -106,6 +114,11 @@ function Sidebar() {
             )
           })}
           </div>
+
+          :
+
+          <></>
+          }
 
         </ul>
       </nav>

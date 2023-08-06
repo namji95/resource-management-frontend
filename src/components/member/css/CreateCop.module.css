@@ -1,0 +1,82 @@
+/* Company.module.css */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 10vh;
+  /* margin-top: 30px; */
+}
+
+.subtitle {
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: 5vh;
+  margin-top: 0vh;
+}
+
+.form-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.form-input {
+  width: 20vw;; /* 입력 폼 요소의 너비를 늘림 */
+  height: 40px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.form-input label {
+  width: 100%;
+}
+
+.form-input input {
+  width: 100%;
+}
+
+.buttons-wrapper {
+  display: flex;
+  flex-direction: column; /* 버튼 요소들을 세로로 배치 */
+  width: 300px;
+  margin-top: 20px;
+}
+
+.submit-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  /* margin-bottom: 10px; */
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
+.cancel-button {
+  padding: 10px 20px;
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.cancel-button:hover {
+  background-color: #c0392b;
+}

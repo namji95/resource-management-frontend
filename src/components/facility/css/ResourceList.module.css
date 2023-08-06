@@ -10,7 +10,10 @@
     width: 100%;
 }
 
-.facilitySearch{
+.facilitySearchBox{
+    border-radius: 6px;
+    width: 410px;
+    height: 28px;
     flex-direction: row;
     display: flex;
     justify-content: center;
@@ -20,9 +23,59 @@
     margin: 8px;
 }
 
-.selectBox {
-    border-radius: 10px;
+.facilitySearch{
+    margin-left: 8px;
+    margin-right: 8px;
+    border : 1px solid gray;
+    border-radius: 6px;
+    width: 180px;
+    height: 28px;
+    padding-left: 15px;
+    font-size: 14px;
 }
+
+.selectBox {
+    border-radius: 6px;
+    width: 120px;
+    height: 28px;
+    border : 1px solid gray;
+    padding-left: 15px;
+    font-size: 14px;
+}
+
+.searchBtn{
+   width: 52px;
+   height: 28px;
+   border : 1px solid gray;
+   border-radius: 6px;
+   cursor: pointer;
+   transition: 0.2;
+   color: honeydew;
+   font-size: 13px;
+   background-color: #4795c3 ;
+}
+
+.searchBtn:hover{
+    opacity: 0.7;
+   transition: 0.2;
+ }
+
+ .addBtn{
+    width: 100px;
+    height: 28px;
+    border : 1px solid gray;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2;
+    color: honeydew;
+    font-size: 13px;
+    background-color: #4392c0 ;
+ }
+ 
+ .addBtn:hover{
+     opacity: 0.7;
+    transition: 0.2;
+  }
 
 .updatebutton{
     margin-left: 400px;
@@ -38,6 +91,8 @@
     margin-right: 15px;
 }
 
+
+
 .resourceCategory{
     height: 100%;
     max-height: 610px;
@@ -51,6 +106,7 @@
 
     padding: 5px;
     margin: 0px;
+
 }
 
 .categoryList{
@@ -59,11 +115,29 @@
 }
 
 .category{
+    transition: 0.2;
     width: 100%;
     min-width: 120px;
     height: 35%;
-    background-color: #f4f6fc;
     margin-top: 20px;
+    cursor: pointer;
+}
+.category:active{
+    color : darkgrey;
+    transition: 0.2s;
+}
+.category:hover{
+    color : gray;
+    transition: 0.2s;
+}
+.categoryClicked{
+    transition: 0.2;
+    width: 100%;
+    min-width: 120px;
+    height: 35%;
+    color: #0067a3 ;
+    margin-top: 20px;
+    cursor: pointer;
 }
 
 .carlist{

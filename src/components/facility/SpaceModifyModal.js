@@ -17,11 +17,10 @@ function SpaceModifyModal(props) {
         if (props.selectSpace) {
             setSpaceObj(props.selectSpace);
         }
-    }, [props.selectDevice]);
+    }, []);
 
     const closeModifyModal = () => {
         props.setUpdateModal(false);
-        props.setSelectSpace(null);
     }
 
     let data;

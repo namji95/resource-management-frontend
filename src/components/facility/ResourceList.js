@@ -1,210 +1,236 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import resourceListStyle from './css/ResourceList.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import FacilityModal from "./FacilityModal";
-import CarSelectAll from "./CarSelectAll";
-import DeviceSelectAll from "./DeviceSelectAll";
-import SpaceSelectAll from "./SpaceSelectAll";
+import FacilityInsertModal from "./FacilityInsertModal";
+import FacilityTable from "./FacilityTable";
+import Loading from "../common/Loading";
 
 
 function ResourceList(props) {
 
   // 상태 (state) 변수들
-  const [showModal, setShowModal] = useState(false);
   const [show, setShow] = useState(false);
-  const [carResourceListClick, setCarResourceListwClick] = useState(false);
-  const [deviceResourceListClick, setDeviceResourceListClick] = useState(false);
-  const [spaceResourceListClick, setspaceResourceListClick] = useState(false);
-  const [facilitySelectType, setFacilitySelectType] = useState ("ex");
-  const [facilityType, setFacilityType] = useState({
-    queryType : ""
-  });
-  // const [queryType, setQueryType] = useState("");
-  const [searchString, setSearchString] = useState("");
 
-  //---------------------- 상태관리 ----------------------------//
+// ==============================================
+// [검색 select, input 핸들링]
 
-  const openModal = () => {
-    setShowModal(showModal => !showModal);
-  };
-  const onClickCarResource = () => {
-    setCarResourceListwClick(!carResourceListClick);
+  const defaultSearchObj = {
+    columnName : "carName",
+    searchString : "",
   }
-  const onClickDeviceResource = () => {
-    setDeviceResourceListClick(!deviceResourceListClick);
+
+  const [searchObj, setSearchObj] = useState(defaultSearchObj);
+
+  const onResetSearchObj = () => {
+    setSearchObj(defaultSearchObj);
   }
-  const onClickSpaceResource = () => {
-    setspaceResourceListClick(!spaceResourceListClick);
-  }
-  const handleShow = () => {
-    setShow(!show);
-  };
-  const handleFacilitySelectType = (e) => {
-    setFacilitySelectType(e.target.value);
-    console.log(e.target.value);
-  }
-  const handleFacilityType = (e) => {
+  
+  const onChangeSearchObj = (e) => {
     let newName = e.target.name;
     let newValue = e.target.value;
-    const newType = {
-      ...facilityType,
+    const newSearchObj = {
+      ...searchObj,
       [newName] : newValue
     }
-    setFacilityType(newType);
+    setSearchObj(newSearchObj);
     console.log(e.target.name);
     console.log(e.target.value);
-    console.log(newType);
+    console.log(newSearchObj);
   }
-  const handleSearchString = (e) => {
-    setSearchString(e.target.value);
-    console.log(e.target.value);
+
+// ==============================================
+// [서버에서 가져온 데이터]
+
+  const defaultCurrData = {
+    category : "car",
+    dataList: []
   }
-  // 상태관리 함수 정의 후 각 함수의 열기/닫기 보이기/숨기기 함수 정의 //
 
+  const [currData,setCurrData] = useState(defaultCurrData);
 
-  const onSearch = (e) => {
-    e.preventDefault();
-    axios.get(`http://localhost:8080/api/${facilitySelectType}/search?queryType=${facilityType.queryType}&searchString=${searchString}`)
-    .then(response => {
-        console.log(response.data);
-        alert("조회 완료");
+// ==============================================
+// [axios get 요청]
+
+  const getList = (e=null, category="car", searchType="get") => {
+    if(e)
+      e.preventDefault();
+
+    const defaultUrl = "http://localhost:8080/api/";
+    
+    let sendUrl = "";
+    let result;
+
+    if(searchType=="get" || !searchObj.searchString ){
+      sendUrl = `${defaultUrl}${category}`
+    }else{
+      sendUrl = `${defaultUrl}${currData.category}/search?columnName=${searchObj.columnName}&searchString=${searchObj.searchString}`
+    }
+    console.log("sendUrl : ",sendUrl);
+    axios
+    .get(sendUrl)
+    .then((response) => {
+      console.log("서버에서 가져온 데이터 >>",response.data);
+      result = response?.data?.data?.list;
     })
-    .catch(error => {
-        alert("조회 실패",error)
+    .catch((error) => {
+      result = [error];
+    })
+    .then(()=>{
+      const newCurrData = {
+        category,
+        dataList : result
+      }
+      console.log("newCurrData : ",newCurrData);
+      setCurrData(newCurrData);
+      setIsLoadFromServer(true);
     });
+
   }
+
+// ==============================================
+
+  // [insert modal]
+
+  const [showInsertModal, setShowInsertModal] = useState(false);
+
+  const openInsertModal = () => {
+    setShowInsertModal(showInsertModal => !showInsertModal);
+  };
+
+  const renderInsertModal = () => { 
+    if(showInsertModal)
+      return (
+        <FacilityInsertModal showInsertModal={showInsertModal} setShowInsertModal={setShowInsertModal} getList={getList} />
+      )
+  }
+  
+// ==============================================
+
+  const renderColumnNameSelect = () => {
+
+      let currOptions;
+
+      switch(currData.category){
+        case "car" :
+          currOptions = (
+            <>
+              <option name="columnName" value="carName">차량명</option>
+              <option name="columnName" value="carNumber">차량번호</option>
+            </>
+          );
+          break;
+        case "device" :
+          currOptions = (
+            <>
+            <option name="columnName" value="dvcName">기기명</option>
+            <option name="columnName" value="dvcSerial">기기번호</option>
+            </>
+          );
+          break;
+        case "space" :
+          currOptions = (
+          <>
+            <option name="columnName" value="spcName">공간명</option>
+          </>
+          );
+          break;
+        default :
+          currOptions = (
+            <>
+              <option name="columnName" value="carName">차량명</option>
+              <option name="columnName" value="carNumber">차량번호</option>
+            </>
+          );
+          break;
+      }
+
+      return (
+        <select className={resourceListStyle.selectBox}
+        onChange={onChangeSearchObj}
+        name="columnName"
+        >
+          {currOptions}
+        </select>
+      )
+  }
+
+
+
+// ==============================================
+// [최초 데이터 가져오기]
+
+const [isLoadFromServer, setIsLoadFromServer] = useState(false);
+
+useEffect(()=>{
+    getList(null,"car");
+},[])
+
+// ==============================================
 
   return (
     <div className={resourceListStyle.resourceTable}>
+      {renderInsertModal()}
       {/* 상단 카테고리 */}
       <div className={resourceListStyle.topCategory}>
-        <div className={resourceListStyle.facilitySearch}>
+        <div className={resourceListStyle.facilitySearchBox}>
           <form>
-          {/* <form action={onSearch()}> */}
-          <select  
-            className={resourceListStyle.selectBox} 
-            onChange={handleFacilitySelectType}>
-              <option value="ex" selected>선택</option>
-              <option value="car">차량</option>
-              <option value="device">모바일 기기</option>
-              <option value="space">공간</option>
-          </select>
-            {facilitySelectType === "car" && (
-              <select className={resourceListStyle.selectBox}
-              onChange={handleFacilityType}
-              name="queryType"
-              >
-                <option value="ex" selected>선택</option>
-                <option name="queryType" value="carName">차량명</option>
-                <option name="queryType" value="carNumber">차량번호</option>
-              </select>
-            )}
-            {facilitySelectType === "device" && (
-              <select className={resourceListStyle.selectBox}
-              onChange={handleFacilityType}
-              name="queryType"
-              >
-                <option value="ex" selected>선택</option>
-                <option name="queryType" value="dvcName">기기명</option>
-                <option name="queryType" value="dvcSerial">기기번호</option>
-              </select>
-            )}
-            {facilitySelectType === "space" && (
-              <select className={resourceListStyle.selectBox}
-              onChange={handleFacilityType}
-              name="queryType"
-              >
-                <option value="ex" selected>선택</option>
-                <option name="queryType" value="spcName">공간명</option>
-              </select>
-            )}
-            {/* {selectType === "all" && (
-              <select className={resourceListStyle.selectBox}>
-                <option>전체검색</option>
-              </select>
-            )} */}
-            {/* {selectType === "ex" && show === true (
-              alert("검색하고 싶은 자원을 선택 후 조회를 눌러주세요.")
-            )} */}
+            {renderColumnNameSelect()}
             <input 
-            type="search"
-            placeholder="선택 자원 조회" 
-            className="searchString"
-            onChange={handleSearchString} />
-            {/* <input type="submit" value="조회"></input> */}
-            <input type="submit" value="조회" onClick={onSearch} ></input>
+              type="search"
+              placeholder="검색어를 입력하세요." 
+              className={resourceListStyle.facilitySearch}
+              name="searchString"
+              onChange={onChangeSearchObj} />
+            <input type="submit" className={resourceListStyle.searchBtn} value="검색" onClick={(e)=>getList(e,currData.category,"search")} />
           </form>
         </div>
         <div className={resourceListStyle.selectFacility}>
-          <input type="button" onClick={openModal} value="자원추가"></input>
-            {
-              showModal ?
-              <FacilityModal showModal={showModal} setShowModal={setShowModal} />
-              : <></>
-            }
-            <input type="button" value="전체 조회" onClick={handleShow} />
+          <input type="button" className={resourceListStyle.addBtn}  onClick={openInsertModal} value="자원 추가" />
         </div>
       </div>
-
       {/* 자원 카테고리 */}
       <div className={resourceListStyle.resourceCategory}>
         <div className={resourceListStyle.categoryList}>
-        <label className={resourceListStyle.category} onClick={onClickCarResource}>
-          차량자원
-        </label>
+          <label className={currData.category == "car" ? resourceListStyle.categoryClicked : resourceListStyle.category} onClick={(e)=>getList(e,"car")}>
+            차량자원
+          </label>
           <div className={resourceListStyle.carlis} />
         </div>
         <div className={resourceListStyle.categoryList}>
-          <label className={resourceListStyle.category} onClick={onClickDeviceResource}>
+          <label className={currData.category == "device" ? resourceListStyle.categoryClicked : resourceListStyle.category} onClick={(e)=>getList(e,"device")}>
             모바일기기 자원
           </label>
-            <div className={resourceListStyle.deviceList}>
-            </div>
+            <div className={resourceListStyle.deviceList} />
         </div>
         <div className={resourceListStyle.categoryList}>
-          <label className={resourceListStyle.category} onClick={onClickSpaceResource}>
+          <label className={currData.category == "space" ? resourceListStyle.categoryClicked : resourceListStyle.category} onClick={(e)=>getList(e,"space")}>
             공간자원
           </label>
-            <div className={resourceListStyle.SpaceList}>
-            </div>
+          <div className={resourceListStyle.SpaceList} />
         </div>
       </div>
       {/* 자원 정보 */}
-      <div className={resourceListStyle.categoeryInfomation}>
-        {carResourceListClick && (
-          <tr className={resourceListStyle.resourceList}>
-            <td>
-              <CarSelectAll />
-            </td>
-          </tr>
-        )}
-        {deviceResourceListClick && (
-          <tr className={resourceListStyle.resourceList}>
-            <td>
-              <DeviceSelectAll />
-            </td>
-          </tr>
-        )}
-        {spaceResourceListClick && (
-          <tr className={resourceListStyle.resourceList}>
-            <td>
-              <SpaceSelectAll />
-            </td>
-          </tr>
-        )}
-        {show && (
-          <tr className={resourceListStyle.resourceList}>
-            <td>
-              <CarSelectAll />
-              <DeviceSelectAll />
-              <SpaceSelectAll />
-            </td>
-          </tr>
-        )}
-      </div>
+      {
+        isLoadFromServer ?
+          (
+            <div className={resourceListStyle.categoeryInfomation}>
+            <div className={resourceListStyle.resourceList}>
+              <div>
+                {
+                  currData?.dataList?.length ?
+                    <FacilityTable category={currData.category} dataList={currData.dataList}/>
+                  :
+                  <span>검색 결과가 없습니다.</span>
+                }
+              </div>
+            </div>
+          </div>
+          ) : <Loading/>
+      }
+
     </div>
   );
 }

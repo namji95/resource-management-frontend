@@ -15,7 +15,6 @@ function DeviceModifyModal(props) {
     const [image, setImage] = useState(null);
 
     useEffect(() => {
-        console.log(props.selectDevice);
         if (props.selectDevice) {
             setDeviceObj(props.selectDevice);
         }
@@ -23,7 +22,6 @@ function DeviceModifyModal(props) {
 
     const closeModifyModal = () => {
         props.setUpdateModal(false);
-        props.setSelectDevice(null);
     }
 
     let data;
@@ -107,8 +105,7 @@ function DeviceModifyModal(props) {
             alert("삭제 실패", error);
         });
     }
-    const printDeviceUpdateForm = (seq) => {
-        onChangeDevice1(seq);
+    const printDeviceUpdateForm = () => {
         return (
             <>
                 <div className={deviceModifyStyle.names}>

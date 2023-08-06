@@ -17,11 +17,10 @@ function CarModifyModal(props) {
         if (props.selectCar) {
             setCarObj(props.selectCar);
         }
-    }, [props.selectCar]);
+    }, []);
 
     const closeModifyModal = () => {
         props.setUpdateModal(false);
-        props.setSelectCar(null);
     }
 
     let data;

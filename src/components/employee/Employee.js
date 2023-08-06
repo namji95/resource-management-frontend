@@ -237,11 +237,12 @@ const Employee = () => {
                  <table class="table table-hover">
                          <thead class="table-light">
                              <tr>
-                                 <th scope="col"><input type='checkbox'></input></th>
+                                 {/* <th scope="col"><input type='checkbox'></input></th> */}
                                  <th scope="col">일련번호</th>
                                  <th scope="col">사원명</th>
                                  <th scope="col">직책</th>
                                  <th scope="col">인증레벨</th>
+                                 <th scope="col">초대하기</th>
                                  <th scope="col">수정</th>
                                  <th scope="col">삭제</th>
                              </tr>

@@ -39,7 +39,7 @@ const adminData = [
     cName : 'navText'
   },
   {
-    title : '구성원 관리',
+    title : '사원 관리',
     path : '/employee',
     icon : <AiIcons.AiOutlineTeam/>,
     cName : 'navText'

@@ -35,7 +35,7 @@ const Td = ({item, handleRemove, handleEdit}) => {
     return (
         <>
             <tr >
-                <th scope="row"><input type='checkbox'></input></th>
+                {/* <th scope="row"><input type='checkbox'></input></th> */}
                 <td>{item.copSeq}</td>
                 <td>{item.copRegNum}</td>
                 <td>{item.copName}</td>

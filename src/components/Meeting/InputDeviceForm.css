@@ -22,4 +22,6 @@
     /* 원하는 크기를 지정 (예: 200px) */
     width: 200px;
   }
-  
+.endText{
+  width: 200px;
+}

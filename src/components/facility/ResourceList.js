@@ -12,7 +12,7 @@ import Loading from "../common/Loading";
 function ResourceList(props) {
 
   // 상태 (state) 변수들
-  const [show, setShow] = useState(false);
+  // const [show, setShow] = useState(false);
 
 // ==============================================
 // [검색 select, input 핸들링]
@@ -30,15 +30,19 @@ function ResourceList(props) {
   
   const onChangeSearchObj = (e) => {
     let newName = e.target.name;
+    console.log("e.target.name : ", e.target.name);
     let newValue = e.target.value;
+    console.log("e.target.value : ", e.target.value);
     const newSearchObj = {
       ...searchObj,
       [newName] : newValue
     }
     setSearchObj(newSearchObj);
-    console.log(e.target.name);
-    console.log(e.target.value);
+    console.log("newName : ",e.target.name);
+    console.log("newValue :",e.target.value);
     console.log(newSearchObj);
+    console.log(searchObj);
+    console.log("columnName : ", searchObj.columnName);
   }
 
 // ==============================================
@@ -63,7 +67,7 @@ function ResourceList(props) {
     let sendUrl = "";
     let result;
 
-    if(searchType=="get" || !searchObj.searchString ){
+    if(searchType === "get" || !searchObj.searchString) {
       sendUrl = `${defaultUrl}${category}`
     }else{
       sendUrl = `${defaultUrl}${currData.category}/search?columnName=${searchObj.columnName}&searchString=${searchObj.searchString}`
@@ -74,6 +78,7 @@ function ResourceList(props) {
     .then((response) => {
       console.log("서버에서 가져온 데이터 >>",response.data);
       result = response?.data?.data?.list;
+      console.log("result : ", result);
     })
     .catch((error) => {
       result = [error];
@@ -87,7 +92,6 @@ function ResourceList(props) {
       setCurrData(newCurrData);
       setIsLoadFromServer(true);
     });
-
   }
 
 // ==============================================
@@ -134,6 +138,7 @@ function ResourceList(props) {
           currOptions = (
           <>
             <option name="columnName" value="spcName">공간명</option>
+            <option name="columnName" value="spcCap">수용인원</option>
           </>
           );
           break;
@@ -146,18 +151,15 @@ function ResourceList(props) {
           );
           break;
       }
-
       return (
         <select className={resourceListStyle.selectBox}
-        onChange={onChangeSearchObj}
         name="columnName"
+        onClick={onChangeSearchObj}
         >
           {currOptions}
         </select>
       )
   }
-
-
 
 // ==============================================
 // [최초 데이터 가져오기]
@@ -194,19 +196,19 @@ useEffect(()=>{
       {/* 자원 카테고리 */}
       <div className={resourceListStyle.resourceCategory}>
         <div className={resourceListStyle.categoryList}>
-          <label className={currData.category == "car" ? resourceListStyle.categoryClicked : resourceListStyle.category} onClick={(e)=>getList(e,"car")}>
+          <label className={currData.category === "car" ? resourceListStyle.categoryClicked : resourceListStyle.category} onClick={(e)=>getList(e,"car")}>
             차량자원
           </label>
           <div className={resourceListStyle.carlis} />
         </div>
         <div className={resourceListStyle.categoryList}>
-          <label className={currData.category == "device" ? resourceListStyle.categoryClicked : resourceListStyle.category} onClick={(e)=>getList(e,"device")}>
+          <label className={currData.category === "device" ? resourceListStyle.categoryClicked : resourceListStyle.category} onClick={(e)=>getList(e,"device")}>
             모바일기기 자원
           </label>
             <div className={resourceListStyle.deviceList} />
         </div>
         <div className={resourceListStyle.categoryList}>
-          <label className={currData.category == "space" ? resourceListStyle.categoryClicked : resourceListStyle.category} onClick={(e)=>getList(e,"space")}>
+          <label className={currData.category === "space" ? resourceListStyle.categoryClicked : resourceListStyle.category} onClick={(e)=>getList(e,"space")}>
             공간자원
           </label>
           <div className={resourceListStyle.SpaceList} />
@@ -230,7 +232,6 @@ useEffect(()=>{
           </div>
           ) : <Loading/>
       }
-
     </div>
   );
 }

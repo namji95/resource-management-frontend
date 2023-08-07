@@ -169,7 +169,7 @@ function DeviceModifyModal(props) {
                             />
         const resetBtn = <input 
                             type="reset"
-                            value="초기화"
+                            value="삭제"
                             className={deviceModifyStyle.cancel}
                             onClick={DeviceDeleteModal}/>
         return (

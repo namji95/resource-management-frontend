@@ -149,7 +149,7 @@ function SpaceModifyModal(props) {
                             />
         const resetBtn = <input 
                             type="reset"
-                            value="초기화"
+                            value="삭제"
                             className={SpaceModifyStyle.cancel}
                             onClick={spaceDeleteModal}/>
         return (

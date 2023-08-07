@@ -17,6 +17,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ko from 'date-fns/locale/ko';
 import { Today } from '@mui/icons-material';
+import ResourceList from '../facility/ResourceList';
 
 function InputDeviceForm() {
   const [rsvTitle,setTitle] = useState('');
@@ -29,7 +30,7 @@ function InputDeviceForm() {
   const handleEndChange = (date) => {
     setRsvEnd(date);
   };
- const [testValue,setTestValue] = useState(3);
+ const [testValue,setTestValue] = useState(9);
 
   
   const availableTimes = [
@@ -41,28 +42,14 @@ function InputDeviceForm() {
 
   const testSubmit = (e) =>{
     e.preventDefalut();
-    console.log(rsvStart);
-    console.log(rsvEnd);
-    // if (rsvStart && rsvEnd) {
-     
-    //   const data = {
-    //      rsvStart: rsvStart,
-    //     rsvEnd: rsvEnd,
-    //  };
-      // axios.post("http://localhost:8080/api/reservation", data)
-      // .then((response) => {
-      //   console.log("서버 응답:", response.data);
-      // })
-      // .catch((error) => {
-      //   console.error("에러 발생:", error);
-      // });
-      // } else {
-      //  console.log("날짜와 시간을 선택하세요.");
-      // }
-    // }
   }
   const today = new Date();
   today.setHours(0, 0, 0, 0); 
+
+  useEffect(() => {
+    console.log('Start date:', rsvStart);
+    console.log('End date:', rsvEnd);
+  }, [rsvStart, rsvEnd]);
 
 
   return (
@@ -137,7 +124,7 @@ function InputDeviceForm() {
         <Col sm="10">
           <Row>
             <Col sm="10"> 
-              <MeetingResourceList></MeetingResourceList>
+            <MeetingResourceList></MeetingResourceList>
             </Col>
           </Row>
         </Col>

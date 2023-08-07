@@ -108,7 +108,6 @@ function CarModifyModal(props) {
                     <input
                     type='text'
                     className={carUpdateStyle.name}
-                    placeholder={data.carName}
                     name="carName"
                     value={data.carName}
                     onChange={onChangeCar}></input>

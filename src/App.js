@@ -144,7 +144,7 @@ function App() {
                   accessCopComponent ? <CreateCop /> : <Navigate to = "/" replace />
                 }>
                 </Route>
-                <Route path='/*' element={<Login/>} />
+                <Route path='/*' element={<Navigate to = "/" replace />} />
             </Routes>
             </div>
           </div>

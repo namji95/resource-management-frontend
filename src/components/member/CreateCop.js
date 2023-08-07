@@ -101,6 +101,9 @@ function CreateCop() {
                             }
                         });
 
+                        console.log('==========');
+                        console.log(empResult);
+                        console.log('==========');
 
                         const userUpdate = await axios.put(`http://localhost:8080/api/user/update`, {
                             copSeq : copResult.data.key,

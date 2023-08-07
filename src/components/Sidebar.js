@@ -92,19 +92,6 @@ function Sidebar() {
           })}
           </div>
 
-          <div className={itemStyles.sideItem}>
-            {barData.map((item,index)=>{
-              return (
-                <li key = {index} className={`${styles.item} ${styles[item.cName]}`}>
-                  <Link to = {item.path}>
-                    {item.icon} &nbsp;&nbsp;
-                    <span style={{color : '#306AA3'}}>{item.title}</span>
-                  </Link>
-                </li>
-              )
-            })}
-          </div>
-
           {authenticated() ? 
 
           <div className={itemStyles.sideItem}>

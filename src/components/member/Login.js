@@ -1,14 +1,15 @@
 import React, { useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-// import LoginFail from './LoginFail';
-import styles from "../../css/Login.module.css";
+import styles from "./css/Login.module.css";
 
 // redux-toolkit
 import { useDispatch } from "react-redux";
+import { useSelector } from 'react-redux';
 import { saveToken, saveInfo } from "../store/CounterSlice";
 
 function Login() {
+
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [checkFail, setCheckFail] = useState("");
@@ -19,47 +20,66 @@ function Login() {
   const loginInputRef = useRef(null); // 로그인 input 클릭시 사용할 Ref
   const passwordInputRef = useRef(null); // 패스워드 input 클릭시 사용할 Ref
 
+  const user = useSelector((state) => state.info.info);
+  const token = useSelector((state) => state.info.token);
+  const navigate = useNavigate();
+
   // result data
   let data = {};
 
   // 로그인 function
   const handleLogin = async () => {
-    // axios.post('https://deeb-112-221-198-150.ngrok-free.app/member', {
-    await axios
-      .post("http://localhost:8080/api/user/login", {
-        userId: id,
-        userPwd: password,
-      })
-      .then((result) => {
-        data = result.data;
 
-        if (data.status === "OK") {
-          localStorage.setItem("accessToken", data.data.tokenDTO.authorization);
-          if (localStorage.getItem("accessToken").includes("Bearer")) {
-            localStorage.setItem("userInfo", JSON.stringify(data.data.userDTO));
-            dispatch(saveToken(localStorage.getItem("accessToken"))); // redux-toolkit에 토큰 저장
-            dispatch(saveInfo({
-              copSeq : data.data.userDTO.copSeq,
-              copName : data.data.userDTO.copName,
-              userSeq : data.data.userDTO.userSeq,
-              userId : data.data.userDTO.userId,
-              userName : data.data.userDTO.userName,
-              userEmail : data.data.userDTO.userEmail,
-              userImage : data.data.userDTO.userImage,
-              empPosition : data.data.userDTO.empPosition,
-              empImage : data.data.userDTO.empImage,
-              authLevel : data.data.userDTO.authLevel,
-            }))
+      await axios
+        .post("http://localhost:8080/api/user/login", {
+          userId: id,
+          userPwd: password,
+        })
+        .then((result) => {
+
+          data = result.data;
+
+          if (data.status === "OK") { // HttpStatus.OK
+
+            localStorage.setItem("accessToken", data.data.tokenDTO.authorization); // localStorage 토큰 저장
+
+            if (localStorage.getItem("accessToken").includes("Bearer")) {
+              localStorage.setItem("userInfo", JSON.stringify(data.data.userDTO));
+
+              dispatch(saveToken(localStorage.getItem("accessToken"))); // redux-toolkit에 토큰 저장 (렌더링)
+
+              dispatch(saveInfo({ // (렌더링)
+                copSeq : data.data.userDTO.copSeq,
+                copName : data.data.userDTO.copName,
+                userSeq : data.data.userDTO.userSeq,
+                userId : data.data.userDTO.userId,
+                userName : data.data.userDTO.userName,
+                userEmail : data.data.userDTO.userEmail,
+                userState : data.data.userDTO.userState,
+                userImage : data.data.userDTO.userImage,
+                empPosition : data.data.userDTO.empPosition,
+                empImage : data.data.userDTO.empImage,
+                authLevel : data.data.userDTO.authLevel,
+              }))
+            }
+
+            navigate("/create/cop");
           }
-        }
-        else {
-          setCheckFail("아이디나 비밀번호를 다시 확인해주세요.");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        setCheckFail("서버오류! 관리자에게 문의해주세요.");
-      });
+
+          
+
+          else {
+            setCheckFail("아이디나 비밀번호를 다시 확인해주세요.");
+          }
+
+        })
+        .catch((error) => {
+          if (error.code === 'ERR_BAD_REQUEST') {
+            setCheckFail("아이디와 비밀번호는 공란일 수 없습니다.")
+          } else {
+            setCheckFail("서버오류! 관리자에게 문의해주세요.");
+          }
+        });
   };
 
   // input tag focus 시 border 색상 변경 및 checkFail 초기화

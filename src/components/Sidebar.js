@@ -14,7 +14,7 @@ import moment from 'moment/moment';
 import './sidebarDate.css';
 import CalendarSide from './CalendarSide';
 
-
+import { useSelector } from 'react-redux';
 
 const barData = [
   {
@@ -58,10 +58,18 @@ const adminData = [
   },
 ]
 
-
 function Sidebar() {
 
+  const user = useSelector((state) => state.info.info);
 
+  const authenticated = () => {
+  
+    const authLevel = user.authLevel === 'MANAGER' || user.authLevel === 'MASTER';
+    
+    return authLevel;
+  }
+
+  const [Datevalue, setValue] = useState();  
 
   return (
     <>
@@ -69,10 +77,8 @@ function Sidebar() {
         <ul className ={styles.navMenuItems} >
           <Link to = "/meeting" >
             <button className = {`${styles.reserveButton}`} style={{margin : '30px', marginRight : '60px', marginTop : '10px', color : 'white'}}>+ 예약하기</button>
-          
           </Link>
       
-          
           <div className={itemStyles.sideItem}>
           {barData.map((item,index)=>{
             return (
@@ -85,8 +91,9 @@ function Sidebar() {
             )
           })}
           </div>
-          <br/>
-          관리자 메뉴
+
+          {authenticated() ? 
+
           <div className={itemStyles.sideItem}>
           {adminData.map((item,index)=>{
             return (
@@ -99,6 +106,11 @@ function Sidebar() {
             )
           })}
           </div>
+
+          :
+
+          <></>
+          }
 
         </ul>
       </nav>

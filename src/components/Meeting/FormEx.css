@@ -26,17 +26,17 @@
     
   }
   
-  label {
-    display: block; /* 블록 레벨 요소로 표시되어 옆에 다른 요소가 오지 않도록 설정 */
-    margin-bottom: 5px; /* 하단 여백 */
+  /* label {
+    display: block;
+    margin-bottom: 5px;
     
   }
   
   input[type="text"],
   textarea {
-    width: 100%; /* 폼 요소의 너비를 100%로 설정하여 부모 요소에 맞게 확장 */
-    padding: 5px; /* 내부 여백 */
-  }
+    width: 100%;
+    padding: 5px; 
+  } */
   
   /* button {
     padding: 10px 20px; 내부 여백
@@ -47,7 +47,7 @@
     cursor: pointer; 
   } */
   
-  button:hover {
-    background-color: rgb(255, 255, 255); /* 마우스 호버 시 배경 색상 변경 */
+  /* button:hover {
+    background-color: rgb(255, 255, 255);
     color: #1a83ff;
-  }
+  } */

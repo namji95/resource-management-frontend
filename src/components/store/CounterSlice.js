@@ -11,6 +11,7 @@ const initialState = {
         userName : '',
         userEmail : '',
         userImage : '',
+        userState : '',
         empPosition : '',
         empImage : '',
         authLevel : '',
@@ -37,12 +38,18 @@ const infoSlice = createSlice({
                     userId : action.payload.userId,
                     userName : action.payload.userName,
                     userEmail : action.payload.userEmail,
+                    userState : action.payload.userState,
                     userImage : action.payload.userImage,
                     empPosition : action.payload.empPosition,
                     empImage : action.payload.empImage,
                     authLevel : action.payload.authLevel,
                 }
-            }, 
+            },
+            
+            // localStorage 가 제거되었을 때 redux 초기화를 위한 reducer
+            clearToken : (state = initialState, action) => {
+                return initialState;
+            }
         }
     }
 );

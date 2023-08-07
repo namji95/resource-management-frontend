@@ -94,11 +94,15 @@
     height: 48px;
     border: none;
     font-weight: 700;
-    background-color: #558ef2;
+    background-color: #007bff;
     border-radius: 64px;
     color: white;
     margin-bottom: 30px;
     cursor: pointer;
+}
+
+.bottomButton:hover {
+    background-color: #558ef2;
 }
 
 .bottomButton:disabled {
@@ -109,3 +113,19 @@
 .imgContainer {
     text-align: center;
 }
+
+.address {
+    margin : 0px;
+    padding : 5px;
+    float : left;
+    font-size: 12px;
+    background-color: #007bff;
+    color : white;
+    border-color: #007bff;
+    border-radius: 1%;
+}
+
+.address:hover {
+    background-color: #1C90FB;
+}
+

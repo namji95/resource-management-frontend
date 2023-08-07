@@ -17,11 +17,10 @@ function SpaceModifyModal(props) {
         if (props.selectSpace) {
             setSpaceObj(props.selectSpace);
         }
-    }, [props.selectDevice]);
+    }, []);
 
     const closeModifyModal = () => {
         props.setUpdateModal(false);
-        props.setSelectSpace(null);
     }
 
     let data;
@@ -49,10 +48,6 @@ function SpaceModifyModal(props) {
         setImage(e.target.files[0]);
     }
 
-    const onReset = () => {
-        setSpaceObj(data);
-    }
-
     const SpaceUpdateModal = (event) => {
         event.preventDefault();
 
@@ -75,6 +70,30 @@ function SpaceModifyModal(props) {
         .catch(error => {
             alert("변경 실패",error)
         });
+    }
+
+    const spaceDeleteModal = (event) => {
+        event.preventDefault();
+
+        const formData = new FormData();
+
+        const config = {
+            headers: { 'content-Type' : 'multipart/form-data' }
+        }
+
+        formData.append("image", image);
+        formData.append("data", new Blob([JSON.stringify(data)],{
+            type: "application/json"
+        }));
+
+        axios.post(`http://localhost:8080/api/space/del/${props.selectSpace.spcSeq}`, formData, config)
+        .then(response => {
+            console.log(response.data);
+            alert("삭제 완료")
+        })
+        .catch(error => {
+            alert("삭제 실패", error);
+        })
     }
     const printSpaceUpdateForm = () => {
         return (
@@ -132,7 +151,7 @@ function SpaceModifyModal(props) {
                             type="reset"
                             value="초기화"
                             className={SpaceModifyStyle.cancel}
-                            onClick={onReset}/>
+                            onClick={spaceDeleteModal}/>
         return (
             <div className={SpaceModifyStyle.sNcBtn}>
                 {resetBtn}

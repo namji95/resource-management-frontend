@@ -2,7 +2,7 @@ import { useState,useEffect } from "react";
 import axios from "axios";
 import {Table} from "react-bootstrap";
 import DeviceSelectAllStyle from "./css/DeviceSelectAll.module.css";
-import DeviceModifyModal from "./DeviceModifyModal";
+import DeviceModifyModal from "../DeviceModifyModal";
 
 function DeviceSelectAll(props) {
 
@@ -28,7 +28,7 @@ function DeviceSelectAll(props) {
           .get("http://localhost:8080/api/device")
           .then((response) => {
             console.log(response.data);
-            setDeviceObj(response.data.dvcList);
+            setDeviceObj(response.data.list);
           })
           .catch((error) => {
             console.error("기기 정보를 가져오는데 실패했습니다.", error);

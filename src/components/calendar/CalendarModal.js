@@ -109,12 +109,10 @@ function CalendarModal ({ showModal, handleCloseModal, calendarTimeStart, calend
         start: calendarStartChanged, // 데이터가 잘 전달되는지 확인하기 위해 잠시 넣어둔 initalStartTime
         end: calendarEndChanged, // 데이터가 잘 전달되는지 확인하기 위해 잠시 넣어둔 initalEndTime
       };
-
+      eventUpdate(event);
+      handleCloseModal();
+      setDateClickCheck(false);
       
-
-      // eventUpdate(event);
-      // handleCloseModal();
-      // setDateClickCheck(false);
     } else {
       const event = {
         title: title,

@@ -21,8 +21,13 @@ import ResourceList from '../facility/ResourceList';
 
 function InputDeviceForm() {
   const [rsvTitle,setTitle] = useState('');
-  const [rsvStart, setRsvStart] = useState(null);
-  const [rsvEnd, setRsvEnd] = useState(null);
+  const now = new Date();
+  const onestartHourLater = new Date(now.getTime() + 60 * 60 * 1000);
+  const oneEndHourLater = new Date(onestartHourLater.getTime() + 60 * 60 * 1000);
+ 
+  const [rsvStart, setRsvStart] = useState(onestartHourLater);
+  const [rsvEnd, setRsvEnd] = useState(oneEndHourLater);
+
 
   const handleStartChange = (date) => {
     setRsvStart(date);
@@ -32,17 +37,27 @@ function InputDeviceForm() {
   };
  const [testValue,setTestValue] = useState(9);
 
-  
-  const availableTimes = [
-    new Date().setHours(testValue, 0), // 09:00 AM
-    new Date().setHours(12, 0), // 12:00 PM
-    new Date().setHours(15, 0), // 03:00 PM
-    new Date().setHours(18, 0), // 06:00 PM
-  ];
+
+ const filterPassedTime = (time) => {
+  const currentDate = new Date();
+  const selectedDate = new Date(time);
+
+  return currentDate.getTime() < selectedDate.getTime();
+};
+  const filterPassedEndTime = (time) => {
+    const currentDate = new Date(rsvStart);
+    const selectedDate = new Date(time);
+
+    return currentDate.getTime() < selectedDate.getTime();
+  }  
+
 
   const testSubmit = (e) =>{
-    e.preventDefalut();
+    e.preventDefault();
+    console.log(rsvStart);
+    console.log(rsvEnd);
   }
+
   const today = new Date();
   today.setHours(0, 0, 0, 0); 
 
@@ -75,10 +90,11 @@ function InputDeviceForm() {
       showTimeSelect
       timeFormat="HH:mm"
       timeIntervals={60}
-      dateFormat="yyyy-MM-dd aa h:mm"
+      dateFormat="yyyy-MM-dd aa h :00"
       locale={ko}
       minDate={today}
-      includeTimes={availableTimes} // 사용 가능한 시간 목록을 전달
+      filterTime={filterPassedTime}
+      // includeTimes={availableTimes} // 사용 가능한 시간 목록을 전달
     />
     
      <div className='endText'> 종료 시간 : </div>
@@ -88,9 +104,10 @@ function InputDeviceForm() {
       showTimeSelect
       timeFormat="HH:mm"
       timeIntervals={60}
-      dateFormat="yyyy-MM-dd aa h:mm"
+      dateFormat="yyyy-MM-dd aa h:00"
       locale={ko}
       minDate={today}
+      filterTime={filterPassedEndTime}
       // includeTimes={availableTimes}
     ></DatePicker>
      </InputGroup>

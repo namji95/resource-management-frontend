@@ -1,0 +1,202 @@
+/* 공통 CSS */
+
+.background_block{
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    z-index: 998;
+}
+
+.back{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0.5;
+    background-color: black;
+}
+    
+    /* position: absolute;: 해당 요소의 위치를 부모 요소를 기준으로 절대적으로 지정합니다. */
+    /* top: 50%;: 요소의 상단을 부모 요소의 상단으로부터 50%의 위치에 배치합니다. */
+    /* left: 50%;: 요소의 왼쪽을 부모 요소의 왼쪽으로부터 50%의 위치에 배치합니다. */
+    /* transform: translate(-50%, -50%);: 해당 요소를 현재 위치로부터 좌측으로 50%, */
+                                       /* 상단으로부터 50%만큼 이동시킵니다. */
+                                       /* 이렇게 함으로써 요소의 중심이 정확히 부모 요소의 중심에 위치하게 됩니다. */
+    /* z-index: 999;: 요소의 쌓임 순서를 결정하는 값입니다. 값이 높을수록 다른 요소보다 위에 쌓이게 됩니다. */
+    /* width: 100vw;: 요소의 너비를 뷰포트(Viewport)의 100%로 설정합니다. 즉, 화면 전체 너비와 같게 됩니다. */
+    /* height: 100vh;: 요소의 높이를 뷰포트의 100%로 설정합니다. 즉, 화면 전체 높이와 같게 됩니다. */
+    /* opacity: 0.5;: 요소의 불투명도를 0.5로 설정합니다. 0이면 완전 투명, 1이면 완전 불투명입니다. */
+    /* background-color: black;: 요소의 배경색을 검정색으로 설정합니다. */
+    
+
+.update_page{
+    position: absolute;
+    height: 50%;
+    width: 30%;
+    min-width: 400px;
+    min-height: 530px;
+    padding: 20px;
+
+    top: 20px;
+    left: 50%;
+    transform: translate(-50%, 0);
+
+    border-radius: 8px;
+
+    z-index: 1000;
+    background-color:#EAEAEA;
+
+}
+
+.essential{
+    display: flex;
+    font-size: 13px;
+    margin-top: 10px;
+    color: blue;
+    height: 20px;
+}
+
+.cancelButton{
+    width: 22px;
+    height: 22px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0%;
+    padding: 5px;
+    background-color: #EAEAEA;
+    color: black;
+    text-align: center;
+    margin-left: px;
+}
+
+.categorys{
+    display: flex;
+    margin-top: 15px;
+    font-size: 12px;
+}
+
+.category{
+    width: 100px;
+    height: 20px;
+    margin-left: 70px;
+}
+
+.firstLine{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.companys{
+    display: flex;
+    margin-top: 20px;
+    font-size: 12px;
+}
+
+.company{
+    text-align: center;
+    height: 20x;
+    width: 80px;
+    margin-left: 70px;
+}
+
+.secondLine{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.sNcBtn{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 7%;
+}
+
+.cancel{
+    height: 25px;
+    width: 65px;
+}
+
+.update{
+    margin-left: 10px;
+    height: 25px;
+    width: 65px;
+}
+
+/* Category 각각 CSS */
+
+.names{
+    display: flex;
+    color: blue;
+    margin-top: 15px;
+    font-size: 10px;
+}
+
+.name{
+    height: 20px;
+    width: 100%;
+    max-width: 150px;
+    margin-left: 55px;
+}
+
+.Serials{
+    display: flex;
+    color: blue;
+    margin-top: 15px;
+    font-size: 10px;
+}
+
+.Serial{
+    height: 20px;
+    width: 100%;
+    max-width: 150px;
+    margin-left: 65px;
+}
+
+.years{
+    display: flex;
+    color: blue;
+    margin-top: 15px;
+    font-size: 10px;
+}
+
+.year{
+    height: 20px;
+    width: 100%;
+    max-width: 150px;
+    margin-left: 65px;
+}
+
+.explanations{
+    display: flex;
+    margin-top: 15px;
+    font-size: 12px;
+}
+
+.explanation{
+    height: 100px;
+    width: 100%;
+    max-width: 200px;
+    margin-left: 95px;
+    margin-right: 5px;
+}
+
+.images{
+    display: flex;
+    margin-top: 15px;
+    font-size: 10px;
+}
+
+.image{
+    height: 20px;
+    width: 200px;
+    margin-left: 90px;
+}

@@ -1,0 +1,35 @@
+.resourceTable{
+    width: 100%;
+    /* min-width: 1060px; */
+    
+    padding: 15px;
+    border: 0px;
+}
+
+.information{
+    font-size: 15px;
+    border: 30px solid #f7f7f7;
+    vertical-align: middle;
+    text-align: center;
+    border-radius: 50px;
+}
+/*  */
+
+.resourceTableHeader th{
+    border-top: 17px solid #f7f7ff;
+    vertical-align: middle;
+    text-align: center;
+    background-color:rgb(139 138 138 / 0%); 
+}
+
+.resourceTableBody{
+    vertical-align: middle;
+    text-align: center;
+    border : 1px solid gainsboro;
+}
+
+.imgBox{
+    width: 150px;
+    height: 120px;
+    border-radius: 8px;
+}

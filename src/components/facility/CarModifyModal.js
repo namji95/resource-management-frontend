@@ -66,8 +66,10 @@ function CarModifyModal(props) {
 
         axios.post(`http://localhost:8080/api/car/${props.selectCar.carSeq}`, formData, config)
         .then(response => {
-            console.log(response.data);
             alert("변경 완료");
+            closeModifyModal();
+
+            props.setModifiedObj( response?.data?.data);
         })
         .catch(error => {
             alert("변경 실패",error)

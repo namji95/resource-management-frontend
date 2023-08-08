@@ -91,6 +91,24 @@ function ResourceList(props) {
       console.log("newCurrData : ",newCurrData);
       setCurrData(newCurrData);
       setIsLoadFromServer(true);
+      let defaultSelectValue = "carName";
+      switch(category){
+        case "car" :
+          defaultSelectValue = "carName";
+          break;
+        case "space" :
+          defaultSelectValue = "spcName";
+          break;
+        case "device" :
+          defaultSelectValue = "dvcName";
+          break;
+      }
+      const newSearchObj = {
+        ...searchObj,
+        "columnName" : defaultSelectValue
+      }
+      console.log(">>",newSearchObj );
+      setSearchObj(newSearchObj);
     });
   }
 
@@ -116,7 +134,7 @@ function ResourceList(props) {
   const renderColumnNameSelect = () => {
 
       let currOptions;
-
+  
       switch(currData.category){
         case "car" :
           currOptions = (
@@ -154,7 +172,7 @@ function ResourceList(props) {
       return (
         <select className={resourceListStyle.selectBox}
         name="columnName"
-        onClick={onChangeSearchObj}
+        onChange={onChangeSearchObj}
         >
           {currOptions}
         </select>

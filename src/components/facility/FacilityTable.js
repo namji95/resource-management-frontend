@@ -8,15 +8,43 @@ import DeviceModifyModal from "./DeviceModifyModal";
 
 function FacilityTable({category="car",dataList=[]}) {
 
+  const [currDataList, setCurrDataList] = useState([]);
+
+  useEffect(()=>{
+    setCurrDataList(dataList);
+  },[dataList]);
+
   const [updateModal, setUpdateModal] = useState(false);
-  const [selectCar, setSelectCar] = useState(null);
 
   const openModal = () => {
     setUpdateModal(updateModal => !updateModal);
   }
 
-  const handleInfoClick = (car) => {
-    setSelectCar(car);
+  const [modifiedObj , setModifiedObj] = useState(null);
+
+ useEffect(()=>{
+    if(modifiedObj){
+      console.log("수정객체 >", modifiedObj)
+      const changedSeq = modifiedObj?.carSeq;
+      if(changedSeq && currDataList?.length){
+        const newDataList = [];
+        currDataList.map((item, idx)=>{
+          if(item.carSeq == changedSeq){
+            newDataList.push(modifiedObj)
+          }else{
+            newDataList.push(item)
+          }
+        })
+        console.log("새배열",newDataList)
+        setCurrDataList(newDataList);
+      }
+    }
+ },[modifiedObj])
+
+  const [selectedItem, setSelectedItem] = useState(null); 
+
+  const openModifyModal = (item) => {
+    setSelectedItem(item);
     setUpdateModal(true); // 모달창 열기
   }
 
@@ -105,10 +133,10 @@ const renderTableRow = () => {
 
   const tableRow = [];
 
-  dataList.map((item, index) => {
+  currDataList.map((item, index) => {
     if(!item) return;
     tableRow.push(
-      <tr key={index} className={FacilityTableStyle.information} onClick={() => handleInfoClick(item)}>
+      <tr key={index} className={FacilityTableStyle.information} onClick={() => openModifyModal(item)}>
         {renderTableData(item)}
       </tr>
     )
@@ -134,7 +162,7 @@ const renderModifyModal = () => {
           // 모달창 열림 상태일 때 CarModifyModal 컴포넌트 렌더링
           updateModal={updateModal}
           setUpdateModal={setUpdateModal}
-          selectDevice={category}
+          selectDevice={selectedItem}
           closeModifyModal={closeModifyModal}
           //setSelectCar 함수를 CarModifyModal 컴포넌트로 전달
           // 선택한 자원 정보를 CarModifyModal 컴포넌트로 전달
@@ -146,7 +174,7 @@ const renderModifyModal = () => {
           // 모달창 열림 상태일 때 CarModifyModal 컴포넌트 렌더링
           updateModal={updateModal}
           setUpdateModal={setUpdateModal}
-          selectSpace={category}
+          selectSpace={selectedItem}
           closeModifyModal={closeModifyModal}
           //setSelectCar 함수를 CarModifyModal 컴포넌트로 전달
           // 선택한 자원 정보를 CarModifyModal 컴포넌트로 전달
@@ -158,8 +186,10 @@ const renderModifyModal = () => {
               // 모달창 열림 상태일 때 CarModifyModal 컴포넌트 렌더링
               updateModal={updateModal}
               setUpdateModal={setUpdateModal}
-              selectSpace={category}
+              selectCar={selectedItem}
               closeModifyModal={closeModifyModal}
+
+              setModifiedObj={setModifiedObj}
               //setSelectCar 함수를 CarModifyModal 컴포넌트로 전달
               // 선택한 자원 정보를 CarModifyModal 컴포넌트로 전달
               />

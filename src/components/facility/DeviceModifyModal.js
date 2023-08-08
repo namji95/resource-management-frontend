@@ -46,14 +46,6 @@ function DeviceModifyModal(props) {
         setDeviceObj(newObj);
     }
 
-    const onChangeDevice1 = (seq) =>{
-        const newObj = {
-            ...deviceObj,
-            dvcSeq : seq
-        }
-        setDeviceObj(newObj);
-    }
-
     const onChangeImageInput = e => {
         setImage(e.target.files[0]);
     }
@@ -74,8 +66,13 @@ function DeviceModifyModal(props) {
 
         axios.post(`http://localhost:8080/api/device/${props.selectDevice.dvcSeq}`, formData, config)
         .then(response => {
-            console.log(response.data);
             alert("변경 완료");
+            closeModifyModal();
+
+            props.setModifiedObj(response?.data?.data);
+            console.log("props > ", props);
+            console.log("response.data.data > ", response.data.data);
+            console.log(`${props.selectDevice.dvcSeq}`)
         })
         .catch(error => {
             alert("변경 실패",error);
@@ -98,8 +95,13 @@ function DeviceModifyModal(props) {
 
         axios.post(`http://localhost:8080/api/device/del/${props.selectDevice.dvcSeq}`, formData, config)
         .then(response => {
-            console.log(response.data);
             alert("삭제 완료");
+            closeModifyModal();
+
+            props.setDeletedObj(response?.data?.data);
+            console.log("props > ", props);
+            console.log("response.data.data > ", response.data.data);
+            console.log(`${props.selectDevice.dvcSeq}`)
         })
         .catch(error => {
             alert("삭제 실패", error);
@@ -185,11 +187,11 @@ function DeviceModifyModal(props) {
             <div className={deviceModifyStyle.back} />
             <div className={deviceModifyStyle.update_page}>
             <button className={deviceModifyStyle.cancelButton} onClick={closeModifyModal}>X</button>
-                <form action={DeviceUpdateModal} method="POST" encType="multipart/form-Data">
+                <form>
                     <div className={deviceModifyStyle.essential}>
                         ● 필수 항목
                     </div>
-                        {printDeviceUpdateForm(props.selectDevice.dvcSeq)}
+                        {printDeviceUpdateForm()}
                         <hr className={deviceModifyStyle.firstLine}/>
                         <div className={deviceModifyStyle.companys}>
                             사용 회사

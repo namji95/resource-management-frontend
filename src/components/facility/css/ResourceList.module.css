@@ -97,6 +97,7 @@
     height: 100%;
     max-height: 610px;
     overflow: scroll;
+    overflow-y: auto;
     /* max h 이거 스크롤 영역 정하는거 알아서 */
     width: 15%;
 
@@ -169,5 +170,6 @@
     border-top: 0.3px solid powderblue;
 
     overflow: scroll;
+    overflow-y: auto;
 }
 

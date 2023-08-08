@@ -7,18 +7,19 @@
 }
 
 .information{
-    font-size: 13px;
-    background-color: white;
-    border-top: 1px solid rgba(175, 175, 175, 0.955);
+    font-size: 15px;
+    border: 30px solid #f7f7f7;
     vertical-align: middle;
     text-align: center;
+    border-radius: 50px;
 }
 /*  */
 
 .resourceTableHeader th{
+    border-top: 17px solid #f7f7ff;
     vertical-align: middle;
     text-align: center;
-    background-color:rgb(139 138 138 / 0%);
+    background-color:rgb(139 138 138 / 0%); 
 }
 
 .resourceTableBody{

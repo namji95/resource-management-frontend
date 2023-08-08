@@ -1,12 +1,11 @@
 import { useState,useEffect } from "react";
-import axios from "axios";
 import {Table} from "react-bootstrap";
 import FacilityTableStyle from "./css/FacilityTable.module.css";
 import CarModifyModal from "./CarModifyModal";
 import SpaceModifyModal from "./SpaceModifyModal";
 import DeviceModifyModal from "./DeviceModifyModal";
 
-function FacilityTable({category="car",dataList=[]}) {
+function FacilityTable({category="car", dataList=[], refresh}) {
 
   const [currDataList, setCurrDataList] = useState([]);
 
@@ -20,7 +19,8 @@ function FacilityTable({category="car",dataList=[]}) {
     setUpdateModal(updateModal => !updateModal);
   }
 
-  const [modifiedObj , setModifiedObj] = useState(null);
+  const [modifiedObj, setModifiedObj] = useState(null);
+  const [deletedObj, setDeletedObj] = useState(null);
 
  useEffect(()=>{
     if(modifiedObj){
@@ -29,9 +29,9 @@ function FacilityTable({category="car",dataList=[]}) {
       if(changedSeq && currDataList?.length){
         const newDataList = [];
         currDataList.map((item, idx)=>{
-          if(item.carSeq == changedSeq){
+          if(item.carSeq === changedSeq){
             newDataList.push(modifiedObj)
-          }else{
+          }else {
             newDataList.push(item)
           }
         })
@@ -41,7 +41,11 @@ function FacilityTable({category="car",dataList=[]}) {
     }
  },[modifiedObj])
 
-  const [selectedItem, setSelectedItem] = useState(null); 
+ useEffect(()=>{
+  refresh();
+},[deletedObj])
+
+  const [selectedItem, setSelectedItem] = useState(null);
 
   const openModifyModal = (item) => {
     setSelectedItem(item);
@@ -74,7 +78,7 @@ const [tableRenderInfo,setTableRenderInfo] = useState({
   },
   space : {
     spcName : "공간자원명",
-    spcCap :"공간자원 수용인원",
+    spcCap : "공간자원 수용인원",
     spcImage : "공간자원 이미지",
     spcExplain :"공간자원 설명"
   }
@@ -160,10 +164,13 @@ const renderModifyModal = () => {
       modifyModal =
       <DeviceModifyModal
           // 모달창 열림 상태일 때 CarModifyModal 컴포넌트 렌더링
-          updateModal={updateModal}
-          setUpdateModal={setUpdateModal}
-          selectDevice={selectedItem}
-          closeModifyModal={closeModifyModal}
+            updateModal={updateModal}
+            setUpdateModal={setUpdateModal}
+            selectDevice={selectedItem}
+            closeModifyModal={closeModifyModal}
+
+            setModifiedObj={setModifiedObj}
+            setDeletedObj={setDeletedObj}
           //setSelectCar 함수를 CarModifyModal 컴포넌트로 전달
           // 선택한 자원 정보를 CarModifyModal 컴포넌트로 전달
           />
@@ -190,6 +197,7 @@ const renderModifyModal = () => {
               closeModifyModal={closeModifyModal}
 
               setModifiedObj={setModifiedObj}
+              setDeletedObj={setDeletedObj}
               //setSelectCar 함수를 CarModifyModal 컴포넌트로 전달
               // 선택한 자원 정보를 CarModifyModal 컴포넌트로 전달
               />

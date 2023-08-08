@@ -11,41 +11,7 @@ import Loading from "../common/Loading";
 
 function ResourceList(props) {
 
-  // 상태 (state) 변수들
-  // const [show, setShow] = useState(false);
-
-// ==============================================
-// [검색 select, input 핸들링]
-
-  const defaultSearchObj = {
-    columnName : "carName",
-    searchString : "",
-  }
-
-  const [searchObj, setSearchObj] = useState(defaultSearchObj);
-
-  const onResetSearchObj = () => {
-    setSearchObj(defaultSearchObj);
-  }
-  
-  const onChangeSearchObj = (e) => {
-    let newName = e.target.name;
-    console.log("e.target.name : ", e.target.name);
-    let newValue = e.target.value;
-    console.log("e.target.value : ", e.target.value);
-    const newSearchObj = {
-      ...searchObj,
-      [newName] : newValue
-    }
-    setSearchObj(newSearchObj);
-    console.log("newName : ",e.target.name);
-    console.log("newValue :",e.target.value);
-    console.log(newSearchObj);
-    console.log(searchObj);
-    console.log("columnName : ", searchObj.columnName);
-  }
-
-// ==============================================
+// ======================================
 // [서버에서 가져온 데이터]
 
   const defaultCurrData = {
@@ -59,6 +25,7 @@ function ResourceList(props) {
 // [axios get 요청]
 
   const getList = (e=null, category="car", searchType="get") => {
+
     if(e)
       e.preventDefault();
 
@@ -67,7 +34,7 @@ function ResourceList(props) {
     let sendUrl = "";
     let result;
 
-    if(searchType === "get" || !searchObj.searchString) {
+    if(searchType ==="get" || !searchObj.searchString ){
       sendUrl = `${defaultUrl}${category}`
     }else{
       sendUrl = `${defaultUrl}${currData.category}/search?columnName=${searchObj.columnName}&searchString=${searchObj.searchString}`
@@ -78,7 +45,6 @@ function ResourceList(props) {
     .then((response) => {
       console.log("서버에서 가져온 데이터 >>",response.data);
       result = response?.data?.data?.list;
-      console.log("result : ", result);
     })
     .catch((error) => {
       result = [error];
@@ -88,28 +54,10 @@ function ResourceList(props) {
         category,
         dataList : result
       }
-      console.log("newCurrData : ",newCurrData);
       setCurrData(newCurrData);
       setIsLoadFromServer(true);
-      let defaultSelectValue = "carName";
-      switch(category){
-        case "car" :
-          defaultSelectValue = "carName";
-          break;
-        case "space" :
-          defaultSelectValue = "spcName";
-          break;
-        case "device" :
-          defaultSelectValue = "dvcName";
-          break;
-      }
-      const newSearchObj = {
-        ...searchObj,
-        "columnName" : defaultSelectValue
-      }
-      console.log(">>",newSearchObj );
-      setSearchObj(newSearchObj);
     });
+
   }
 
 // ==============================================
@@ -131,53 +79,94 @@ function ResourceList(props) {
   
 // ==============================================
 
+// [검색 select, input 핸들링]
+
+    const defaultSearchObj = {
+        columnName : "carName",
+        searchString : "",
+    }
+
+  const [searchObj, setSearchObj] = useState(defaultSearchObj);
+
+  const onResetSearchObj = () => {
+    setSearchObj(defaultSearchObj);
+  }
+  
+  // 카태고리탭 바뀔 떄 마다 현재 선택된 값 변경 처리
+  useEffect(()=>{
+    if(currData?.category){
+        let defaultValue = "carName";
+
+        switch(currData.category){
+            case "device" :
+                defaultValue = "dvcName";
+            break;
+            case "space" :
+                defaultValue = "spcName";
+            break;
+            default :
+                defaultValue = "carName";
+        }
+    
+        const newSearchObj = {
+            ...searchObj,
+            columnName : defaultValue
+        }
+        setSearchObj(newSearchObj)
+    }
+  },[currData.category]);
+
+  const onChangeSearchObj = (e) => {
+    let newName = e.target.name;
+    let newValue = e.target.value;
+    const newSearchObj = {
+      ...searchObj,
+      [newName] : newValue
+    }
+    setSearchObj(newSearchObj);
+    console.log("newName > ", e.target.name);
+    console.log("newValue > ", e.target.value);
+    console.log("searchObj > ", searchObj);
+  }
+
+  const [optionObj, setOptionObj] = useState({
+    car : {
+        carName : "차량명",
+        carNumber : "차량번호"
+    },
+    device : {
+        dvcName : "기기명",
+        dvcSerial : "기기번호"
+    },
+    space : {
+        spcName : "공간명",
+        spcCap : "수용인원"
+    }
+  })
+
   const renderColumnNameSelect = () => {
 
-      let currOptions;
-  
-      switch(currData.category){
-        case "car" :
-          currOptions = (
-            <>
-              <option name="columnName" value="carName">차량명</option>
-              <option name="columnName" value="carNumber">차량번호</option>
-            </>
-          );
-          break;
-        case "device" :
-          currOptions = (
-            <>
-            <option name="columnName" value="dvcName">기기명</option>
-            <option name="columnName" value="dvcSerial">기기번호</option>
-            </>
-          );
-          break;
-        case "space" :
-          currOptions = (
-          <>
-            <option name="columnName" value="spcName">공간명</option>
-            <option name="columnName" value="spcCap">수용인원</option>
-          </>
-          );
-          break;
-        default :
-          currOptions = (
-            <>
-              <option name="columnName" value="carName">차량명</option>
-              <option name="columnName" value="carNumber">차량번호</option>
-            </>
-          );
-          break;
+      const currOptions = [];
+
+      for (const key in optionObj[currData.category]){
+        const value = optionObj[currData.category][key];
+        currOptions.push(<option name="columnName" value={key}>{value}</option>);
       }
+
       return (
         <select className={resourceListStyle.selectBox}
+        onChange={(e)=>{onChangeSearchObj(e)}}
         name="columnName"
-        onChange={onChangeSearchObj}
+        value={searchObj.columnName}
         >
-          {currOptions}
+          {currOptions.map((item)=>{
+            return item;
+          })}
         </select>
       )
   }
+
+
 
 // ==============================================
 // [최초 데이터 가져오기]
@@ -185,7 +174,7 @@ function ResourceList(props) {
 const [isLoadFromServer, setIsLoadFromServer] = useState(false);
 
 useEffect(()=>{
-    getList(null,"car");
+    getList();
 },[])
 
 // ==============================================
@@ -241,7 +230,7 @@ useEffect(()=>{
               <div>
                 {
                   currData?.dataList?.length ?
-                    <FacilityTable category={currData.category} dataList={currData.dataList}/>
+                    <FacilityTable category={currData.category} dataList={currData.dataList} refresh={getList}/>
                   :
                   <span>검색 결과가 없습니다.</span>
                 }
@@ -250,6 +239,7 @@ useEffect(()=>{
           </div>
           ) : <Loading/>
       }
+
     </div>
   );
 }

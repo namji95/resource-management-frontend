@@ -69,14 +69,17 @@ function CarModifyModal(props) {
             alert("변경 완료");
             closeModifyModal();
 
-            props.setModifiedObj( response?.data?.data);
+            props.setModifiedObj(response?.data?.data);
+            console.log("props > ", props);
+            console.log("response.data.data > ", response.data.data);
+            console.log(`${props.selectCar.carSeq}`)
         })
         .catch(error => {
             alert("변경 실패",error)
         });
     }
 
-    const  CarDeleteModal = (event) => {
+    const CarDeleteModal = (event) => {
         event.preventDefault();
 
         const formData = new FormData();
@@ -92,8 +95,14 @@ function CarModifyModal(props) {
 
         axios.post(`http://localhost:8080/api/car/del/${props.selectCar.carSeq}`, formData, config)
         .then(response => {
-            console.log(response.data);
             alert("삭제 완료");
+            closeModifyModal();
+
+            props.setDeletedObj(response?.data?.data);
+            console.log("props > ", props);
+            console.log("response.data.data > ", response.data.data);
+            console.log(`${props.selectCar.carSeq}`)
+
         })
         .catch(error => {
             alert("삭제 실패", error)
@@ -192,7 +201,7 @@ function CarModifyModal(props) {
             <div className={carUpdateStyle.back} />
             <div className={carUpdateStyle.update_page}>
             <button className={carUpdateStyle.cancelButton} onClick={closeModifyModal}>X</button>
-                <form action={CarUpdateModal} method="POST" encType="multipart/form-Data">
+                <form>
                     <div className={carUpdateStyle.essential}>
                         ● 필수 항목
                     </div>

@@ -23,5 +23,38 @@
     width: 200px;
   }
 .endText{
+  width: 100px;
+  margin-top: 20px;
+ 
+}
+.startText{
   width: 200px;
+  margin-top: 20px; 
+}
+.startTime{
+  margin-top : 20px;
+}
+.endTime{
+  margin-top : 20px;
+}
+.SearchButton{
+  margin-left: 60px;
+  width: 100px;
+  margin-top: 20px;
+}
+.SerachContainer{
+  display: flex;
+  flex-direction: row;
+}
+.categoeryreservation{
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  max-height: 610px;
+  
+  float: right;
+
+  border-top: 0.3px solid powderblue;
+
+  overflow: scroll;
 }
